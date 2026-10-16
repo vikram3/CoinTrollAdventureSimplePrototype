@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/objects/falling_hazard.gd" id="1_r"]
+[ext_resource type="Texture2D" path="res://assets/ui/warning.png" id="2_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/rock.png" id="3_r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 20.0
+
+[node name="FallingHazard" type="Node2D"]
+script = ExtResource("1_r")
+
+[node name="Warning" type="Sprite2D" parent="."]
+position = Vector2(0, -46)
+z_index = 5
+texture = ExtResource("2_r")
+
+[node name="Body" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 3
+monitorable = false
+
+[node name="Sprite" type="Sprite2D" parent="Body"]
+texture = ExtResource("3_r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+shape = SubResource("CircleShape2D_1")
+
+[node name="Trigger" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]

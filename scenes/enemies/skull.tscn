@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/skull.gd" id="1_r"]
+[ext_resource type="Texture2D" path="res://assets/enemies/skull.png" id="2_r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(30, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2"]
+size = Vector2(36, 48)
+
+[node name="Skull" type="CharacterBody2D"]
+script = ExtResource("1_r")
+collision_layer = 4
+collision_mask = 1
+max_health = 1
+enemy_type = "skull"
+bubble_height = 50.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+texture = ExtResource("2_r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_2")

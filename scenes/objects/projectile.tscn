@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/objects/projectile.gd" id="1_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/cannonball.png" id="2_r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 8.0
+
+[node name="Projectile" type="Area2D"]
+script = ExtResource("1_r")
+speed = 300.0
+lifetime = 4.0
+damage = 1
+source_name = "barreldugo"
+rotate_to_direction = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1")

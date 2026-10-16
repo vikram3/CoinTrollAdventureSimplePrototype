@@ -1,0 +1,188 @@
+[gd_scene load_steps=24 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/background.tscn" id="2_r"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/bg_forest.png" id="3_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/block.tscn" id="4_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/wall_stone.png" id="5_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ground_forest.png" id="6_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ledge_moss.png" id="7_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/bull.tscn" id="8_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/elite_skull.tscn" id="9_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/barreldugo.tscn" id="10_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/trunk.png" id="11_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="12_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/falling_hazard.tscn" id="13_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/log.png" id="14_r"]
+[ext_resource type="PackedScene" path="res://scenes/npc/felix.tscn" id="15_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hide_spot.tscn" id="16_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/hedge.png" id="17_r"]
+[ext_resource type="PackedScene" path="res://scenes/player/player_ct.tscn" id="18_r"]
+[ext_resource type="Script" path="res://scripts/levels/trackers/enemy_type_tracker.gd" id="19_r"]
+[ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="20_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="21_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="22_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="23_r"]
+
+[node name="Checkpoint09" type="Node2D"]
+script = ExtResource("1_r")
+checkpoint_number = 9
+checkpoint_name = "Enemy Types"
+trigger_line = "A barreldugo! Flex says get close, let's try it!"
+objective_type = 6
+coin_target = 0
+survive_seconds = 0.0
+defeat_target = 0
+objective_text_override = ""
+level_bounds = Rect2(0, -500, 3400, 1220)
+kill_y = 900.0
+tracker_path = NodePath("Tracker")
+
+[node name="Background" parent="." instance=ExtResource("2_r")]
+texture = ExtResource("3_r")
+parallax = 0.25
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Goals" type="Node2D" parent="."]
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Wall1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(0, 60)
+size = Vector2(64, 1520)
+tile_texture = ExtResource("5_r")
+
+[node name="Ground1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(1100, 610)
+size = Vector2(2200, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="MossLedge1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(550, 292)
+size = Vector2(200, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="MossLedge2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(1110, 252)
+size = Vector2(220, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="MossLedge3" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(1750, 292)
+size = Vector2(200, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="TankBull1" parent="Enemies" instance=ExtResource("8_r")]
+position = Vector2(1600, 364)
+charge_speed = 468.0
+min_x = 80.0
+max_x = 2120.0
+enemy_type = "tank"
+
+[node name="SpeedSkull1" parent="Enemies" instance=ExtResource("9_r")]
+position = Vector2(1100, 370)
+enemy_type = "speed"
+detect_range = 420.0
+leash_distance = 900.0
+
+[node name="Barreldugo1" parent="Enemies" instance=ExtResource("10_r")]
+position = Vector2(1980, 374)
+enemy_type = "projectile"
+
+[node name="Ground2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(2800, 610)
+size = Vector2(1200, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Barreldugo2" parent="Enemies" instance=ExtResource("10_r")]
+position = Vector2(2400, 374)
+fire_interval = 2.0
+
+[node name="Pillar1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(2781, 345)
+size = Vector2(60, 110)
+tile_texture = ExtResource("11_r")
+
+[node name="Coin1" parent="Coins" instance=ExtResource("12_r")]
+position = Vector2(2741, 246)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("12_r")]
+position = Vector2(2781, 246)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("12_r")]
+position = Vector2(2821, 246)
+
+[node name="FallingLog1" parent="Hazards" instance=ExtResource("13_r")]
+position = Vector2(2985, 70)
+texture = ExtResource("14_r")
+trigger_size = Vector2(220, 420)
+damage = 1
+knockback = Vector2(300, -250)
+hazard_name = "log"
+shake_time = 0.4
+debris_color = Color(0.45, 0.3, 0.18, 1)
+
+[node name="Felix" parent="NPCs" instance=ExtResource("15_r")]
+position = Vector2(90, 360)
+opening_lines = PackedStringArray("Three kinds of enemies, CT. Listen up!", "Tanks like that bull: slow but tough. Keep hitting up close.", "Speed types rush you. They're fragile - one or two good hits.", "Projectile guys like the Barreldugo? Get close and they panic!")
+opening_interval = 4.2
+
+[node name="HideSpot1" parent="Hazards" instance=ExtResource("16_r")]
+position = Vector2(2700, 345)
+size = Vector2(120, 110)
+hint = "Hold DOWN to hide!"
+
+[node name="Bush1" type="Sprite2D" parent="Decor"]
+position = Vector2(2700, 345)
+texture = ExtResource("17_r")
+scale = Vector2(1.25, 1.1458)
+
+[node name="HideSpot2" parent="Hazards" instance=ExtResource("16_r")]
+position = Vector2(1500, 345)
+size = Vector2(120, 110)
+hint = "Hold DOWN to hide!"
+
+[node name="Bush2" type="Sprite2D" parent="Decor"]
+position = Vector2(1500, 345)
+texture = ExtResource("17_r")
+scale = Vector2(1.25, 1.1458)
+
+[node name="Wall2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(3400, 60)
+size = Vector2(64, 1520)
+tile_texture = ExtResource("5_r")
+
+[node name="Player" parent="." instance=ExtResource("18_r")]
+position = Vector2(200, 360)
+
+[node name="Tracker" type="Node" parent="."]
+script = ExtResource("19_r")
+required_types = PackedStringArray("tank", "speed", "projectile")
+
+[node name="TouchControls" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="TouchPad" type="Control" parent="TouchControls"]
+script = ExtResource("20_r")
+mode = "platformer"
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="HUD" parent="." instance=ExtResource("21_r")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("22_r")]
+
+[node name="CheckpointComplete" parent="." instance=ExtResource("23_r")]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/objects/chaser.gd" id="1_r"]
+[ext_resource type="Texture2D" path="res://assets/enemies/forest_chaser.png" id="2_r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(300, 2000)
+
+[node name="Chaser" type="Area2D"]
+script = ExtResource("1_r")
+collision_layer = 8
+collision_mask = 2
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-10, -80)
+texture = ExtResource("2_r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -200)
+shape = SubResource("RectangleShape2D_1")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/felix.gd" id="1_r"]
+[ext_resource type="Texture2D" path="res://assets/npc/felix.png" id="2_r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1"]
+radius = 14.0
+height = 56.0
+
+[node name="Felix" type="CharacterBody2D"]
+script = ExtResource("1_r")
+collision_layer = 64
+collision_mask = 1
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+texture = ExtResource("2_r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1")

@@ -1,0 +1,197 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/background.tscn" id="2_r"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/bg_arena_night.png" id="3_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/block.tscn" id="4_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/wall_stone.png" id="5_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ground_arena.png" id="6_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/fence.png" id="7_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ledge_stone.png" id="8_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="9_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/big_boss.tscn" id="10_r"]
+[ext_resource type="PackedScene" path="res://scenes/npc/pink_girl.tscn" id="11_r"]
+[ext_resource type="PackedScene" path="res://scenes/player/player_ct.tscn" id="12_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/wave_spawner.tscn" id="13_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/skull.tscn" id="14_r"]
+[ext_resource type="Script" path="res://scripts/levels/trackers/wave_tracker.gd" id="15_r"]
+[ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="16_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="17_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="18_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="19_r"]
+
+[node name="Checkpoint05" type="Node2D"]
+script = ExtResource("1_r")
+checkpoint_number = 5
+checkpoint_name = "Pink Girl vs Big Boss"
+trigger_line = "She's holding her own, but Big Boss has one more trick!"
+objective_type = 6
+coin_target = 0
+survive_seconds = 0.0
+defeat_target = 0
+objective_text_override = ""
+level_bounds = Rect2(0, -700, 4400, 1320)
+kill_y = 1000.0
+tracker_path = NodePath("Tracker")
+
+[node name="Background" parent="." instance=ExtResource("2_r")]
+texture = ExtResource("3_r")
+parallax = 0.25
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Goals" type="Node2D" parent="."]
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Wall1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(0, 10)
+size = Vector2(64, 1420)
+tile_texture = ExtResource("5_r")
+
+[node name="Ground1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(2200, 510)
+size = Vector2(4400, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="ArenaFence1" type="Sprite2D" parent="Decor"]
+position = Vector2(3340, 268)
+texture = ExtResource("7_r")
+
+[node name="ArenaFence2" type="Sprite2D" parent="Decor"]
+position = Vector2(3340, 204)
+texture = ExtResource("7_r")
+
+[node name="ArenaFence3" type="Sprite2D" parent="Decor"]
+position = Vector2(3340, 140)
+texture = ExtResource("7_r")
+
+[node name="ArenaFence4" type="Sprite2D" parent="Decor"]
+position = Vector2(3340, 76)
+texture = ExtResource("7_r")
+
+[node name="Ledge1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(1020, 192)
+size = Vector2(240, 24)
+tile_texture = ExtResource("8_r")
+one_way = true
+
+[node name="Ledge2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(2020, 192)
+size = Vector2(240, 24)
+tile_texture = ExtResource("8_r")
+one_way = true
+
+[node name="Coin1" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(920, 145)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(986.6667, 145)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(1053.3333, 145)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(1120, 145)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(1920, 145)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(1986.6667, 145)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(2053.3333, 145)
+
+[node name="Coin8" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(2120, 145)
+
+[node name="Coin9" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(400, 264)
+
+[node name="Coin10" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(533.3333, 264)
+
+[node name="Coin11" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(666.6667, 264)
+
+[node name="Coin12" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(800, 264)
+
+[node name="BigBoss1" parent="Enemies" instance=ExtResource("10_r")]
+position = Vector2(3950, 191)
+target_group = "pink_girl"
+ignore_player = true
+contact_damage = 0
+invulnerable = false
+max_health = 24
+arena_min_x = 3420.0
+arena_max_x = 4320.0
+preferred_distance = 170.0
+slam_chance = 0.35
+
+[node name="PinkGirl" parent="NPCs" instance=ExtResource("11_r")]
+position = Vector2(3550, 235)
+boss_path = NodePath("../../Enemies/BigBoss1")
+min_x = 3420.0
+max_x = 4300.0
+
+[node name="Wall2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(4400, 10)
+size = Vector2(64, 1420)
+tile_texture = ExtResource("5_r")
+
+[node name="Player" parent="." instance=ExtResource("12_r")]
+position = Vector2(300, 260)
+
+[node name="WaveSpawner" parent="." instance=ExtResource("13_r")]
+enemy_scene = ExtResource("14_r")
+wave_counts = PackedInt32Array(2, 3, 4)
+one_marker_per_wave = true
+spread = 60.0
+start_delay = 2.5
+delay_between_waves = 3.0
+speed_bonus_per_wave = 6.0
+march = true
+march_target_x = 3340.0
+fail_on_reach = true
+fail_message = "The skulls reached the arena!"
+detect_range_override = 320.0
+
+[node name="Wave1Spawn" type="Marker2D" parent="WaveSpawner"]
+position = Vector2(1500, 250)
+
+[node name="Wave2Spawn" type="Marker2D" parent="WaveSpawner"]
+position = Vector2(2300, 250)
+
+[node name="Wave3Spawn" type="Marker2D" parent="WaveSpawner"]
+position = Vector2(2868, 250)
+
+[node name="Tracker" type="Node" parent="."]
+script = ExtResource("15_r")
+spawner_path = NodePath("../WaveSpawner")
+label = "Clear the skull waves"
+
+[node name="TouchControls" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="TouchPad" type="Control" parent="TouchControls"]
+script = ExtResource("16_r")
+mode = "platformer"
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="HUD" parent="." instance=ExtResource("17_r")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("18_r")]
+
+[node name="CheckpointComplete" parent="." instance=ExtResource("19_r")]

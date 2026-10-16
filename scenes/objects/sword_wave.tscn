@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/boss_wave.gd" id="1_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/sword_wave.png" id="2_r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(36, 90)
+
+[node name="SwordWave" type="Area2D"]
+script = ExtResource("1_r")
+speed = 620.0
+lifetime = 1.8
+damage = 1
+knockback = Vector2(320, -320)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/environment/block.gd" id="1_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ground_arena.png" id="2_r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(256, 64)
+
+[node name="Block" type="StaticBody2D"]
+script = ExtResource("1_r")
+collision_layer = 1
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("2_r")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")

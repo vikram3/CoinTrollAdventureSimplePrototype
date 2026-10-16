@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/commenter.gd" id="1_r"]
+[ext_resource type="Texture2D" path="res://assets/npc/lala.png" id="2_r"]
+
+[node name="Commenter" type="Node2D"]
+script = ExtResource("1_r")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_r")

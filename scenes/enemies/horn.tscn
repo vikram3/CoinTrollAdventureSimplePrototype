@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/charger.gd" id="1_r"]
+[ext_resource type="Texture2D" path="res://assets/enemies/horn.png" id="2_r"]
+[ext_resource type="Texture2D" path="res://assets/ui/warning.png" id="3_r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(96, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2"]
+size = Vector2(102, 76)
+
+[node name="Horn" type="CharacterBody2D"]
+script = ExtResource("1_r")
+collision_layer = 4
+collision_mask = 1
+invulnerable = true
+enemy_type = "horn"
+contact_knockback = Vector2(620, -380)
+charge_speed = 728.0
+windup_time = 0.7
+rest_time = 1.4
+counts_for_objective = false
+bubble_height = 60.0
+lines_charge = PackedStringArray("HRRRNN!", "SNORT!", "*stomp stomp*")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+texture = ExtResource("2_r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_2")
+
+[node name="Warning" type="Sprite2D" parent="."]
+position = Vector2(0, -62)
+z_index = 5
+texture = ExtResource("3_r")

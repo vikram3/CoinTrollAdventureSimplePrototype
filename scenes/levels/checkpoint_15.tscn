@@ -1,0 +1,269 @@
+[gd_scene load_steps=25 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/background.tscn" id="2_r"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/bg_ship_sky.png" id="3_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/block.tscn" id="4_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/wall_stone.png" id="5_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ground_deck.png" id="6_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ledge_wood.png" id="7_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/falling_hazard.tscn" id="8_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/rock.png" id="9_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="10_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/skull.tscn" id="11_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/minor_bull.tscn" id="12_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/crate_big.png" id="13_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/goal.tscn" id="14_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/safe_zone.png" id="15_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hide_spot.tscn" id="16_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/hedge.png" id="17_r"]
+[ext_resource type="PackedScene" path="res://scenes/player/player_ct.tscn" id="18_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/sliding_crate.tscn" id="19_r"]
+[ext_resource type="Script" path="res://scripts/environment/ship_tilt.gd" id="20_r"]
+[ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="21_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="22_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="23_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="24_r"]
+
+[node name="Checkpoint15" type="Node2D"]
+script = ExtResource("1_r")
+checkpoint_number = 15
+checkpoint_name = "Tilting Ship"
+trigger_line = "The ship is going DOWN. Hold on and get to safety!"
+objective_type = 1
+coin_target = 0
+survive_seconds = 0.0
+defeat_target = 0
+objective_text_override = ""
+level_bounds = Rect2(0, -600, 6000, 1320)
+kill_y = 900.0
+
+[node name="Background" parent="." instance=ExtResource("2_r")]
+texture = ExtResource("3_r")
+parallax = 0.25
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Goals" type="Node2D" parent="."]
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Wall1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(0, 60)
+size = Vector2(64, 1520)
+tile_texture = ExtResource("5_r")
+
+[node name="Ground1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(500, 610)
+size = Vector2(1000, 420)
+tile_texture = ExtResource("6_r")
+tint = Color(1, 1, 1, 1)
+
+[node name="Ground2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(1500, 610)
+size = Vector2(1000, 420)
+tile_texture = ExtResource("6_r")
+tint = Color(0.9, 0.85, 0.8, 1)
+
+[node name="Ground3" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(2500, 610)
+size = Vector2(1000, 420)
+tile_texture = ExtResource("6_r")
+tint = Color(1, 1, 1, 1)
+
+[node name="Ground4" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(3300, 610)
+size = Vector2(600, 420)
+tile_texture = ExtResource("6_r")
+tint = Color(0.9, 0.85, 0.8, 1)
+
+[node name="TopDeck1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(4000, 535)
+size = Vector2(800, 570)
+tile_texture = ExtResource("6_r")
+
+[node name="LowLedge1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(1230, 322)
+size = Vector2(160, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="LowLedge2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(2230, 322)
+size = Vector2(160, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="LowLedge3" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(3330, 322)
+size = Vector2(160, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="FallingRock1" parent="Hazards" instance=ExtResource("8_r")]
+position = Vector2(900, -40)
+texture = ExtResource("9_r")
+trigger_size = Vector2(180, 460)
+respawn_time = 6.0
+damage = 1
+
+[node name="FallingRock2" parent="Hazards" instance=ExtResource("8_r")]
+position = Vector2(1900, -40)
+texture = ExtResource("9_r")
+trigger_size = Vector2(180, 460)
+respawn_time = 6.0
+damage = 1
+
+[node name="FallingRock3" parent="Hazards" instance=ExtResource("8_r")]
+position = Vector2(2800, -40)
+texture = ExtResource("9_r")
+trigger_size = Vector2(180, 460)
+respawn_time = 6.0
+damage = 1
+
+[node name="Coin1" parent="Coins" instance=ExtResource("10_r")]
+position = Vector2(1170, 275)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("10_r")]
+position = Vector2(1290, 275)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("10_r")]
+position = Vector2(2170, 275)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("10_r")]
+position = Vector2(2290, 275)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("10_r")]
+position = Vector2(3270, 275)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("10_r")]
+position = Vector2(3390, 275)
+
+[node name="Skull1" parent="Enemies" instance=ExtResource("11_r")]
+position = Vector2(934, 370)
+
+[node name="MinorBull1" parent="Enemies" instance=ExtResource("12_r")]
+position = Vector2(1887, 374)
+min_x = 460.0
+max_x = 3340.0
+
+[node name="Skull2" parent="Enemies" instance=ExtResource("11_r")]
+position = Vector2(2935, 370)
+
+[node name="Ground5" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(5200, 610)
+size = Vector2(1600, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="FallingRock4" parent="Hazards" instance=ExtResource("8_r")]
+position = Vector2(4600, -20)
+texture = ExtResource("9_r")
+trigger_size = Vector2(180, 400)
+respawn_time = 5.0
+damage = 1
+
+[node name="Pillar1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(4938, 345)
+size = Vector2(60, 110)
+tile_texture = ExtResource("13_r")
+
+[node name="Coin7" parent="Coins" instance=ExtResource("10_r")]
+position = Vector2(4898, 246)
+
+[node name="Coin8" parent="Coins" instance=ExtResource("10_r")]
+position = Vector2(4938, 246)
+
+[node name="Coin9" parent="Coins" instance=ExtResource("10_r")]
+position = Vector2(4978, 246)
+
+[node name="Pillar2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(5187, 345)
+size = Vector2(60, 110)
+tile_texture = ExtResource("13_r")
+
+[node name="Coin10" parent="Coins" instance=ExtResource("10_r")]
+position = Vector2(5147, 246)
+
+[node name="Coin11" parent="Coins" instance=ExtResource("10_r")]
+position = Vector2(5187, 246)
+
+[node name="Coin12" parent="Coins" instance=ExtResource("10_r")]
+position = Vector2(5227, 246)
+
+[node name="Skull3" parent="Enemies" instance=ExtResource("11_r")]
+position = Vector2(5406, 370)
+
+[node name="Goal" parent="Goals" instance=ExtResource("14_r")]
+position = Vector2(5850, 340)
+label_text = "SAFE"
+texture = ExtResource("15_r")
+sprite_scale = 1.0
+show_sprite = true
+
+[node name="HideSpot1" parent="Hazards" instance=ExtResource("16_r")]
+position = Vector2(1800, 345)
+size = Vector2(120, 110)
+hint = "Hold DOWN to hide!"
+
+[node name="Bush1" type="Sprite2D" parent="Decor"]
+position = Vector2(1800, 345)
+texture = ExtResource("17_r")
+scale = Vector2(1.25, 1.1458)
+
+[node name="HideSpot2" parent="Hazards" instance=ExtResource("16_r")]
+position = Vector2(4900, 350)
+size = Vector2(110, 100)
+hint = "Hold DOWN to hide!"
+
+[node name="Bush2" type="Sprite2D" parent="Decor"]
+position = Vector2(4900, 350)
+texture = ExtResource("13_r")
+scale = Vector2(0.6875, 0.625)
+
+[node name="Wall2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(6000, 60)
+size = Vector2(64, 1520)
+tile_texture = ExtResource("5_r")
+
+[node name="Player" parent="." instance=ExtResource("18_r")]
+position = Vector2(200, 360)
+
+[node name="CrateA" parent="." instance=ExtResource("19_r")]
+position = Vector2(3500, 370)
+lifetime = 14.0
+start_delay = 1.5
+
+[node name="CrateB" parent="." instance=ExtResource("19_r")]
+position = Vector2(2400, 370)
+lifetime = 10.0
+start_delay = 4.0
+
+[node name="ShipTilt" type="Node" parent="."]
+script = ExtResource("20_r")
+amplitude_degrees = 4.0
+period = 5.0
+push_strength = 90.0
+
+[node name="TouchControls" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="TouchPad" type="Control" parent="TouchControls"]
+script = ExtResource("21_r")
+mode = "platformer"
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="HUD" parent="." instance=ExtResource("22_r")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("23_r")]
+
+[node name="CheckpointComplete" parent="." instance=ExtResource("24_r")]

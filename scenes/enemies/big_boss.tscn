@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/big_boss.gd" id="1_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/sword_wave.tscn" id="2_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/shockwave.tscn" id="3_r"]
+[ext_resource type="Texture2D" path="res://assets/enemies/big_boss.png" id="4_r"]
+[ext_resource type="Texture2D" path="res://assets/ui/warning.png" id="5_r"]
+[ext_resource type="Texture2D" path="res://assets/enemies/slam_marker.png" id="6_r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(80, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2"]
+size = Vector2(86, 146)
+
+[node name="BigBoss" type="CharacterBody2D"]
+script = ExtResource("1_r")
+collision_layer = 4
+collision_mask = 1
+max_health = 40
+invulnerable = true
+enemy_type = "boss"
+counts_for_objective = false
+contact_knockback = Vector2(380, -320)
+bubble_height = 96.0
+feet_offset = 70.0
+sword_wave_scene = ExtResource("2_r")
+shockwave_scene = ExtResource("3_r")
+lines_idle = PackedStringArray("You think you can steal from ME?", "Hold still.", "I'll crush you like a coin.")
+lines_combat = PackedStringArray("YOU ARE DONE!", "I have been putting up with you for way too long!", "HRAAH!", "Take this!")
+lines_defeat = PackedStringArray("This... isn't over!")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+texture = ExtResource("4_r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_2")
+
+[node name="Warning" type="Sprite2D" parent="."]
+position = Vector2(0, -100)
+z_index = 5
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_r")
+
+[node name="SlamMarker" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("6_r")

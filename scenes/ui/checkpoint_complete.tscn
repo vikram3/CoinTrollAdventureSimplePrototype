@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/checkpoint_complete.gd" id="1_r"]
+[ext_resource type="Theme" path="res://scenes/ui/ui_theme.tres" id="2_r"]
+[ext_resource type="Texture2D" path="res://assets/ui/coin_icon.png" id="3_r"]
+
+[node name="CheckpointComplete" type="CanvasLayer"]
+script = ExtResource("1_r")
+process_mode = 3
+layer = 25
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_r")
+
+[node name="Dim" type="ColorRect" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="Center" type="CenterContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Banner" type="PanelContainer" parent="Root/Center"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(560, 0)
+
+[node name="VBox" type="VBoxContainer" parent="Root/Center/Banner"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Header" type="Label" parent="Root/Center/Banner/VBox"]
+layout_mode = 2
+text = "CHECKPOINT COMPLETE"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 40
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+
+[node name="NameLabel" type="Label" parent="Root/Center/Banner/VBox"]
+layout_mode = 2
+text = "Checkpoint 01 - Name"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
+unique_name_in_owner = true
+
+[node name="CoinsRow" type="HBoxContainer" parent="Root/Center/Banner/VBox"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 10
+
+[node name="CoinIcon" type="TextureRect" parent="Root/Center/Banner/VBox/CoinsRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(32, 32)
+texture = ExtResource("3_r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinsLabel" type="Label" parent="Root/Center/Banner/VBox/CoinsRow"]
+layout_mode = 2
+text = "0 coins"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 28
+unique_name_in_owner = true
+theme_override_colors/font_color = Color(1, 0.88, 0.3, 1)
+
+[node name="ContinueButton" type="Button" parent="Root/Center/Banner/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Continue"

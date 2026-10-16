@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/skull_topdown.gd" id="1_r"]
+[ext_resource type="Texture2D" path="res://assets/enemies/skull.png" id="2_r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2"]
+radius = 21.0
+
+[node name="SkullTopdown" type="CharacterBody2D"]
+script = ExtResource("1_r")
+collision_layer = 4
+collision_mask = 1
+max_health = 1
+enemy_type = "skull"
+use_gravity = false
+bubble_height = 50.0
+contact_knockback = Vector2(240, 0)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+texture = ExtResource("2_r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_2")

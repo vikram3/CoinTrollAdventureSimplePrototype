@@ -1,0 +1,457 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/background.tscn" id="2_r"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/bg_desert.png" id="3_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/block.tscn" id="4_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/wall_stone.png" id="5_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ground_sand.png" id="6_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/falling_hazard.tscn" id="7_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/stone.png" id="8_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="9_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/elite_skull.tscn" id="10_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/skull.tscn" id="11_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ruins.png" id="12_r"]
+[ext_resource type="PackedScene" path="res://scenes/player/player_ct.tscn" id="13_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/chaser.tscn" id="14_r"]
+[ext_resource type="Texture2D" path="res://assets/enemies/wormfish.png" id="15_r"]
+[ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="16_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="17_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="18_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="19_r"]
+
+[node name="Checkpoint18" type="Node2D"]
+script = ExtResource("1_r")
+checkpoint_number = 18
+checkpoint_name = "Wormfish Chase"
+trigger_line = "A sand wormfish?! Everyone scatter!"
+objective_type = 4
+coin_target = 0
+survive_seconds = 56.0
+defeat_target = 0
+objective_text_override = ""
+level_bounds = Rect2(0, -600, 15000, 1320)
+kill_y = 900.0
+
+[node name="Background" parent="." instance=ExtResource("2_r")]
+texture = ExtResource("3_r")
+parallax = 0.25
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Goals" type="Node2D" parent="."]
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Wall1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(0, 60)
+size = Vector2(64, 1520)
+tile_texture = ExtResource("5_r")
+
+[node name="Ground1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(700, 630)
+size = Vector2(1400, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(2200, 630)
+size = Vector2(1400, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground3" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(3700, 630)
+size = Vector2(1400, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground4" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(5200, 630)
+size = Vector2(1400, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground5" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(6700, 630)
+size = Vector2(1400, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground6" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(8200, 630)
+size = Vector2(1400, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground7" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(9700, 630)
+size = Vector2(1400, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground8" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(11200, 630)
+size = Vector2(1400, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground9" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(12700, 630)
+size = Vector2(1400, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground10" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(14250, 630)
+size = Vector2(1500, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="FallingStone1" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(900, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone2" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(1500, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone3" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(2100, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone4" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(2700, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone5" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(3300, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone6" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(3900, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone7" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(4500, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone8" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(5100, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone9" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(5700, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone10" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(6300, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone11" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(6900, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone12" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(7500, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone13" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(8100, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone14" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(8700, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone15" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(9300, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone16" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(9900, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone17" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(10500, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone18" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(11100, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone19" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(11700, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone20" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(12300, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone21" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(12900, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone22" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(13500, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone23" parent="Hazards" instance=ExtResource("7_r")]
+position = Vector2(14100, 0)
+texture = ExtResource("8_r")
+trigger_size = Vector2(200, 440)
+damage = 1
+hazard_name = "stone"
+shake_time = 0.45
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="Coin1" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(700, 384)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(1150, 384)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(1600, 384)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(2050, 384)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(2500, 384)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(3400, 384)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(3850, 384)
+
+[node name="Coin8" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(4300, 384)
+
+[node name="Coin9" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(4750, 384)
+
+[node name="Coin10" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(5200, 384)
+
+[node name="Coin11" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(5650, 384)
+
+[node name="Coin12" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(6100, 384)
+
+[node name="Coin13" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(6550, 384)
+
+[node name="Coin14" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(7000, 384)
+
+[node name="Coin15" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(7900, 384)
+
+[node name="Coin16" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(8350, 384)
+
+[node name="Coin17" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(8800, 384)
+
+[node name="Coin18" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(9250, 384)
+
+[node name="Coin19" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(9700, 384)
+
+[node name="Coin20" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(10150, 384)
+
+[node name="Coin21" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(10600, 384)
+
+[node name="Coin22" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(11050, 384)
+
+[node name="Coin23" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(11500, 384)
+
+[node name="Coin24" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(12400, 384)
+
+[node name="Coin25" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(12850, 384)
+
+[node name="Coin26" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(13300, 384)
+
+[node name="Coin27" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(13750, 384)
+
+[node name="Coin28" parent="Coins" instance=ExtResource("9_r")]
+position = Vector2(14200, 384)
+
+[node name="EliteSkull1" parent="Enemies" instance=ExtResource("10_r")]
+position = Vector2(1604, 388)
+
+[node name="Skull1" parent="Enemies" instance=ExtResource("11_r")]
+position = Vector2(3256, 390)
+
+[node name="EliteSkull2" parent="Enemies" instance=ExtResource("10_r")]
+position = Vector2(4958, 388)
+
+[node name="Skull2" parent="Enemies" instance=ExtResource("11_r")]
+position = Vector2(6593, 390)
+
+[node name="Skull3" parent="Enemies" instance=ExtResource("11_r")]
+position = Vector2(8253, 390)
+
+[node name="EliteSkull3" parent="Enemies" instance=ExtResource("10_r")]
+position = Vector2(9887, 388)
+
+[node name="EliteSkull4" parent="Enemies" instance=ExtResource("10_r")]
+position = Vector2(11543, 388)
+
+[node name="EliteSkull5" parent="Enemies" instance=ExtResource("10_r")]
+position = Vector2(13157, 388)
+
+[node name="EndRuins1" type="Sprite2D" parent="Decor"]
+position = Vector2(14600, 356)
+texture = ExtResource("12_r")
+
+[node name="Wall2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(15000, 60)
+size = Vector2(64, 1520)
+tile_texture = ExtResource("5_r")
+
+[node name="Player" parent="." instance=ExtResource("13_r")]
+position = Vector2(300, 380)
+
+[node name="Wormfish" parent="." instance=ExtResource("14_r")]
+position = Vector2(-150, 420)
+speed = 364.0
+start_delay = 1.0
+texture = ExtResource("15_r")
+kill_message = "Eaten by the wormfish!"
+
+[node name="TouchControls" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="TouchPad" type="Control" parent="TouchControls"]
+script = ExtResource("16_r")
+mode = "platformer"
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="HUD" parent="." instance=ExtResource("17_r")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("18_r")]
+
+[node name="CheckpointComplete" parent="." instance=ExtResource("19_r")]

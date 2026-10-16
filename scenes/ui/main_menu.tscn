@@ -1,0 +1,319 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_r"]
+[ext_resource type="Theme" path="res://scenes/ui/ui_theme.tres" id="2_r"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/bg_castle_night.png" id="3_r"]
+[ext_resource type="Texture2D" path="res://assets/characters/CT/ct_idle.png" id="4_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/coin_bag.png" id="5_r"]
+
+[node name="MainMenu" type="Control"]
+script = ExtResource("1_r")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_r")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_r")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.02, 0.08, 0.35)
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 50.0
+offset_bottom = 140.0
+grow_horizontal = 2
+text = "COIN TROLL ADVENTURE"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1, 0.82, 0.2, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 64
+
+[node name="Subtitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 138.0
+offset_bottom = 172.0
+grow_horizontal = 2
+text = "Prototype - 18 checkpoints"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 22
+
+[node name="CTArt" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = -330.0
+offset_right = 300.0
+offset_bottom = -10.0
+grow_vertical = 0
+texture = ExtResource("4_r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinArt" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -200.0
+offset_right = -60.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("5_r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EndCard" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 180.0
+offset_bottom = 220.0
+grow_horizontal = 2
+text = "TO BE CONTINUED... thanks for playing the prototype!"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.6, 1, 0.7, 1)
+theme_override_font_sizes/font_size = 24
+
+[node name="MainButtons" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -60.0
+offset_right = 200.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="ContinueButton" type="Button" parent="MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Continue"
+
+[node name="NewGameButton" type="Button" parent="MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New game"
+
+[node name="SelectButton" type="Button" parent="MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Checkpoint select"
+
+[node name="ControlsButton" type="Button" parent="MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Controls"
+
+[node name="QuitButton" type="Button" parent="MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"
+
+[node name="SelectPanel" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+unique_name_in_owner = true
+visible = false
+
+[node name="Panel" type="PanelContainer" parent="SelectPanel"]
+layout_mode = 2
+custom_minimum_size = Vector2(760, 0)
+
+[node name="VBox" type="VBoxContainer" parent="SelectPanel/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Header" type="Label" parent="SelectPanel/Panel/VBox"]
+layout_mode = 2
+text = "Checkpoint Select"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+
+[node name="CheckpointGrid" type="GridContainer" parent="SelectPanel/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 6
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+
+[node name="CP01" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "01"
+
+[node name="CP02" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "02"
+
+[node name="CP03" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "03"
+
+[node name="CP04" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "04"
+
+[node name="CP05" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "05"
+
+[node name="CP06" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "06"
+
+[node name="CP07" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "07"
+
+[node name="CP08" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "08"
+
+[node name="CP09" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "09"
+
+[node name="CP10" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "10"
+
+[node name="CP11" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "11"
+
+[node name="CP12" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "12"
+
+[node name="CP13" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "13"
+
+[node name="CP14" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "14"
+
+[node name="CP15" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "15"
+
+[node name="CP16" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "16"
+
+[node name="CP17" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "17"
+
+[node name="CP18" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 56)
+text = "18"
+
+[node name="SelectInfo" type="Label" parent="SelectPanel/Panel/VBox"]
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 90)
+autowrap_mode = 3
+
+[node name="SelectBackButton" type="Button" parent="SelectPanel/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"
+
+[node name="ControlsPanel" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+unique_name_in_owner = true
+visible = false
+
+[node name="Panel" type="PanelContainer" parent="ControlsPanel"]
+layout_mode = 2
+custom_minimum_size = Vector2(640, 0)
+
+[node name="VBox" type="VBoxContainer" parent="ControlsPanel/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Header" type="Label" parent="ControlsPanel/Panel/VBox"]
+layout_mode = 2
+text = "Controls"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+
+[node name="Body" type="Label" parent="ControlsPanel/Panel/VBox"]
+layout_mode = 2
+text = "CT\n  Move: A/D or Left/Right   (maze: WASD / arrows)\n  Jump: Space, K, W or Up\n  Attack: J, X or Enter\n\nAlex (checkpoint 12)\n  Move: Left/Right   Jump: Space\n  Shield: Down   Bow: Up   Attack combo: Enter / J\n\nPause: Esc or P      Restart checkpoint: R\nCinematics: Space to advance, Esc to skip"
+horizontal_alignment = 0
+theme_override_font_sizes/font_size = 19
+
+[node name="ControlsBackButton" type="Button" parent="ControlsPanel/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"

@@ -1,0 +1,214 @@
+[gd_scene load_steps=24 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/background.tscn" id="2_r"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/bg_ship_sky.png" id="3_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/block.tscn" id="4_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/wall_stone.png" id="5_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ground_deck.png" id="6_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ledge_wood.png" id="7_r"]
+[ext_resource type="PackedScene" path="res://scenes/npc/commenter.tscn" id="8_r"]
+[ext_resource type="Texture2D" path="res://assets/npc/queen.png" id="9_r"]
+[ext_resource type="Texture2D" path="res://assets/characters/Alex/alex_idle.png" id="10_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/bull_armored.tscn" id="11_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/minor_bull.tscn" id="12_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/skull.tscn" id="13_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/crate_big.png" id="14_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="15_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hide_spot.tscn" id="16_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/hedge.png" id="17_r"]
+[ext_resource type="PackedScene" path="res://scenes/player/player_ct.tscn" id="18_r"]
+[ext_resource type="Script" path="res://scripts/levels/trackers/bull_tracker.gd" id="19_r"]
+[ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="20_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="21_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="22_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="23_r"]
+
+[node name="Checkpoint10" type="Node2D"]
+script = ExtResource("1_r")
+checkpoint_number = 10
+checkpoint_name = "Bull Gauntlet"
+trigger_line = "The Queen stepped in, but those bulls aren't done yet!"
+objective_type = 6
+coin_target = 0
+survive_seconds = 0.0
+defeat_target = 0
+objective_text_override = ""
+level_bounds = Rect2(0, -500, 4200, 1220)
+kill_y = 900.0
+tracker_path = NodePath("Tracker")
+
+[node name="Background" parent="." instance=ExtResource("2_r")]
+texture = ExtResource("3_r")
+parallax = 0.25
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Goals" type="Node2D" parent="."]
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Wall1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(0, 60)
+size = Vector2(64, 1520)
+tile_texture = ExtResource("5_r")
+
+[node name="Ground1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(1400, 610)
+size = Vector2(2800, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ledge1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(560, 272)
+size = Vector2(220, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="Ledge2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(1430, 252)
+size = Vector2(260, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="Ledge3" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(2260, 272)
+size = Vector2(220, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="Queen1" parent="Decor" instance=ExtResource("8_r")]
+position = Vector2(2600, 358)
+texture = ExtResource("9_r")
+lines = PackedStringArray("Stand back, troll!", "These beasts answer to ME.", "Hold them... hold them...")
+modulate = Color(0.85, 0.85, 1, 0.9)
+bubble_height = 80.0
+
+[node name="Alex1" parent="Decor" instance=ExtResource("8_r")]
+position = Vector2(2480, 365)
+texture = ExtResource("10_r")
+lines = PackedStringArray("Whoa, the Queen!", "Keep dodging, CT!")
+modulate = Color(0.85, 0.85, 1, 0.9)
+flip = true
+first_delay = 5.0
+
+[node name="ArmoredBull1" parent="Enemies" instance=ExtResource("11_r")]
+position = Vector2(900, 364)
+min_x = 80.0
+max_x = 2720.0
+
+[node name="ArmoredBull2" parent="Enemies" instance=ExtResource("11_r")]
+position = Vector2(2100, 364)
+min_x = 80.0
+max_x = 2720.0
+
+[node name="MinorBull1" parent="Enemies" instance=ExtResource("12_r")]
+position = Vector2(1300, 374)
+min_x = 80.0
+max_x = 2720.0
+
+[node name="MinorBull2" parent="Enemies" instance=ExtResource("12_r")]
+position = Vector2(1700, 374)
+min_x = 80.0
+max_x = 2720.0
+
+[node name="Ground2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(3500, 610)
+size = Vector2(1400, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Skull1" parent="Enemies" instance=ExtResource("13_r")]
+position = Vector2(3000, 370)
+
+[node name="MinorBull3" parent="Enemies" instance=ExtResource("12_r")]
+position = Vector2(3422, 374)
+min_x = 2880.0
+max_x = 4120.0
+
+[node name="Pillar1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(3876, 355)
+size = Vector2(60, 90)
+tile_texture = ExtResource("14_r")
+
+[node name="Coin1" parent="Coins" instance=ExtResource("15_r")]
+position = Vector2(3836, 266)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("15_r")]
+position = Vector2(3876, 266)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("15_r")]
+position = Vector2(3916, 266)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("15_r")]
+position = Vector2(480, 225)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("15_r")]
+position = Vector2(560, 225)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("15_r")]
+position = Vector2(640, 225)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("15_r")]
+position = Vector2(2180, 225)
+
+[node name="Coin8" parent="Coins" instance=ExtResource("15_r")]
+position = Vector2(2260, 225)
+
+[node name="Coin9" parent="Coins" instance=ExtResource("15_r")]
+position = Vector2(2340, 225)
+
+[node name="HideSpot1" parent="Hazards" instance=ExtResource("16_r")]
+position = Vector2(1000, 345)
+size = Vector2(120, 110)
+hint = "Hold DOWN to hide!"
+
+[node name="Bush1" type="Sprite2D" parent="Decor"]
+position = Vector2(1000, 345)
+texture = ExtResource("17_r")
+scale = Vector2(1.25, 1.1458)
+
+[node name="HideSpot2" parent="Hazards" instance=ExtResource("16_r")]
+position = Vector2(3600, 350)
+size = Vector2(110, 100)
+hint = "Hold DOWN to hide!"
+
+[node name="Bush2" type="Sprite2D" parent="Decor"]
+position = Vector2(3600, 350)
+texture = ExtResource("14_r")
+scale = Vector2(0.6875, 0.625)
+
+[node name="Wall2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(4200, 60)
+size = Vector2(64, 1520)
+tile_texture = ExtResource("5_r")
+
+[node name="Player" parent="." instance=ExtResource("18_r")]
+position = Vector2(200, 360)
+
+[node name="Tracker" type="Node" parent="."]
+script = ExtResource("19_r")
+need_charges = 4
+need_minor_defeats = 2
+
+[node name="TouchControls" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="TouchPad" type="Control" parent="TouchControls"]
+script = ExtResource("20_r")
+mode = "platformer"
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="HUD" parent="." instance=ExtResource("21_r")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("22_r")]
+
+[node name="CheckpointComplete" parent="." instance=ExtResource("23_r")]

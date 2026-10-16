@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/environment/background.gd" id="1_r"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/bg_arena_night.png" id="2_r"]
+
+[node name="Background" type="CanvasLayer"]
+script = ExtResource("1_r")
+layer = -10
+
+[node name="Rect" type="TextureRect" parent="."]
+offset_right = 3840.0
+offset_bottom = 720.0
+mouse_filter = 2
+texture = ExtResource("2_r")
+stretch_mode = 1
