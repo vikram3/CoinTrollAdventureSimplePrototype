@@ -27,16 +27,17 @@ func _ready() -> void:
 	_streams["boom"] = _make(PackedFloat32Array([90.0, 70.0, 50.0]), 0.09, 0.6, true)
 	_streams["crash"] = _make(PackedFloat32Array([160.0, 110.0]), 0.08, 0.5, true)
 	_streams["complete"] = _make(PackedFloat32Array([523.0, 659.0, 784.0, 1046.0]), 0.1, 0.4, false)
+	_streams["chime"] = _make(PackedFloat32Array([1760.0, 2637.0]), 0.06, 0.35, false)
 	_streams["select"] = _make(PackedFloat32Array([660.0]), 0.04, 0.3, false)
 
 
-func play(sound: String, pitch_jitter: float = 0.05) -> void:
+func play(sound: String, pitch_jitter: float = 0.05, pitch_scale: float = 1.0) -> void:
 	if not _streams.has(sound):
 		return
 	var p := _players[_next]
 	_next = (_next + 1) % _players.size()
 	p.stream = _streams[sound]
-	p.pitch_scale = 1.0 + randf_range(-pitch_jitter, pitch_jitter)
+	p.pitch_scale = pitch_scale * (1.0 + randf_range(-pitch_jitter, pitch_jitter))
 	p.play()
 
 

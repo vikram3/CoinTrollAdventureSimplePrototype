@@ -18,6 +18,7 @@ The first open imports all PNGs (takes a few seconds).
 
 ## Controls
 CT: A/D or arrows to move (WASD/arrows in the maze), Space/K/W/Up to jump, J/X/Enter to attack.
+CT extras: press jump again in the air to double jump; Shift or C to dash; hold Q or Ctrl on the ground to block front hits (not from above). Mouse: left click attacks, hold right click to block.
 Alex: arrows to move, Space jump, Down shield, Up bow, Enter/J combo attack.
 Esc/P pause, R restart checkpoint.
 

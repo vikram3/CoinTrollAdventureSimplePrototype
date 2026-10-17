@@ -15,6 +15,8 @@ var best_coins: Dictionary = {}
 var pending_cinematic: String = ""
 var cinematic_next_checkpoint: int = 0
 var show_end_card: bool = false
+var coin_streak: int = 0
+var _last_pickup_ms: int = -100000
 
 
 func _ready() -> void:
@@ -27,7 +29,18 @@ func _ready() -> void:
 
 func reset_coins() -> void:
 	coins = 0
+	coin_streak = 0
 	coins_changed.emit(coins)
+
+
+## Counts coins picked up in a row (a gap of over 1.5 s starts a new run).
+func next_coin_streak() -> int:
+	var now := Time.get_ticks_msec()
+	if now - _last_pickup_ms > 1500:
+		coin_streak = 0
+	_last_pickup_ms = now
+	coin_streak += 1
+	return coin_streak
 
 
 func add_coins(amount: int = 1) -> void:
@@ -41,7 +54,10 @@ func new_game() -> void:
 	unlocked_checkpoint = 1
 	best_coins.clear()
 	save_progress()
-	start_checkpoint(1)
+	# The intro plays first and then continues into checkpoint 01.
+	pending_cinematic = "intro"
+	cinematic_next_checkpoint = 1
+	Transition.change_scene(CINEMATIC_SCENE, "")
 
 
 func continue_game() -> void:

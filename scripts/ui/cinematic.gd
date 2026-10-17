@@ -11,6 +11,11 @@ extends Control
 @onready var speaker_label: Label = %SpeakerLabel
 @onready var line_label: Label = %LineLabel
 
+## Preview one cinematic on its own: type a key from StoryData.CINEMATICS here
+## (e.g. "intro"), then press F6 with this scene open. Leave it empty in the game.
+@export var preview_key: String = ""
+
+var _previewing: bool = false
 var _advance: bool = false
 var _skip: bool = false
 var _done: bool = false
@@ -20,7 +25,12 @@ func _ready() -> void:
 	get_tree().paused = false
 	bubble.modulate.a = 0.0
 	frame.modulate.a = 0.0
+	if GameState.pending_cinematic == "" and preview_key != "":
+		GameState.pending_cinematic = preview_key
+		_previewing = true
 	var data := StoryData.get_cinematic(GameState.pending_cinematic)
+	if data.is_empty():
+		push_warning("Cinematic key not found: '%s'" % GameState.pending_cinematic)
 	if data.is_empty():
 		_finish.call_deferred()
 		return
@@ -100,4 +110,8 @@ func _finish() -> void:
 	if _done:
 		return
 	_done = true
+	if _previewing:
+		GameState.pending_cinematic = ""
+		GameState.go_to_main_menu()
+		return
 	GameState.cinematic_finished()

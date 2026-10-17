@@ -25,6 +25,8 @@ signal goal_touched
 ## Checkpoint 06: a knockback off the edge ends the checkpoint as a scripted fall.
 @export var knockback_fall_completes: bool = false
 @export var knockback_fall_source: String = "horn"
+## Countdown in seconds shown on the HUD. Running out restarts the checkpoint. 0 = no limit.
+@export var time_limit: float = 0.0
 @export_group("Nodes")
 @export var player_path: NodePath = ^"Player"
 @export var tracker_path: NodePath
@@ -35,6 +37,7 @@ var pause_menu: PauseMenu = null
 var complete_banner: CheckpointCompleteBanner = null
 var tracker: ObjectiveTracker = null
 var time_left: float = 0.0
+var limit_left: float = 0.0
 var elapsed: float = 0.0
 var defeats: int = 0
 var reached_goal: bool = false
@@ -58,6 +61,7 @@ func _ready() -> void:
 	if not tracker_path.is_empty():
 		tracker = get_node_or_null(tracker_path) as ObjectiveTracker
 	time_left = survive_seconds
+	limit_left = time_limit
 	if player:
 		player.died.connect(_on_player_died)
 		player.health_changed.connect(_on_player_health_changed)
@@ -97,6 +101,11 @@ func _physics_process(delta: float) -> void:
 		time_left = maxf(time_left - delta, 0.0)
 		if time_left <= 0.0:
 			complete()
+			return
+	if time_limit > 0.0:
+		limit_left = maxf(limit_left - delta, 0.0)
+		if limit_left <= 0.0:
+			fail("Out of time!")
 			return
 	if player and player.global_position.y > kill_y:
 		handle_fall()
@@ -174,6 +183,8 @@ func get_objective_text() -> String:
 func get_timer_value() -> float:
 	if objective_type == ObjectiveType.SURVIVE:
 		return time_left
+	if time_limit > 0.0:
+		return limit_left
 	if objective_type == ObjectiveType.EVENT and tracker:
 		return tracker.get_timer_value()
 	return -1.0

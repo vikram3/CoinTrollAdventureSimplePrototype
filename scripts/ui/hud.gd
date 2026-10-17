@@ -12,6 +12,7 @@ var _timer_value: float = -1.0
 var _pulse: float = 0.0
 var _announce_time: float = 0.0
 var _fade_target: float = 1.0
+var _bump_tween: Tween = null
 
 @onready var coin_label: Label = %CoinLabel
 @onready var objective_label: Label = %ObjectiveLabel
@@ -25,6 +26,7 @@ var _fade_target: float = 1.0
 
 
 func _ready() -> void:
+	add_to_group("hud")
 	pause_button.pressed.connect(_on_pause_button_pressed)
 	timer_label.visible = false
 	announce_label.modulate.a = 0.0
@@ -32,6 +34,24 @@ func _ready() -> void:
 
 func set_coins(count: int, target: int) -> void:
 	coin_label.text = ("%d / %d" % [count, target]) if target > 0 else str(count)
+
+
+## Screen position the flying coins head for.
+func coin_screen_position() -> Vector2:
+	return coin_label.get_global_rect().get_center()
+
+
+## Counter bump when a coin lands.
+func bump_coins() -> void:
+	if _bump_tween and _bump_tween.is_valid():
+		_bump_tween.kill()
+	coin_label.pivot_offset = coin_label.size * 0.5
+	coin_label.scale = Vector2.ONE
+	coin_label.modulate = Color(1.0, 1.0, 0.5)
+	_bump_tween = create_tween()
+	_bump_tween.tween_property(coin_label, "scale", Vector2(1.4, 1.4), 0.06).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	_bump_tween.tween_property(coin_label, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_bump_tween.parallel().tween_property(coin_label, "modulate", Color.WHITE, 0.3)
 
 
 func set_objective(text: String) -> void:

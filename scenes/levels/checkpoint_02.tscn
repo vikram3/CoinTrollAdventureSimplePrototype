@@ -19,8 +19,6 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/hide_spot.tscn" id="17_r"]
 [ext_resource type="Texture2D" uid="uid://ckawy0wqockf0" path="res://assets/environment/hedge.png" id="18_r"]
 [ext_resource type="PackedScene" path="res://scenes/objects/hazard_emitter.tscn" id="19_r"]
-[ext_resource type="PackedScene" path="res://scenes/npc/commenter.tscn" id="20_r"]
-[ext_resource type="Texture2D" uid="uid://c65v6v83a3osb" path="res://assets/npc/lala.png" id="21_r"]
 [ext_resource type="PackedScene" path="res://scenes/objects/sliding_crate.tscn" id="22_r"]
 [ext_resource type="Texture2D" uid="uid://b30urc6d2janq" path="res://assets/objects/chest.png" id="23_r"]
 [ext_resource type="PackedScene" path="res://scenes/objects/goal.tscn" id="24_r"]
@@ -39,6 +37,7 @@ objective_type = 1
 objective_text_override = "Reach the TREASURE chest"
 level_bounds = Rect2(0, -600, 9400, 1320)
 kill_y = 900.0
+time_limit = 60.0
 
 [node name="Background" parent="." unique_id=990889637 instance=ExtResource("2_r")]
 texture = ExtResource("3_r")
@@ -70,18 +69,6 @@ position = Vector2(7760, 345)
 scale = Vector2(1.25, 1.1458)
 texture = ExtResource("18_r")
 
-[node name="Lala1" parent="Decor" unique_id=375660311 instance=ExtResource("20_r")]
-position = Vector2(7700, 368)
-texture = ExtResource("21_r")
-interval_min = 8.0
-interval_max = 12.0
-
-[node name="Lala2" parent="Decor" unique_id=479389430 instance=ExtResource("20_r")]
-position = Vector2(9100, 368)
-texture = ExtResource("21_r")
-first_delay = 1.5
-interval_max = 9.0
-
 [node name="TreasureBox1" type="Sprite2D" parent="Decor" unique_id=657071039]
 modulate = Color(1, 0.95, 0.7, 1)
 position = Vector2(9330, 342)
@@ -111,7 +98,7 @@ size = Vector2(950, 420)
 tile_texture = ExtResource("6_r")
 
 [node name="CorridorCeiling1" parent="Environment" unique_id=967675226 instance=ExtResource("4_r")]
-position = Vector2(2500, -205)
+position = Vector2(2500, -329)
 size = Vector2(600, 990)
 tile_texture = ExtResource("5_r")
 
@@ -566,6 +553,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("26_r")
 
