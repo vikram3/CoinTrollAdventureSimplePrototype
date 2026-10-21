@@ -14,10 +14,18 @@ const FLY_TIME := 0.42
 @export var falling: bool = false
 @export var fall_delay: float = 0.0
 @export var fall_speed_max: float = 520.0
+## Seconds before CT can pick this coin up (used for coins that spill out of CT).
+@export var pickup_delay: float = 0.0
+## Starting push for a falling coin: x sideways, y up (negative).
+@export var drop_impulse: Vector2 = Vector2.ZERO
+## If above 0, a falling coin lands this far below where it started, even with no floor (top-down levels).
+@export var max_fall: float = 0.0
 
 var _collected: bool = false
 var _landed: bool = false
 var _vy: float = 0.0
+var _vx: float = 0.0
+var _start_y: float = INF
 var _t: float = 0.0
 var _pull_speed: float = MAGNET_START_SPEED
 var _player: Node2D = null
@@ -31,6 +39,8 @@ func _ready() -> void:
 	collision_mask = 2 | (1 if falling else 0)
 	body_entered.connect(_on_body_entered)
 	_t = randf() * TAU
+	_vx = drop_impulse.x
+	_vy = drop_impulse.y
 	if falling and fall_delay > 0.0:
 		visible = false
 
@@ -39,14 +49,23 @@ func _physics_process(delta: float) -> void:
 	if _collected:
 		return
 	_t += delta
+	if pickup_delay > 0.0:
+		pickup_delay -= delta
 	if falling and not _landed:
 		if fall_delay > 0.0:
 			fall_delay -= delta
 			if fall_delay <= 0.0:
 				visible = true
 			return
+		if _start_y == INF:
+			_start_y = position.y
 		_vy = minf(_vy + 900.0 * delta, fall_speed_max)
+		_vx = move_toward(_vx, 0.0, 400.0 * delta)
+		position.x += _vx * delta
 		position.y += _vy * delta
+		if max_fall > 0.0 and _vy > 0.0 and position.y >= _start_y + max_fall:
+			_landed = true
+			position.y = _start_y + max_fall
 		sprite.position.y = 0.0
 		if position.y > 4000.0:
 			queue_free()
@@ -60,6 +79,8 @@ func _physics_process(delta: float) -> void:
 
 ## Pulls the coin toward CT once she is close enough. Returns true if the coin was collected.
 func _update_magnet(delta: float) -> bool:
+	if pickup_delay > 0.0:
+		return false
 	if _player == null or not is_instance_valid(_player):
 		_player = get_tree().get_first_node_in_group("player") as Node2D
 		if _player == null:
@@ -79,7 +100,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if _collected or not visible:
 		return
 	if body is PlayerBase:
-		_collect()
+		if pickup_delay <= 0.0:
+			_collect()
 	elif falling and body is StaticBody2D:
 		_landed = true
 

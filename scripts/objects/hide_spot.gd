@@ -1,12 +1,18 @@
 class_name HideSpot
 extends Area2D
-## A bush or crate CT can hide in. Stand inside and hold DOWN (or HIDE on touch).
-## Hidden CT is ignored by enemies and can't be hurt.
+## A bush or crate CT can hide in. Stand with his centre inside it and hold DOWN (or HIDE on touch).
+## Hidden CT is ignored by enemies and can't be hurt. While CT is inside, the bush is solid for skulls.
+
+## Physics layer used by occupied bushes. Skulls collide with it; CT does not.
+const BUSH_BLOCK_LAYER := 16
 
 @export var size: Vector2 = Vector2(120, 110)
 @export var hint: String = "Hold DOWN to hide!"
 
+## True while CT is hiding inside this bush.
+var occupied: bool = false
 var _said: bool = false
+var _blocker: StaticBody2D = null
 
 
 func _ready() -> void:
@@ -17,19 +23,35 @@ func _ready() -> void:
 		var shape := RectangleShape2D.new()
 		shape.size = size
 		cs.shape = shape
+	add_to_group("hide_spot")
+	_blocker = StaticBody2D.new()
+	_blocker.collision_layer = 0
+	_blocker.collision_mask = 0
+	var bcs := CollisionShape2D.new()
+	var bshape := RectangleShape2D.new()
+	bshape.size = size
+	bcs.shape = bshape
+	_blocker.add_child(bcs)
+	add_child(_blocker)
 	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
+
+
+func rect() -> Rect2:
+	return Rect2(global_position - size * 0.5, size)
+
+
+## True only when the point (CT's centre) is inside the bush itself, not just touching its edge.
+func contains_point(world_pos: Vector2) -> bool:
+	return rect().has_point(world_pos)
+
+
+func _physics_process(_delta: float) -> void:
+	var ct := get_tree().get_first_node_in_group("player") as PlayerBase
+	occupied = ct != null and not ct.is_dead and contains_point(ct.global_position)
+	_blocker.set_deferred("collision_layer", BUSH_BLOCK_LAYER if occupied else 0)
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is PlayerBase:
-		var p := body as PlayerBase
-		p.can_hide = true
-		if not _said:
-			_said = true
-			p.say(hint, 2.0)
-
-
-func _on_body_exited(body: Node2D) -> void:
-	if body is PlayerBase:
-		(body as PlayerBase).can_hide = false
+	if body is PlayerBase and not _said:
+		_said = true
+		(body as PlayerBase).say(hint, 2.0)

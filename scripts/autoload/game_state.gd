@@ -48,6 +48,16 @@ func add_coins(amount: int = 1) -> void:
 	coins_changed.emit(coins)
 
 
+## CT was hit: he loses 10% of his coins, rounded up so small purses still lose one. Returns how many were lost.
+func lose_share_of_coins() -> int:
+	if coins <= 0:
+		return 0
+	var lost := maxi(1, ceili(coins * 0.10))
+	coins -= lost
+	coins_changed.emit(coins)
+	return lost
+
+
 # --- Flow ------------------------------------------------------------------
 
 func new_game() -> void:

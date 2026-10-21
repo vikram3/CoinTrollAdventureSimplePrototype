@@ -46,6 +46,29 @@ func _ready() -> void:
 	health_changed.emit(health, max_health)
 
 
+const COIN_SCENE := preload("res://scenes/objects/coin.tscn")
+
+
+## How far a spilled coin falls with no floor under it. 0 means it falls until it lands on a floor.
+func coin_drop_limit() -> float:
+	return 0.0
+
+
+## Spill coins out of CT when he loses them. Each one pops out and can be picked up again after a moment.
+func _drop_coins(amount: int) -> void:
+	var parent := get_parent()
+	if parent == null:
+		return
+	for i in amount:
+		var c := COIN_SCENE.instantiate() as Coin
+		c.falling = true
+		c.max_fall = coin_drop_limit()
+		c.pickup_delay = 0.9
+		c.drop_impulse = Vector2(randf_range(-170.0, 170.0), randf_range(-330.0, -220.0))
+		parent.add_child(c)
+		c.global_position = global_position + Vector2(randf_range(-8.0, 8.0), -18.0)
+
+
 func take_damage(amount: int, from_position: Vector2 = Vector2.INF, knockback: Vector2 = Vector2(260, -280), source: String = "") -> bool:
 	if is_dead or invincible or is_hidden or _invuln > 0.0 or amount <= 0:
 		return false
@@ -56,6 +79,10 @@ func take_damage(amount: int, from_position: Vector2 = Vector2.INF, knockback: V
 	Sfx.play("hit")
 	shake_camera(8.0, 0.25)
 	health_changed.emit(health, max_health)
+	var lost := GameState.lose_share_of_coins()
+	if lost > 0:
+		say("Dropped %d coins!" % lost, 2.0)
+		_drop_coins(lost)
 	if health <= 0:
 		die()
 	return true
@@ -159,6 +186,11 @@ func update_hiding() -> void:
 		sprite.modulate.a = 0.35 if is_hidden else 1.0
 	if is_hidden:
 		velocity.x = 0.0
+
+
+## Enemies ask this directly each time they look for CT, so a hiding check can't lag a frame behind.
+func is_hidden_now() -> bool:
+	return is_hidden
 
 
 func is_stunned() -> bool:

@@ -8,9 +8,9 @@ const CHECKPOINTS := [
 	{"number": 1, "name": "Bush Maze Intro", "scene": "res://scenes/levels/checkpoint_01.tscn",
 		"trigger": "Time to grab those coins before anyone notices...", "cinematic": "bush_maze_done"},
 	{"number": 2, "name": "Treasure Chest Chase", "scene": "res://scenes/levels/checkpoint_02.tscn",
-		"trigger": "Those coins are MINE. Gotta beat him there!", "cinematic": "chest_open"},
+		"trigger": "Those coins are MINE. Gotta beat him there!", "cinematic": "chest_open+shadow_storm"},
 	{"number": 3, "name": "Shadow Arena", "scene": "res://scenes/levels/checkpoint_03.tscn",
-		"trigger": "New players flooding in... grab what I can before it gets crazy!", "cinematic": "shadow_arena_done"},
+		"trigger": "New players flooding in... grab what I can before it gets crazy!", "cinematic": "big_boss_arrives"},
 	{"number": 4, "name": "Big Boss Dodge", "scene": "res://scenes/levels/checkpoint_04.tscn",
 		"trigger": "Big Boss is coming. MOVE!", "cinematic": "pink_girl_arrives"},
 	{"number": 5, "name": "Pink Girl vs Big Boss", "scene": "res://scenes/levels/checkpoint_05.tscn",
@@ -239,12 +239,39 @@ const CINEMATICS := {
 				"lines": [["CT", "Those coins are mine!"]]},
 		],
 	},
-	"shadow_arena_done": {
-		"title": "The Shadows Fade",
+	## Plays before checkpoint 03 (after chest_open, joined with "+" in CHECKPOINTS).
+	"shadow_storm": {
+		"title": "New Players Arrive",
 		"panels": [
-			{"bg": "#101030", "art": "res://assets/characters/CT/ct_idle.png",
-				"caption": "The shadows dissolve. Coins glitter on every ledge.",
-				"lines": [["CT", "Shadows don't carry wallets. Their loss."], ["CT", "Okay, now the hall ahead looks even bigger."]]},
+			{"bg": "#1a2a4a", "art": "res://assets/characters/Alex/alex_idle.png",
+				"caption": "A crowd of new players pours into the arena through the castle gate.",
+				"lines": [["New Player", "Everybody in! Grab the coins before the boss gets them!"]]},
+			{"bg": "#101c10", "art": "res://assets/enemies/shadow_avatar.png",
+				"caption": "A dark shadow flickers in the middle of the arena. Its warning light pulses on the ground.",
+				"lines": [["New Player", "What is THAT?"]]},
+			{"bg": "#2a1a0a", "art": "res://assets/enemies/shadow_avatar.png",
+				"caption": "The shadow bursts open right beside CT. A shockwave rings out across the arena.",
+				"lines": [["CT", "Whoa! Not cool!"]]},
+			{"bg": "#1a2a4a", "art": "res://assets/characters/Alex/alex_idle.png",
+				"caption": "The new player charges straight into the shadow, sword first.",
+				"lines": [["New Player", "Storm it! Together!"], ["New Player", "Nobody touches the coins!"]]},
+			{"bg": "#101c10", "art": "res://assets/enemies/shadow_avatar.png",
+				"caption": "The shadow breaks apart into dust. More players rush past the spot where it stood.",
+				"lines": [["New Player", "Got it! Next one!"]]},
+		],
+	},
+	"big_boss_arrives": {
+		"title": "Big Boss Is Coming",
+		"panels": [
+			{"bg": "#3a1414", "art": "res://assets/enemies/big_boss.png",
+				"caption": "Big Boss crashes down from the castle tower, sword raised.",
+				"lines": [["Big Boss", "Little green thief. Did you think I forgot about you?"]]},
+			{"bg": "#14304a", "art": "res://assets/characters/CT/ct_idle.png",
+				"caption": "CT scrambles backward as the blade swings toward him. It misses by a hair.",
+				"lines": [["CT", "Whoa! Whoa! Let's talk about this!"], ["Big Boss", "No talking."]]},
+			{"bg": "#3a1414", "art": "res://assets/enemies/big_boss.png",
+				"caption": "Big Boss raises his sword again.",
+				"lines": [["Big Boss", "Stand still and let me finish."], ["CT", "Nope! I'm not standing still for that!"]]},
 		],
 	},
 	"forest_chase_done": {
@@ -304,7 +331,18 @@ static func cinematic_after(number: int) -> String:
 	return str(info.get("cinematic", ""))
 
 
+## A key like "chest_open+shadow_storm" plays those cinematics one after another.
 static func get_cinematic(key: String) -> Dictionary:
+	if key.contains("+"):
+		var merged := {"title": "", "panels": []}
+		for part in key.split("+"):
+			var one := get_cinematic(part.strip_edges())
+			if one.is_empty():
+				continue
+			if str(merged["title"]) == "":
+				merged["title"] = one.get("title", "")
+			merged["panels"].append_array(one.get("panels", []))
+		return merged
 	if CINEMATICS.has(key):
 		return CINEMATICS[key]
 	return {}

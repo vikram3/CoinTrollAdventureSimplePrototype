@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="11_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="12_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="13_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hide_spot.tscn" id="30_hs"]
 
 [node name="Checkpoint01" type="Node2D" unique_id=1580573827]
 script = ExtResource("1_r")
@@ -816,26 +817,74 @@ position = Vector2(2448, 240)
 [node name="Skull1" parent="Enemies" unique_id=477350487 instance=ExtResource("5_r")]
 position = Vector2(144, 1680)
 patrol_points = PackedVector2Array(0, 0, 2304, 0)
+lines_patrol = PackedStringArray("Length of this hallway is a crime.", "Another lap, another lap. Lovely.", "I could do this blindfolded. Have done, actually.")
+lines_detected = PackedStringArray("Oi, troll! Eyes up here, I am right in front of you!", "There is the naked lump of trouble!", "Well well, a troll who forgot his trousers.")
+lines_chase = PackedStringArray("Stop running, you coward!", "Running is for people with places to be!", "I will catch you by the next hedge, trust me.")
+lines_attack = PackedStringArray("Eat bone, troll!", "Take a swing at this!", "Hold still and be a good target!")
+lines_caught = PackedStringArray("Gotcha! Hand over the coins, big lad!", "Caught in the hallway. Embarrassing, troll.", "Thought you could outrun me? Adorable.")
+lines_lost = PackedStringArray("Where did he go? Hiding like a coward!", "Blast, a hedge stole him!", "He ducked into a bush. Cheat!")
+lines_search = PackedStringArray("Come on out, I can smell the coins!", "Bushes do not hide much from me.", "I am standing right here waiting, troll.")
+lines_give_up = PackedStringArray("Fine, back to the hallway.", "Not worth another lap.", "Coward. Back to patrol.")
 
 [node name="Skull2" parent="Enemies" unique_id=1088366262 instance=ExtResource("5_r")]
 position = Vector2(1104, 912)
 patrol_points = PackedVector2Array(0, 0, 1344, 0)
+lines_patrol = PackedStringArray("Is it nap time yet?", "Quiet... too quiet. I do not like it.", "Counting hedges again. Forty-one. Forty-two...")
+lines_detected = PackedStringArray("Oh! Oh no, it is the troll!", "Eek, you are naked! Put something on!", "Do not look at me like that, I am just doing my job!")
+lines_chase = PackedStringArray("Please stop chasing me!", "Wait, come back? No, do not come back!", "I am going, I am going!")
+lines_attack = PackedStringArray("Sorry! Sorry! Take THAT!", "I am brave, I am brave, I am brave!", "Do not make me do this!")
+lines_caught = PackedStringArray("Oh dear, I caught you! Please do not hit me!", "I got him! I think I got him!", "Okay, okay, you win... no, I win!")
+lines_lost = PackedStringArray("He is gone! Did he go? Did he?", "Where did he go? Oh dear.", "Hide, you troll, hide and stay hidden!")
+lines_search = PackedStringArray("Hello? Troll? Please be friendly.", "Something rustled. It was me.", "I will just look under this bush. Oh, it is a spider.")
+lines_give_up = PackedStringArray("Phew. Okay. Back to patrol.", "Maybe he went home.", "Nap time after this, I promise.")
 
 [node name="Skull3" parent="Enemies" unique_id=2010393637 instance=ExtResource("5_r")]
 position = Vector2(2448, 528)
 patrol_points = PackedVector2Array(0, 0, 0, 1152)
+lines_patrol = PackedStringArray("Up and down, down and up, the maze has no top.", "Nobody writes songs for skulls. Not one.", "The wind is cold tonight, and so is my heart.")
+lines_detected = PackedStringArray("A troll in the moonlight, how romantic... and rude.", "You there, unclothed one! Halt, in the name of the maze!", "I see you. Oh, I see you very well.")
+lines_chase = PackedStringArray("Run, little troll, like the wind through the hedges!", "Your bare knees are showing, troll!", "Every chase ends in the same place, you know.")
+lines_attack = PackedStringArray("A verse for your head!", "Your coins are a sad little sonnet, troll!", "Take this, from the poem of the maze!")
+lines_caught = PackedStringArray("Caught! A tragedy, but a fitting one.", "You fell beautifully, troll.", "Art needs a victim. Thank you for volunteering.")
+lines_lost = PackedStringArray("Bushes make a poor metaphor for hiding.", "He slipped away like a rhyme I never finished.", "Gone. Like everything worth keeping.")
+lines_search = PackedStringArray("Come out, come out, my naked muse.", "Shadows are easy to read. Where are you, shadow?", "I shall wait, troll, for poetry takes patience.")
+lines_give_up = PackedStringArray("Some verses are never finished.", "The maze keeps its secrets. For now.", "Back to my rounds. Back to the rhymes.")
 
 [node name="Skull4" parent="Enemies" unique_id=1553388085 instance=ExtResource("5_r")]
 position = Vector2(1296, 144)
 patrol_points = PackedVector2Array(0, 0, 960, 0)
+lines_patrol = PackedStringArray("Doing push-ups on the bone. Set twelve.", "Protein in the hedges, that is my secret.", "Nobody beats a skull in a hedge race.")
+lines_detected = PackedStringArray("Look at those legs, troll! Those are not gym legs!", "Naked and fast, eh? Not fast enough!", "Hey, you! Coins on the ground, mine now!")
+lines_chase = PackedStringArray("Keep it up, troll, I am warming up!", "This is my cardio, and you are my cardio!", "Faster, faster, I am on a roll!")
+lines_attack = PackedStringArray("Bone-crusher special!", "Spotter, I need a spot! Take THIS!", "Hit a skull and see who hurts more!")
+lines_caught = PackedStringArray("Hah, pumped and caught! Pay up!", "That was a warm-up for you, troll!", "Final rep: your coins, my pockets!")
+lines_lost = PackedStringArray("He used the bushes! Dirty tactics!", "Gone? I did not even get my warm-up in!", "Ran off like a little troll. Shame.")
+lines_search = PackedStringArray("I can see your bare feet under there!", "Come on, troll, I have got all day and a lot of reps!", "Nobody out-sprints a skull, come out!")
+lines_give_up = PackedStringArray("Fine, cooling down now.", "Next time, troll. Next time.", "Back to the cardio route.")
 
 [node name="Skull5" parent="Enemies" unique_id=444188829 instance=ExtResource("5_r")]
 position = Vector2(720, 720)
 patrol_points = PackedVector2Array(0, 0, 0, 768)
+lines_patrol = PackedStringArray("Back in my day the maze had no hedges.", "These bones creak. Every single one.", "Ten steps, turn around, ten steps back. Thrilling.")
+lines_detected = PackedStringArray("You there! Youngster with no clothes!", "Ah, a troll. Thought you had gone out of fashion.", "Stop right there or I will tell your mother!")
+lines_chase = PackedStringArray("Slow down! I am too old for this!", "Come back here and face an elder!", "Back in my day, trolls had manners!")
+lines_attack = PackedStringArray("Take that, you rascal!", "Old bones still hit hard!", "This is for stealing my coins!")
+lines_caught = PackedStringArray("Ha! Got you! Now sit down and be quiet!", "Caught by an old skull! Mind yourself!", "Young trolls, no respect at all!")
+lines_lost = PackedStringArray("Bushes! Ruining the maze for everyone!", "Where did he get to? Blasted hedges!", "He vanished. Typical.")
+lines_search = PackedStringArray("I know you are in there, rascal!", "Come out before my knees give out!", "Hmph. Still here, troll, still waiting.")
+lines_give_up = PackedStringArray("Fine. My back hurts anyway.", "Enough of this, back to my laps.", "Hmph. Let him stay in his bush.")
 
 [node name="Skull6" parent="Enemies" unique_id=52952861 instance=ExtResource("5_r")]
 position = Vector2(528, 144)
 patrol_points = PackedVector2Array(0, 0, 0, 768)
+lines_patrol = PackedStringArray("The night is long, and so is this corridor.", "I was once a king of bones. Now I count hedges.", "Oh fate, why must I patrol this dreary path?")
+lines_detected = PackedStringArray("Halt, intruder! I see your bare bottom!", "A trespasser in my realm! Unclothed, too!", "Thou shalt not pass, naked one!")
+lines_chase = PackedStringArray("Flee if you must, troll, I follow!", "Your coins shall be mine, bare one!", "The hunt is on, and I am the hunter!")
+lines_attack = PackedStringArray("Feel the wrath of the bone king!", "Thou art no match for me!", "For the bone crown!")
+lines_caught = PackedStringArray("Caught in my grasp! Victory!", "The bone king prevails once more!", "Kneel, troll, and surrender your coins!")
+lines_lost = PackedStringArray("He has escaped into the hedges! Coward!", "The shadows have swallowed him!", "Fled like a scared rabbit!")
+lines_search = PackedStringArray("Show yourself, bare one! I command it!", "I smell your coins, troll, you cannot hide forever!", "I am patient. Kings are always patient.")
+lines_give_up = PackedStringArray("Let him go. The maze is mine.", "A king does not chase forever.", "Back to my watch. Back to my throne.")
 
 [node name="Player" parent="." unique_id=499675606 instance=ExtResource("9_r")]
 position = Vector2(144, 144)
@@ -857,3 +906,160 @@ mode = "topdown"
 [node name="PauseMenu" parent="." unique_id=1123208098 instance=ExtResource("12_r")]
 
 [node name="CheckpointComplete" parent="." unique_id=1961286623 instance=ExtResource("13_r")]
+
+[node name="Bushes" type="Node2D" parent="." unique_id=880100001]
+[node name="Bush1" parent="Bushes" unique_id=880100011 instance=ExtResource("3_r")]
+position = Vector2(1104, 816)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot1" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(1104, 816)
+size = Vector2(96, 96)
+hint = "Get in the bush to hide from skulls!"
+
+[node name="Bush2" parent="Bushes" unique_id=880100012 instance=ExtResource("3_r")]
+position = Vector2(2448, 240)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot2" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(2448, 240)
+size = Vector2(96, 96)
+hint = "Get in the bush to hide from skulls!"
+
+[node name="Bush3" parent="Bushes" unique_id=880100013 instance=ExtResource("3_r")]
+position = Vector2(2160, 1488)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot3" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(2160, 1488)
+size = Vector2(96, 96)
+hint = "Get in the bush to hide from skulls!"
+
+[node name="Bush4" parent="Bushes" unique_id=880100014 instance=ExtResource("3_r")]
+position = Vector2(144, 432)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot4" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(144, 432)
+size = Vector2(96, 96)
+hint = "Get in the bush to hide from skulls!"
+
+[node name="Bush5" parent="Bushes" unique_id=880100015 instance=ExtResource("3_r")]
+position = Vector2(624, 1296)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot5" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(624, 1296)
+size = Vector2(96, 96)
+hint = "Get in the bush to hide from skulls!"
+
+[node name="Bush6" parent="Bushes" unique_id=880100016 instance=ExtResource("3_r")]
+position = Vector2(1776, 336)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot6" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(1776, 336)
+size = Vector2(96, 96)
+hint = "Get in the bush to hide from skulls!"
+
+[node name="Bush7" parent="Bushes" unique_id=880100017 instance=ExtResource("3_r")]
+position = Vector2(1104, 144)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot7" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(1104, 144)
+size = Vector2(96, 96)
+hint = "Get in the bush to hide from skulls!"
+
+[node name="Bush8" parent="Bushes" unique_id=880100018 instance=ExtResource("3_r")]
+position = Vector2(1488, 1488)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot8" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(1488, 1488)
+size = Vector2(96, 96)
+hint = "Get in the bush to hide from skulls!"
+
+[node name="Bush9" parent="Bushes" unique_id=880100019 instance=ExtResource("3_r")]
+position = Vector2(144, 1104)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot9" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(144, 1104)
+size = Vector2(96, 96)
+hint = "Get in the bush to hide from skulls!"
+
+[node name="Bush10" parent="Bushes" unique_id=880100020 instance=ExtResource("3_r")]
+position = Vector2(2256, 720)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot10" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(2256, 720)
+size = Vector2(96, 96)
+hint = "Get in the bush to hide from skulls!"
+
+[node name="Bush11" parent="Bushes" unique_id=880100021 instance=ExtResource("3_r")]
+position = Vector2(624, 336)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot11" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(624, 336)
+size = Vector2(96, 96)
+hint = "Get in the bush to hide from skulls!"
+
+[node name="Bush12" parent="Bushes" unique_id=880100022 instance=ExtResource("3_r")]
+position = Vector2(1680, 1104)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot12" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(1680, 1104)
+size = Vector2(96, 96)
+hint = "Get in the bush to hide from skulls!"

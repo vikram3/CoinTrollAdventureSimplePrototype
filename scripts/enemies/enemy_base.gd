@@ -85,7 +85,7 @@ func player_on_level(p: PlayerBase, tolerance: float = 50.0) -> bool:
 
 func get_player() -> PlayerBase:
 	var p := get_tree().get_first_node_in_group("player") as PlayerBase
-	if p and not p.is_dead and not p.is_hidden:
+	if p and not p.is_dead and not p.is_hidden_now():
 		return p
 	return null
 
