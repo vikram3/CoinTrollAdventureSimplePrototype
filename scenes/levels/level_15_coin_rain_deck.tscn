@@ -19,12 +19,12 @@
 [ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="17_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="18_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="19_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="20_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="20_r"]
 
-[node name="Checkpoint14" type="Node2D"]
+[node name="Level15" type="Node2D"]
 script = ExtResource("1_r")
-checkpoint_number = 14
-checkpoint_name = "Coin Rain on the Deck"
+level_number = 15
+level_name = "Coin Rain on the Deck"
 trigger_line = "Alex won! Now the coins are flowing, grab what you can!"
 objective_type = 0
 coin_target = 60
@@ -475,4 +475,4 @@ mouse_filter = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("19_r")]
 
-[node name="CheckpointComplete" parent="." instance=ExtResource("20_r")]
+[node name="LevelComplete" parent="." instance=ExtResource("20_r")]

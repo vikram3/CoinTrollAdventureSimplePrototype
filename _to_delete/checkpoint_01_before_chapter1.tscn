@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://d03bjnls3g0nh"]
+[gd_scene format=3]
 
 [ext_resource type="Script" uid="uid://sna6faykk7l8" path="res://scripts/levels/level.gd" id="1_r"]
 [ext_resource type="Texture2D" uid="uid://pa1rn6rr3kbp" path="res://assets/environment/grass_topdown.png" id="2_r"]

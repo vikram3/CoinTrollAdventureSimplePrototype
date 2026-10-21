@@ -20,12 +20,12 @@
 [ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="18_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="19_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="20_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="21_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="21_r"]
 
-[node name="Checkpoint13" type="Node2D"]
+[node name="Level14" type="Node2D"]
 script = ExtResource("1_r")
-checkpoint_number = 13
-checkpoint_name = "Coin Scramble"
+level_number = 14
+level_name = "Coin Scramble"
 trigger_line = "I signed WHAT? Gotta do something, find those coins first!"
 objective_type = 6
 coin_target = 0
@@ -329,4 +329,4 @@ mouse_filter = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("20_r")]
 
-[node name="CheckpointComplete" parent="." instance=ExtResource("21_r")]
+[node name="LevelComplete" parent="." instance=ExtResource("21_r")]

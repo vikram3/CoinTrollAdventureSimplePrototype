@@ -23,12 +23,12 @@
 [ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="21_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="22_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="23_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="24_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="24_r"]
 
-[node name="Checkpoint15" type="Node2D"]
+[node name="Level16" type="Node2D"]
 script = ExtResource("1_r")
-checkpoint_number = 15
-checkpoint_name = "Tilting Ship"
+level_number = 16
+level_name = "Tilting Ship"
 trigger_line = "The ship is going DOWN. Hold on and get to safety!"
 objective_type = 1
 coin_target = 0
@@ -266,4 +266,4 @@ mouse_filter = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("23_r")]
 
-[node name="CheckpointComplete" parent="." instance=ExtResource("24_r")]
+[node name="LevelComplete" parent="." instance=ExtResource("24_r")]

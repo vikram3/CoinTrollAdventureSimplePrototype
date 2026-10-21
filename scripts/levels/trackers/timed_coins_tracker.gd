@@ -1,5 +1,5 @@
 extends ObjectiveTracker
-## Checkpoint 13: survive the timer and have enough coins when it runs out.
+## Level 14: survive the timer and have enough coins when it runs out.
 
 @export var seconds: float = 60.0
 @export var need_coins: int = 20

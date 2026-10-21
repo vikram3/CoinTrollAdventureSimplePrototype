@@ -1,3 +1,5 @@
+# LEGACY: these generators predate the level rename and the hand-built levels.
+# Do NOT run them: they would overwrite scenes/levels/ with old checkpoint output.
 """Generates the reusable scenes (player, enemies, objects, UI) for the project."""
 import os
 from tscn import *
@@ -373,13 +375,13 @@ def write_pause_menu():
     s.node("Root", "Control", props=full_rect({"theme": s.res(THEME)}))
     s.node("Dim", "ColorRect", "Root", full_rect({"color": C(0, 0, 0, 0.6)}, mode=1))
     vb = menu_panel(s, "Root", "Center", "Paused")
-    for n, t in (("ResumeButton", "Resume"), ("RestartButton", "Restart checkpoint"), ("QuitButton", "Quit to menu")):
+    for n, t in (("ResumeButton", "Resume"), ("RestartButton", "Restart level"), ("QuitButton", "Quit to menu")):
         s.node(n, "Button", vb, {"unique_name_in_owner": True, "layout_mode": 2, "text": t})
     s.node("Hint", "Label", vb, label_props("Esc: resume", 16, 1, {"modulate": C(1, 1, 1, 0.7)}))
     s.write(P("scenes/ui/pause_menu.tscn"))
 
 def write_complete_banner():
-    s = Scene("CheckpointComplete", "CanvasLayer", "res://scripts/ui/checkpoint_complete.gd", {"process_mode": 3, "layer": 25})
+    s = Scene("LevelComplete", "CanvasLayer", "res://scripts/ui/level_complete.gd", {"process_mode": 3, "layer": 25})
     s.node("Root", "Control", props=full_rect({"theme": s.res(THEME)}))
     s.node("Dim", "ColorRect", "Root", full_rect({"color": C(0, 0, 0, 0.45)}, mode=1))
     s.node("Center", "CenterContainer", "Root", full_rect({}, mode=1))
@@ -387,8 +389,8 @@ def write_complete_banner():
                                                       "custom_minimum_size": V(560, 0)})
     vb = "Root/Center/Banner/VBox"
     s.node("VBox", "VBoxContainer", "Root/Center/Banner", {"layout_mode": 2, "theme_override_constants/separation": 14})
-    s.node("Header", "Label", vb, label_props("CHECKPOINT COMPLETE", 40, 1, {"theme_override_colors/font_color": C(1, 0.85, 0.3)}))
-    s.node("NameLabel", "Label", vb, label_props("Checkpoint 01 - Name", 24, 1, {"unique_name_in_owner": True}))
+    s.node("Header", "Label", vb, label_props("LEVEL COMPLETE", 40, 1, {"theme_override_colors/font_color": C(1, 0.85, 0.3)}))
+    s.node("NameLabel", "Label", vb, label_props("Level 01 - Name", 24, 1, {"unique_name_in_owner": True}))
     s.node("CoinsRow", "HBoxContainer", vb, {"layout_mode": 2, "alignment": 1, "theme_override_constants/separation": 10})
     s.node("CoinIcon", "TextureRect", vb + "/CoinsRow", {"layout_mode": 2, "custom_minimum_size": V(32, 32),
                                                          "texture": s.res("res://assets/ui/coin_icon.png"),
@@ -396,7 +398,7 @@ def write_complete_banner():
     s.node("CoinsLabel", "Label", vb + "/CoinsRow", label_props("0 coins", 28, 1, {"unique_name_in_owner": True,
                                                                                    "theme_override_colors/font_color": C(1, 0.88, 0.3)}))
     s.node("ContinueButton", "Button", vb, {"unique_name_in_owner": True, "layout_mode": 2, "text": "Continue"})
-    s.write(P("scenes/ui/checkpoint_complete.tscn"))
+    s.write(P("scenes/ui/level_complete.tscn"))
 
 def write_transition():
     s = Scene("Transition", "CanvasLayer", "res://scripts/ui/transition.gd", {"process_mode": 3, "layer": 100})
@@ -421,7 +423,7 @@ def write_main_menu():
                                     "theme_override_constants/outline_size": 14,
                                     "theme_override_font_sizes/font_size": 64})
     s.node("Subtitle", "Label", props={"layout_mode": 1, "anchors_preset": 10, "anchor_right": 1.0, "offset_top": 138.0,
-                                       "offset_bottom": 172.0, "grow_horizontal": 2, "text": "Prototype - 18 checkpoints",
+                                       "offset_bottom": 172.0, "grow_horizontal": 2, "text": "Prototype - 18 levels",
                                        "horizontal_alignment": 1, "theme_override_font_sizes/font_size": 22})
     s.node("CTArt", "TextureRect", props={"layout_mode": 1, "anchors_preset": 2, "anchor_top": 1.0, "anchor_bottom": 1.0,
                                           "offset_left": 60.0, "offset_top": -330.0, "offset_right": 300.0, "offset_bottom": -10.0,
@@ -441,20 +443,20 @@ def write_main_menu():
                                                   "offset_left": -200.0, "offset_top": -60.0, "offset_right": 200.0,
                                                   "offset_bottom": 250.0, "grow_horizontal": 2, "grow_vertical": 2,
                                                   "theme_override_constants/separation": 12})
-    for n, t in (("ContinueButton", "Continue"), ("NewGameButton", "New game"), ("SelectButton", "Checkpoint select"),
+    for n, t in (("ContinueButton", "Continue"), ("NewGameButton", "New game"), ("SelectButton", "Level select"),
                  ("ControlsButton", "Controls"), ("QuitButton", "Quit")):
         s.node(n, "Button", "MainButtons", {"unique_name_in_owner": True, "layout_mode": 2, "text": t})
-    # checkpoint select
+    # level select
     s.node("SelectPanel", "CenterContainer", props=full_rect({"unique_name_in_owner": True, "visible": False}, mode=1))
     s.node("Panel", "PanelContainer", "SelectPanel", {"layout_mode": 2, "custom_minimum_size": V(760, 0)})
     vb = "SelectPanel/Panel/VBox"
     s.node("VBox", "VBoxContainer", "SelectPanel/Panel", {"layout_mode": 2, "theme_override_constants/separation": 14})
-    s.node("Header", "Label", vb, label_props("Checkpoint Select", 36, 1, {"theme_override_colors/font_color": C(1, 0.85, 0.3)}))
-    s.node("CheckpointGrid", "GridContainer", vb, {"unique_name_in_owner": True, "layout_mode": 2, "columns": 6,
+    s.node("Header", "Label", vb, label_props("Level Select", 36, 1, {"theme_override_colors/font_color": C(1, 0.85, 0.3)}))
+    s.node("LevelGrid", "GridContainer", vb, {"unique_name_in_owner": True, "layout_mode": 2, "columns": 6,
                                                    "theme_override_constants/h_separation": 10,
                                                    "theme_override_constants/v_separation": 10})
     for i in range(1, 19):
-        s.node(f"CP{i:02d}", "Button", vb + "/CheckpointGrid", {"layout_mode": 2, "custom_minimum_size": V(110, 56),
+        s.node(f"CP{i:02d}", "Button", vb + "/LevelGrid", {"layout_mode": 2, "custom_minimum_size": V(110, 56),
                                                                 "text": f"{i:02d}"})
     s.node("SelectInfo", "Label", vb, label_props("", 20, 1, {"unique_name_in_owner": True, "custom_minimum_size": V(0, 90),
                                                                "autowrap_mode": 3}))
@@ -467,8 +469,8 @@ def write_main_menu():
     s.node("Header", "Label", vb, label_props("Controls", 36, 1, {"theme_override_colors/font_color": C(1, 0.85, 0.3)}))
     s.node("Body", "Label", vb, label_props(
         "CT\n  Move: A/D or Left/Right   (maze: WASD / arrows)\n  Jump: Space, K, W or Up\n  Attack: J, X or Enter\n\n"
-        "Alex (checkpoint 12)\n  Move: Left/Right   Jump: Space\n  Shield: Down   Bow: Up   Attack combo: Enter / J\n\n"
-        "Pause: Esc or P      Restart checkpoint: R\nCinematics: Space to advance, Esc to skip", 19, 0))
+        "Alex (level 13)\n  Move: Left/Right   Jump: Space\n  Shield: Down   Bow: Up   Attack combo: Enter / J\n\n"
+        "Pause: Esc or P      Restart level: R\nCinematics: Space to advance, Esc to skip", 19, 0))
     s.node("ControlsBackButton", "Button", vb, {"unique_name_in_owner": True, "layout_mode": 2, "text": "Back"})
     s.write(P("scenes/ui/main_menu.tscn"))
 

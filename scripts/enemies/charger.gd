@@ -28,6 +28,7 @@ var _charge_dir: int = 1
 
 
 func _ready() -> void:
+	charge_speed *= GameState.speed_mult()
 	super._ready()
 	ensure_edge_ray()
 	edge_ray_ahead = 40.0

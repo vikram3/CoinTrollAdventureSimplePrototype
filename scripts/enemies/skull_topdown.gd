@@ -1,6 +1,6 @@
 class_name SkullTopDown
 extends EnemyBase
-## Top-down skull for the checkpoint 01 maze. Walks a patrol route and talks as it goes.
+## Top-down skull for the level 01 maze. Walks a patrol route and talks as it goes.
 ## Sees CT only with a clear line of sight (hedges and walls block it), chases him,
 ## lunges when close, and catches him on contact. Routes around hedges with a grid path,
 ## so it can return to its patrol points and search spots.
@@ -56,6 +56,10 @@ var _path_t: float = 0.0
 
 
 func _ready() -> void:
+	var s := GameState.speed_mult()
+	patrol_speed *= s
+	chase_speed *= s
+	lunge_speed *= s
 	use_gravity = false
 	super._ready()
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING

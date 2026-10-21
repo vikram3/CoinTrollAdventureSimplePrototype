@@ -2,7 +2,7 @@ class_name BigBoss
 extends EnemyBase
 ## Big Boss: idle, jump, fall, windup, slam, slash, stagger, story.
 ## Every attack is telegraphed (0.8 s by default) before it lands.
-## In checkpoint 05 he targets Pink Girl only (target_group = "pink_girl").
+## In level 06 he targets Pink Girl only (target_group = "pink_girl").
 
 signal attack_landed(target: Node)
 
@@ -42,6 +42,7 @@ var _drop_goal_y: float = 0.0
 
 
 func _ready() -> void:
+	walk_speed *= GameState.speed_mult()
 	super._ready()
 	_spawn_position = global_position
 	if warning:

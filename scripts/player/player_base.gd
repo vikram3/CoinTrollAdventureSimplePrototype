@@ -57,7 +57,7 @@ func coin_drop_limit() -> float:
 ## Spill coins out of CT when he loses them. Each one pops out and can be picked up again after a moment.
 func _drop_coins(amount: int) -> void:
 	var parent := get_parent()
-	if parent == null:
+	if parent == null or not is_inside_tree():
 		return
 	for i in amount:
 		var c := COIN_SCENE.instantiate() as Coin
@@ -82,7 +82,9 @@ func take_damage(amount: int, from_position: Vector2 = Vector2.INF, knockback: V
 	var lost := GameState.lose_share_of_coins()
 	if lost > 0:
 		say("Dropped %d coins!" % lost, 2.0)
-		_drop_coins(lost)
+		# take_damage often runs inside a physics callback (body_entered), where
+		# adding Area2D coins is not allowed, so spawn them after the flush.
+		_drop_coins.call_deferred(lost)
 	if health <= 0:
 		die()
 	return true
@@ -104,6 +106,22 @@ func die() -> void:
 	is_dead = true
 	controls_enabled = false
 	died.emit()
+
+
+## Puts CT back on his feet at a checkpoint: full health, no death state, brief invulnerability.
+func respawn_at(pos: Vector2) -> void:
+	global_position = pos
+	velocity = Vector2.ZERO
+	is_dead = false
+	death_message = ""
+	invincible = false
+	is_hidden = false
+	_invuln = invulnerable_time
+	_stun = 0.0
+	controls_enabled = true
+	if sprite:
+		sprite.modulate = Color.WHITE
+	heal_full()
 
 
 func heal_full() -> void:

@@ -1,5 +1,5 @@
 extends ObjectiveTracker
-## Checkpoint 03: collect the coins and avoid the shadow shockwaves.
+## Level 04: collect the coins and avoid the shadow shockwaves.
 
 @export var need_coins: int = 30
 @export var need_bursts: int = 5

@@ -12,6 +12,7 @@ var _cd: float = 0.0
 
 
 func _ready() -> void:
+	interval *= GameState.hazard_timer_mult()
 	_cd = first_delay
 
 

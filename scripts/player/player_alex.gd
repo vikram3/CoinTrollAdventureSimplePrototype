@@ -1,6 +1,6 @@
 class_name PlayerAlex
 extends PlayerBase
-## Alex (checkpoint 12): move with the arrows, shield on down, bow on up,
+## Alex (level 13): move with the arrows, shield on down, bow on up,
 ## attack combo with the accept/attack key.
 
 @export var run_speed: float = 320.0

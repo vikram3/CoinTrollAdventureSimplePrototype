@@ -1,16 +1,16 @@
 class_name Level
 extends Node2D
-## Root script for every checkpoint scene. Each checkpoint has one objective;
+## Root script for every level scene. Each level has one objective;
 ## completing it shows the banner and moves to the next story beat.
-## Failing restarts the checkpoint (not the story).
+## Failing restarts the level (not the story).
 
 enum ObjectiveType { COINS, EXIT, COINS_OR_EXIT, COINS_AND_EXIT, SURVIVE, DEFEAT_COUNT, EVENT }
 
 signal enemy_defeated(enemy: EnemyBase)
 signal goal_touched
 
-@export var checkpoint_number: int = 1
-@export var checkpoint_name: String = "Checkpoint"
+@export var level_number: int = 1
+@export var level_name: String = "Level"
 @export_multiline var trigger_line: String = ""
 @export var objective_type: ObjectiveType = ObjectiveType.COINS
 @export var coin_target: int = 0
@@ -18,14 +18,14 @@ signal goal_touched
 @export var defeat_target: int = 0
 @export var objective_text_override: String = ""
 @export_group("Rules")
-## Camera limits for this checkpoint.
+## Camera limits for this level.
 @export var level_bounds: Rect2 = Rect2(0, -800, 4000, 1520)
 ## Falling below this y counts as a fall (restart).
 @export var kill_y: float = 1000.0
-## Checkpoint 06: a knockback off the edge ends the checkpoint as a scripted fall.
+## Level 07: a knockback off the edge ends the level as a scripted fall.
 @export var knockback_fall_completes: bool = false
 @export var knockback_fall_source: String = "horn"
-## Countdown in seconds shown on the HUD. Running out restarts the checkpoint. 0 = no limit.
+## Countdown in seconds shown on the HUD. Running out restarts the level. 0 = no limit.
 @export var time_limit: float = 0.0
 @export_group("Nodes")
 @export var player_path: NodePath = ^"Player"
@@ -34,7 +34,7 @@ signal goal_touched
 var player: PlayerBase = null
 var hud: GameHUD = null
 var pause_menu: PauseMenu = null
-var complete_banner: CheckpointCompleteBanner = null
+var complete_banner: LevelCompleteBanner = null
 var tracker: ObjectiveTracker = null
 var time_left: float = 0.0
 var limit_left: float = 0.0
@@ -43,6 +43,9 @@ var defeats: int = 0
 var reached_goal: bool = false
 var finished: bool = false
 
+var _checkpoint: Checkpoint = null
+var _checkpoint_coins: int = 0
+
 
 func _enter_tree() -> void:
 	add_to_group("level")
@@ -50,16 +53,22 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	get_tree().paused = false
-	GameState.current_checkpoint = checkpoint_number
+	GameState.current_level = level_number
 	GameState.reset_coins()
 	if not GameState.coins_changed.is_connected(_on_coins_changed):
 		GameState.coins_changed.connect(_on_coins_changed)
 	player = get_node_or_null(player_path) as PlayerBase
 	hud = get_node_or_null("HUD") as GameHUD
 	pause_menu = get_node_or_null("PauseMenu") as PauseMenu
-	complete_banner = get_node_or_null("CheckpointComplete") as CheckpointCompleteBanner
+	complete_banner = get_node_or_null("LevelComplete") as LevelCompleteBanner
 	if not tracker_path.is_empty():
 		tracker = get_node_or_null(tracker_path) as ObjectiveTracker
+	if coin_target > 0:
+		coin_target = maxi(1, roundi(coin_target * GameState.coin_target_mult()))
+	if time_limit > 0.0:
+		time_limit *= GameState.timer_mult()
+	if survive_seconds > 0.0:
+		survive_seconds *= GameState.timer_mult()
 	time_left = survive_seconds
 	limit_left = time_limit
 	if player:
@@ -105,7 +114,7 @@ func _physics_process(delta: float) -> void:
 	if time_limit > 0.0:
 		limit_left = maxf(limit_left - delta, 0.0)
 		if limit_left <= 0.0:
-			fail("Out of time!")
+			fail("Out of time!", false)
 			return
 	if player and player.global_position.y > kill_y:
 		handle_fall()
@@ -118,7 +127,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if finished:
 		return
 	if event.is_action_pressed("restart"):
-		fail("")
+		fail("", false)
 
 
 # --- Objective ---------------------------------------------------------------
@@ -226,8 +235,13 @@ func handle_fall(message: String = "") -> void:
 	fail(message if message != "" else "Waaah!")
 
 
-func fail(message: String = "") -> void:
+## Falls and defeats return CT to the last checkpoint when there is one. Pass
+## allow_checkpoint = false for a full restart (restart key, timers).
+func fail(message: String = "", allow_checkpoint: bool = true) -> void:
 	if finished:
+		return
+	if allow_checkpoint and _checkpoint != null and is_instance_valid(_checkpoint):
+		_respawn_at_checkpoint(message)
 		return
 	finished = true
 	if player:
@@ -240,7 +254,7 @@ func fail(message: String = "") -> void:
 		hud.announce("Restarting...")
 	Sfx.play("hurt")
 	await get_tree().create_timer(0.9).timeout
-	GameState.restart_checkpoint()
+	GameState.restart_level()
 
 
 func complete() -> void:
@@ -252,13 +266,45 @@ func complete() -> void:
 		player.invincible = true
 	Sfx.play("complete")
 	if hud:
-		hud.announce("Checkpoint complete!")
+		hud.announce("Level complete!")
 	_refresh_hud()
 	await get_tree().create_timer(1.0).timeout
 	if complete_banner:
-		complete_banner.open(checkpoint_number, checkpoint_name, GameState.coins, get_coin_target())
+		complete_banner.open(level_number, level_name, GameState.coins, get_coin_target())
 	else:
-		GameState.complete_checkpoint(GameState.coins)
+		GameState.complete_level(GameState.coins)
+
+
+## Called by a Checkpoint when CT touches it. Remembers the spot and the coins held there.
+func set_checkpoint(cp: Checkpoint) -> void:
+	if _checkpoint == cp:
+		return
+	if _checkpoint != null and is_instance_valid(_checkpoint):
+		_checkpoint.set_active(false)
+	_checkpoint = cp
+	cp.set_active(true)
+	_checkpoint_coins = GameState.coins
+	announce("Checkpoint!")
+	Sfx.play("select")
+
+
+func _respawn_at_checkpoint(message: String) -> void:
+	finished = true
+	if player:
+		player.set_controls_enabled(false)
+		player.invincible = true
+		player.shake_camera(8.0, 0.3)
+		if message != "":
+			player.say(message, 1.2)
+	if hud:
+		hud.announce("Back to checkpoint")
+	Sfx.play("hurt")
+	await get_tree().create_timer(0.9).timeout
+	GameState.coins = _checkpoint_coins
+	GameState.coins_changed.emit(GameState.coins)
+	if player and is_instance_valid(player) and _checkpoint and is_instance_valid(_checkpoint):
+		player.respawn_at(_checkpoint.global_position)
+	finished = false
 
 
 func announce(text: String) -> void:

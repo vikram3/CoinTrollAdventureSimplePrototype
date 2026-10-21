@@ -1,5 +1,5 @@
 extends CanvasLayer
-## Scene transitions: a short fade with the checkpoint name. Autoloaded as "Transition".
+## Scene transitions: a short fade with the level name. Autoloaded as "Transition".
 
 var busy: bool = false
 

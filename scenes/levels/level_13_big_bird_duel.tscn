@@ -18,12 +18,12 @@
 [ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="16_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="17_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="18_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="19_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="19_r"]
 
-[node name="Checkpoint12" type="Node2D"]
+[node name="Level13" type="Node2D"]
 script = ExtResource("1_r")
-checkpoint_number = 12
-checkpoint_name = "Big Bird Duel"
+level_number = 13
+level_name = "Big Bird Duel"
 trigger_line = "Big Bird went straight for projectiles, dodge and get close!"
 objective_type = 5
 coin_target = 0
@@ -136,4 +136,4 @@ mouse_filter = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("18_r")]
 
-[node name="CheckpointComplete" parent="." instance=ExtResource("19_r")]
+[node name="LevelComplete" parent="." instance=ExtResource("19_r")]

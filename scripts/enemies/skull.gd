@@ -1,7 +1,7 @@
 class_name Skull
 extends EnemyBase
 ## Skull: patrols a fixed path and chases CT when close. Can also march toward
-## a target x (used by the checkpoint 05 reinforcement waves).
+## a target x (used by the level 06 reinforcement waves).
 
 signal reached_target(skull: Skull)
 
@@ -30,6 +30,9 @@ var _reached: bool = false
 
 
 func _ready() -> void:
+	var s := GameState.speed_mult()
+	patrol_speed *= s
+	chase_speed *= s
 	super._ready()
 	_origin_x = global_position.x
 	ensure_edge_ray()

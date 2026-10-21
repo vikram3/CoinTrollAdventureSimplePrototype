@@ -1,6 +1,6 @@
 class_name SlidingCrate
 extends CharacterBody2D
-## Crate sliding down the tilting deck (checkpoint 15). Kills CT on touch.
+## Crate sliding down the tilting deck (level 16). Kills CT on touch.
 ## After its lifetime it returns to where it started and slides again.
 
 @export var slide_direction: int = -1

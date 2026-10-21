@@ -30,6 +30,8 @@ var _start: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
+	if respawn_time > 0.0:
+		respawn_time *= GameState.hazard_timer_mult()
 	if texture:
 		body_sprite.texture = texture
 	_start = body.position

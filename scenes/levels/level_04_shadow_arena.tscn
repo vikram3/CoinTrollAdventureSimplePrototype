@@ -15,12 +15,12 @@
 [ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="13_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="14_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="15_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="16_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="16_r"]
 
-[node name="Checkpoint03" type="Node2D"]
+[node name="Level04" type="Node2D"]
 script = ExtResource("1_r")
-checkpoint_number = 3
-checkpoint_name = "Shadow Arena"
+level_number = 4
+level_name = "Shadow Arena"
 trigger_line = "New players flooding in... grab what I can before it gets crazy!"
 objective_type = 6
 coin_target = 0
@@ -356,4 +356,4 @@ mouse_filter = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("15_r")]
 
-[node name="CheckpointComplete" parent="." instance=ExtResource("16_r")]
+[node name="LevelComplete" parent="." instance=ExtResource("16_r")]

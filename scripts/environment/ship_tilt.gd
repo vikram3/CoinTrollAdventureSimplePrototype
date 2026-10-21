@@ -1,5 +1,5 @@
 extends Node
-## Tilting deck for checkpoint 15: sways the camera and pushes CT downhill.
+## Tilting deck for level 16: sways the camera and pushes CT downhill.
 
 @export var amplitude_degrees: float = 4.0
 @export var period: float = 5.0

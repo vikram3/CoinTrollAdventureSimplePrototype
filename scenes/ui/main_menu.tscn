@@ -1,13 +1,12 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://htklu22ow3tt"]
 
-[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_r"]
-[ext_resource type="Theme" path="res://scenes/ui/ui_theme.tres" id="2_r"]
-[ext_resource type="Texture2D" path="res://assets/backgrounds/bg_castle_night.png" id="3_r"]
-[ext_resource type="Texture2D" path="res://assets/characters/CT/ct_idle.png" id="4_r"]
-[ext_resource type="Texture2D" path="res://assets/objects/coin_bag.png" id="5_r"]
+[ext_resource type="Script" uid="uid://dkvheob82plhg" path="res://scripts/ui/main_menu.gd" id="1_r"]
+[ext_resource type="Theme" uid="uid://cxp0n3gkuvjlp" path="res://scenes/ui/ui_theme.tres" id="2_r"]
+[ext_resource type="Texture2D" uid="uid://catjvoh18oien" path="res://assets/backgrounds/bg_castle_night.png" id="3_r"]
+[ext_resource type="Texture2D" uid="uid://c7w1t6rwfnjs5" path="res://assets/characters/CT/ct_idle.png" id="4_r"]
+[ext_resource type="Texture2D" uid="uid://trr44gdw2163" path="res://assets/objects/coin_bag.png" id="5_r"]
 
-[node name="MainMenu" type="Control"]
-script = ExtResource("1_r")
+[node name="MainMenu" type="Control" unique_id=488062563]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,8 +14,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_r")
+script = ExtResource("1_r")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=50254680]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,41 +27,41 @@ texture = ExtResource("3_r")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Shade" type="ColorRect" parent="."]
+[node name="Shade" type="ColorRect" parent="." unique_id=795098480]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.03, 0.02, 0.08, 0.35)
 mouse_filter = 2
+color = Color(0.03, 0.02, 0.08, 0.35)
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=1884824356]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 50.0
 offset_bottom = 140.0
 grow_horizontal = 2
-text = "COIN TROLL ADVENTURE"
-horizontal_alignment = 1
 theme_override_colors/font_color = Color(1, 0.82, 0.2, 1)
 theme_override_constants/outline_size = 14
 theme_override_font_sizes/font_size = 64
+text = "COIN TROLL ADVENTURE"
+horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="."]
+[node name="Subtitle" type="Label" parent="." unique_id=1945062745]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 138.0
 offset_bottom = 172.0
 grow_horizontal = 2
-text = "Prototype - 18 checkpoints"
-horizontal_alignment = 1
 theme_override_font_sizes/font_size = 22
+text = "Prototype - 18 levels"
+horizontal_alignment = 1
 
-[node name="CTArt" type="TextureRect" parent="."]
+[node name="CTArt" type="TextureRect" parent="." unique_id=1118674634]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -75,7 +75,7 @@ texture = ExtResource("4_r")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CoinArt" type="TextureRect" parent="."]
+[node name="CoinArt" type="TextureRect" parent="." unique_id=1148335973]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -92,7 +92,7 @@ texture = ExtResource("5_r")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="EndCard" type="Label" parent="."]
+[node name="EndCard" type="Label" parent="." unique_id=38827789]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
@@ -100,12 +100,12 @@ anchor_right = 1.0
 offset_top = 180.0
 offset_bottom = 220.0
 grow_horizontal = 2
-text = "TO BE CONTINUED... thanks for playing the prototype!"
-horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.6, 1, 0.7, 1)
 theme_override_font_sizes/font_size = 24
+text = "TO BE CONTINUED... thanks for playing the prototype!"
+horizontal_alignment = 1
 
-[node name="MainButtons" type="VBoxContainer" parent="."]
+[node name="MainButtons" type="VBoxContainer" parent="." unique_id=624435392]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -121,199 +121,207 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
 
-[node name="ContinueButton" type="Button" parent="MainButtons"]
+[node name="ContinueButton" type="Button" parent="MainButtons" unique_id=146274242]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Continue"
 
-[node name="NewGameButton" type="Button" parent="MainButtons"]
+[node name="NewGameButton" type="Button" parent="MainButtons" unique_id=952658545]
 unique_name_in_owner = true
 layout_mode = 2
 text = "New game"
 
-[node name="SelectButton" type="Button" parent="MainButtons"]
+[node name="SelectButton" type="Button" parent="MainButtons" unique_id=1448558913]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Checkpoint select"
+text = "Level select"
 
-[node name="ControlsButton" type="Button" parent="MainButtons"]
+[node name="ControlsButton" type="Button" parent="MainButtons" unique_id=209919832]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Controls"
 
-[node name="QuitButton" type="Button" parent="MainButtons"]
+[node name="QuitButton" type="Button" parent="MainButtons" unique_id=2089670217]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
 
-[node name="SelectPanel" type="CenterContainer" parent="."]
+[node name="SelectPanel" type="CenterContainer" parent="." unique_id=1582150315]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-unique_name_in_owner = true
-visible = false
 
-[node name="Panel" type="PanelContainer" parent="SelectPanel"]
-layout_mode = 2
+[node name="Panel" type="PanelContainer" parent="SelectPanel" unique_id=461525469]
 custom_minimum_size = Vector2(760, 0)
+layout_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="SelectPanel/Panel"]
+[node name="VBox" type="VBoxContainer" parent="SelectPanel/Panel" unique_id=402741593]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Header" type="Label" parent="SelectPanel/Panel/VBox"]
+[node name="Header" type="Label" parent="SelectPanel/Panel/VBox" unique_id=254403269]
 layout_mode = 2
-text = "Checkpoint Select"
-horizontal_alignment = 1
-theme_override_font_sizes/font_size = 36
 theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 36
+text = "Level Select"
+horizontal_alignment = 1
 
-[node name="CheckpointGrid" type="GridContainer" parent="SelectPanel/Panel/VBox"]
+[node name="LevelGrid" type="GridContainer" parent="SelectPanel/Panel/VBox" unique_id=831132471]
 unique_name_in_owner = true
 layout_mode = 2
-columns = 6
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
+columns = 6
 
-[node name="CP01" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP01" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=238648064]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "01"
 
-[node name="CP02" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP02" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=2001929217]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "02"
 
-[node name="CP03" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP03" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=237454847]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "03"
 
-[node name="CP04" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP04" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=974407556]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "04"
 
-[node name="CP05" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP05" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=1124833322]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "05"
 
-[node name="CP06" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP06" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=829410154]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "06"
 
-[node name="CP07" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP07" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=1025253329]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "07"
 
-[node name="CP08" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP08" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=1662453676]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "08"
 
-[node name="CP09" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP09" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=1039109477]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "09"
 
-[node name="CP10" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP10" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=963276252]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "10"
 
-[node name="CP11" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP11" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=521086057]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "11"
 
-[node name="CP12" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP12" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=692444788]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "12"
 
-[node name="CP13" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP13" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=937490048]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "13"
 
-[node name="CP14" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP14" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=1841598677]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "14"
 
-[node name="CP15" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP15" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=801867487]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "15"
 
-[node name="CP16" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP16" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=240252354]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "16"
 
-[node name="CP17" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP17" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=903311452]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "17"
 
-[node name="CP18" type="Button" parent="SelectPanel/Panel/VBox/CheckpointGrid"]
-layout_mode = 2
+[node name="CP18" type="Button" parent="SelectPanel/Panel/VBox/LevelGrid" unique_id=1844474208]
 custom_minimum_size = Vector2(110, 56)
+layout_mode = 2
 text = "18"
 
-[node name="SelectInfo" type="Label" parent="SelectPanel/Panel/VBox"]
-layout_mode = 2
-text = ""
-horizontal_alignment = 1
-theme_override_font_sizes/font_size = 20
+[node name="SelectInfo" type="Label" parent="SelectPanel/Panel/VBox" unique_id=1272191851]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="SelectBackButton" type="Button" parent="SelectPanel/Panel/VBox"]
+[node name="SelectBackButton" type="Button" parent="SelectPanel/Panel/VBox" unique_id=1871084599]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Back"
 
-[node name="ControlsPanel" type="CenterContainer" parent="."]
+[node name="ControlsPanel" type="CenterContainer" parent="." unique_id=568763800]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-unique_name_in_owner = true
-visible = false
 
-[node name="Panel" type="PanelContainer" parent="ControlsPanel"]
-layout_mode = 2
+[node name="Panel" type="PanelContainer" parent="ControlsPanel" unique_id=86112902]
 custom_minimum_size = Vector2(640, 0)
+layout_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="ControlsPanel/Panel"]
+[node name="VBox" type="VBoxContainer" parent="ControlsPanel/Panel" unique_id=359110505]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Header" type="Label" parent="ControlsPanel/Panel/VBox"]
+[node name="Header" type="Label" parent="ControlsPanel/Panel/VBox" unique_id=1498823012]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 36
 text = "Controls"
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 36
-theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
 
-[node name="Body" type="Label" parent="ControlsPanel/Panel/VBox"]
+[node name="Body" type="Label" parent="ControlsPanel/Panel/VBox" unique_id=1824966632]
 layout_mode = 2
-text = "CT\n  Move: A/D or Left/Right   (maze: WASD / arrows)\n  Jump: Space, K, W or Up\n  Attack: J, X or Enter\n\nAlex (checkpoint 12)\n  Move: Left/Right   Jump: Space\n  Shield: Down   Bow: Up   Attack combo: Enter / J\n\nPause: Esc or P      Restart checkpoint: R\nCinematics: Space to advance, Esc to skip"
-horizontal_alignment = 0
 theme_override_font_sizes/font_size = 19
+text = "CT
+  Move: A/D or Left/Right   (maze: WASD / arrows)
+  Jump: Space, K, W or Up
+  Attack: J, X or Enter
 
-[node name="ControlsBackButton" type="Button" parent="ControlsPanel/Panel/VBox"]
+Alex (level 13)
+  Move: Left/Right   Jump: Space
+  Shield: Down   Bow: Up   Attack combo: Enter / J
+
+Pause: Esc or P      Restart level: R
+Cinematics: Space to advance, Esc to skip"
+
+[node name="ControlsBackButton" type="Button" parent="ControlsPanel/Panel/VBox" unique_id=1506132872]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Back"

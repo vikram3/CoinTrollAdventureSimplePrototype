@@ -40,6 +40,8 @@ var _edge_ray: RayCast2D = null
 
 func _ready() -> void:
 	add_to_group("enemy")
+	max_health = GameState.enemy_health(max_health)
+	contact_damage = GameState.enemy_contact_damage(contact_damage)
 	health = max_health
 	var lvl := get_tree().get_first_node_in_group("level")
 	if lvl and lvl.has_method("register_enemy"):

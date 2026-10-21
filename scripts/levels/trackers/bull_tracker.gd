@@ -1,5 +1,5 @@
 extends ObjectiveTracker
-## Checkpoint 10: survive four charges from the invulnerable bulls and defeat
+## Level 11: survive four charges from the invulnerable bulls and defeat
 ## both minor bulls.
 
 @export var need_charges: int = 4

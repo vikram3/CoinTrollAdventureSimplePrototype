@@ -2,7 +2,7 @@ class_name WaveSpawner
 extends Node2D
 ## Spawns enemy waves from its Marker2D children. A new wave starts when the
 ## previous one is cleared. Skulls can march toward a target x; if
-## fail_on_reach is set, a skull reaching it fails the checkpoint.
+## fail_on_reach is set, a skull reaching it fails the level.
 
 signal wave_started(index: int)
 signal wave_cleared(index: int)

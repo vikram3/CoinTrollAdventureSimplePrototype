@@ -1,6 +1,6 @@
 class_name PauseMenu
 extends CanvasLayer
-## Pause menu: Resume, Restart checkpoint, Quit to menu.
+## Pause menu: Resume, Restart level, Quit to menu.
 
 @onready var resume_button: Button = %ResumeButton
 @onready var restart_button: Button = %RestartButton
@@ -49,7 +49,7 @@ func resume() -> void:
 
 func _on_restart_pressed() -> void:
 	visible = false
-	GameState.restart_checkpoint()
+	GameState.restart_level()
 
 
 func _on_quit_pressed() -> void:

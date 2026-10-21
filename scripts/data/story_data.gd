@@ -1,52 +1,59 @@
 class_name StoryData
 extends RefCounted
-## Story script for the prototype: the 18 checkpoints in order, their trigger
+## Story script for the prototype: the 19 levels in order, their trigger
 ## lines, and the cinematics that play between them.
 ## Cinematic panels are placeholders (still art + speech), per the design doc.
 
-const CHECKPOINTS := [
-	{"number": 1, "name": "Bush Maze Intro", "scene": "res://scenes/levels/checkpoint_01.tscn",
+const LEVELS := [
+	{"number": 1, "name": "Bush Maze Intro", "scene": "res://scenes/levels/chapter_01/level_01_bush_maze.tscn",
 		"trigger": "Time to grab those coins before anyone notices...", "cinematic": "bush_maze_done"},
-	{"number": 2, "name": "Treasure Chest Chase", "scene": "res://scenes/levels/checkpoint_02.tscn",
+	{"number": 2, "name": "Tower Climb", "scene": "res://scenes/levels/chapter_01/level_02_tower_climb.tscn",
+		"trigger": "Time to climb that tower and get a better view...", "cinematic": "tower_done"},
+	{"number": 3, "name": "Treasure Chest Chase", "scene": "res://scenes/levels/chapter_01/level_03_treasure_chest.tscn",
 		"trigger": "Those coins are MINE. Gotta beat him there!", "cinematic": "chest_open+chapter1_outro+shadow_storm"},
-	{"number": 3, "name": "Shadow Arena", "scene": "res://scenes/levels/checkpoint_03.tscn",
+	{"number": 4, "name": "Shadow Arena", "scene": "res://scenes/levels/level_04_shadow_arena.tscn",
 		"trigger": "New players flooding in... grab what I can before it gets crazy!", "cinematic": "big_boss_arrives"},
-	{"number": 4, "name": "Big Boss Dodge", "scene": "res://scenes/levels/checkpoint_04.tscn",
+	{"number": 5, "name": "Big Boss Dodge", "scene": "res://scenes/levels/level_05_big_boss_dodge.tscn",
 		"trigger": "Big Boss is coming. MOVE!", "cinematic": "pink_girl_arrives"},
-	{"number": 5, "name": "Pink Girl vs Big Boss", "scene": "res://scenes/levels/checkpoint_05.tscn",
+	{"number": 6, "name": "Pink Girl vs Big Boss", "scene": "res://scenes/levels/level_06_pink_girl_vs_big_boss.tscn",
 		"trigger": "She's holding her own, but Big Boss has one more trick!", "cinematic": "pink_girl_wins"},
-	{"number": 6, "name": "Cliff Ambush", "scene": "res://scenes/levels/checkpoint_06.tscn",
+	{"number": 7, "name": "Cliff Ambush", "scene": "res://scenes/levels/level_07_cliff_ambush.tscn",
 		"trigger": "Better snap out of it... something doesn't feel right.", "cinematic": "cliff_fall"},
-	{"number": 7, "name": "Forest Walk", "scene": "res://scenes/levels/checkpoint_07.tscn",
+	{"number": 8, "name": "Forest Walk", "scene": "res://scenes/levels/level_08_forest_walk.tscn",
 		"trigger": "Alright Flex, lead the way, but watch out for what's in these woods!", "cinematic": "meet_felix"},
-	{"number": 8, "name": "Forest Chase", "scene": "res://scenes/levels/checkpoint_08.tscn",
+	{"number": 9, "name": "Forest Chase", "scene": "res://scenes/levels/level_09_forest_chase.tscn",
 		"trigger": "Horn is somewhere in these woods... keep moving!", "cinematic": "forest_chase_done"},
-	{"number": 9, "name": "Enemy Types", "scene": "res://scenes/levels/checkpoint_09.tscn",
+	{"number": 10, "name": "Enemy Types", "scene": "res://scenes/levels/level_10_enemy_types.tscn",
 		"trigger": "A barreldugo! Flex says get close, let's try it!", "cinematic": "enemy_types_done"},
-	{"number": 10, "name": "Bull Gauntlet", "scene": "res://scenes/levels/checkpoint_10.tscn",
+	{"number": 11, "name": "Bull Gauntlet", "scene": "res://scenes/levels/level_11_bull_gauntlet.tscn",
 		"trigger": "The Queen stepped in, but those bulls aren't done yet!", "cinematic": "bull_gauntlet_done"},
-	{"number": 11, "name": "Warm-up Before the Duel", "scene": "res://scenes/levels/checkpoint_11.tscn",
+	{"number": 12, "name": "Warm-up Before the Duel", "scene": "res://scenes/levels/level_12_warmup_before_duel.tscn",
 		"trigger": "Alex accepted the duel... somebody's gotta warm up for him!", "cinematic": "crew_gathers"},
-	{"number": 12, "name": "Big Bird Duel", "scene": "res://scenes/levels/checkpoint_12.tscn",
+	{"number": 13, "name": "Big Bird Duel", "scene": "res://scenes/levels/level_13_big_bird_duel.tscn",
 		"trigger": "Big Bird went straight for projectiles, dodge and get close!", "cinematic": "big_bird_challenge"},
-	{"number": 13, "name": "Coin Scramble", "scene": "res://scenes/levels/checkpoint_13.tscn",
+	{"number": 14, "name": "Coin Scramble", "scene": "res://scenes/levels/level_14_coin_scramble.tscn",
 		"trigger": "I signed WHAT? Gotta do something, find those coins first!", "cinematic": "coin_scramble_done"},
-	{"number": 14, "name": "Coin Rain on the Deck", "scene": "res://scenes/levels/checkpoint_14.tscn",
+	{"number": 15, "name": "Coin Rain on the Deck", "scene": "res://scenes/levels/level_15_coin_rain_deck.tscn",
 		"trigger": "Alex won! Now the coins are flowing, grab what you can!", "cinematic": "deck_rain_done"},
-	{"number": 15, "name": "Tilting Ship", "scene": "res://scenes/levels/checkpoint_15.tscn",
+	{"number": 16, "name": "Tilting Ship", "scene": "res://scenes/levels/level_16_tilting_ship.tscn",
 		"trigger": "The ship is going DOWN. Hold on and get to safety!", "cinematic": "ship_falls"},
-	{"number": 16, "name": "Sand Land", "scene": "res://scenes/levels/checkpoint_16.tscn",
+	{"number": 17, "name": "Sand Land", "scene": "res://scenes/levels/level_17_sand_land.tscn",
 		"trigger": "Welcome to Sand Land... and it does NOT look friendly.", "cinematic": "sand_land"},
-	{"number": 17, "name": "Mayor's Coin Bag", "scene": "res://scenes/levels/checkpoint_17.tscn",
+	{"number": 18, "name": "Mayor's Coin Bag", "scene": "res://scenes/levels/level_18_mayors_coin_bag.tscn",
 		"trigger": "I signed WHAT? Gotta do something, find those coins first!", "cinematic": "mayor_contract"},
-	{"number": 18, "name": "Wormfish Chase", "scene": "res://scenes/levels/checkpoint_18.tscn",
+	{"number": 19, "name": "Wormfish Chase", "scene": "res://scenes/levels/level_19_wormfish_chase.tscn",
 		"trigger": "A sand wormfish?! Everyone scatter!", "cinematic": "outro"},
+]
+
+## Chapters group levels for the menus. Chapter 1 is set up; the rest are still one list.
+const CHAPTERS := [
+	{"number": 1, "name": "Chapter 1", "levels": [1, 2, 3]},
 ]
 
 ## Each cinematic is a list of still panels. Every panel has a background
 ## colour, optional art, a caption and speech lines shown one at a time.
 const CINEMATICS := {
-	## Plays before checkpoint 01 when a New Game starts.
+	## Plays before level 01 when a New Game starts.
 	"intro": {
 		"title": "Chapter 1",
 		"panels": [
@@ -159,7 +166,7 @@ const CINEMATICS := {
 				"lines": [["CT", "Ouch! That hurt."]]},
 		],
 	},
-	## Chapter 1 ending (storyboard pages 33-37). Plays after chest_open, before the next checkpoint.
+	## Chapter 1 ending (storyboard pages 33-37). Plays after chest_open, before the next level.
 	## Chapter 1 ending (comic pages 6 to 7). Plays after the chest scene.
 	"chapter1_outro": {
 		"title": "Chapter 1 Ends",
@@ -309,7 +316,7 @@ const CINEMATICS := {
 				"lines": [["", "..."]]},
 		],
 	},
-	## Plays before checkpoint 03 (after chest_open, joined with "+" in CHECKPOINTS).
+	## Plays before level 04 (after chest_open, joined with "+" in LEVELS).
 	"shadow_storm": {
 		"title": "New Players Arrive",
 		"panels": [
@@ -388,16 +395,16 @@ const CINEMATICS := {
 
 
 static func count() -> int:
-	return CHECKPOINTS.size()
+	return LEVELS.size()
 
 
-static func get_checkpoint(number: int) -> Dictionary:
-	var index := clampi(number, 1, CHECKPOINTS.size()) - 1
-	return CHECKPOINTS[index]
+static func get_level(number: int) -> Dictionary:
+	var index := clampi(number, 1, LEVELS.size()) - 1
+	return LEVELS[index]
 
 
 static func cinematic_after(number: int) -> String:
-	var info := get_checkpoint(number)
+	var info := get_level(number)
 	return str(info.get("cinematic", ""))
 
 

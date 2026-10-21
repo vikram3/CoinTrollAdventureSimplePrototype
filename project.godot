@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Coin Troll Adventure"
-config/description="2D side-scrolling platformer prototype - 18 checkpoints."
+config/description="2D side-scrolling platformer prototype - 19 levels."
 run/main_scene="res://scenes/ui/main_menu.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"

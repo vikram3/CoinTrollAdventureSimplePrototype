@@ -1,0 +1,406 @@
+[gd_scene format=3 uid="uid://cpsgpxi1svvkx"]
+
+[ext_resource type="Script" uid="uid://sna6faykk7l8" path="res://scripts/levels/level.gd" id="1_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/background.tscn" id="2_r"]
+[ext_resource type="Texture2D" uid="uid://catjvoh18oien" path="res://assets/backgrounds/bg_castle_night.png" id="3_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/block.tscn" id="4_r"]
+[ext_resource type="Texture2D" uid="uid://pyapak4rnpol" path="res://assets/environment/wall_stone.png" id="5_r"]
+[ext_resource type="Texture2D" uid="uid://bpaqiwdjkhnff" path="res://assets/environment/ground_castle.png" id="6_r"]
+[ext_resource type="Texture2D" uid="uid://x2h8k4xadkp" path="res://assets/environment/ledge_stone.png" id="7_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/falling_hazard.tscn" id="8_r"]
+[ext_resource type="Texture2D" uid="uid://mhef7li7efc8" path="res://assets/objects/hedge_trap.png" id="9_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/skull.tscn" id="10_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/elite_skull.tscn" id="11_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="12_r"]
+[ext_resource type="Texture2D" uid="uid://ceo2y2p1p6xu1" path="res://assets/enemies/big_boss.png" id="13_r"]
+[ext_resource type="Script" uid="uid://cnyo2p718xs1t" path="res://scripts/environment/decor_mover.gd" id="14_r"]
+[ext_resource type="Texture2D" uid="uid://c7uqb6ohali6v" path="res://assets/objects/stone.png" id="15_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/restart_zone.tscn" id="16_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hide_spot.tscn" id="17_r"]
+[ext_resource type="Texture2D" uid="uid://ckawy0wqockf0" path="res://assets/environment/hedge.png" id="18_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazard_emitter.tscn" id="19_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/sliding_crate.tscn" id="22_r"]
+[ext_resource type="Texture2D" uid="uid://b30urc6d2janq" path="res://assets/objects/chest.png" id="23_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/goal.tscn" id="24_r"]
+[ext_resource type="PackedScene" path="res://scenes/player/player_ct_naked.tscn" id="25_r"]
+[ext_resource type="Script" uid="uid://ce155otdu8vd5" path="res://scripts/ui/touch_controls.gd" id="26_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="27_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="28_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="29_r"]
+[ext_resource type="Script" uid="uid://s4fut5i8mbge" path="res://scripts/objects/checkpoint.gd" id="90_cp"]
+
+[node name="Level03" type="Node2D" unique_id=1210654734]
+script = ExtResource("1_r")
+level_number = 3
+level_name = "Treasure Chest Chase"
+trigger_line = "Those coins are MINE. Gotta beat him to the chest!"
+objective_type = 3
+coin_target = 22
+objective_text_override = "Grab 22 coins, then reach the TREASURE"
+level_bounds = Rect2(0, -600, 11000, 1320)
+kill_y = 900.0
+time_limit = 90.0
+
+[node name="Background" parent="." unique_id=990889637 instance=ExtResource("2_r")]
+texture = ExtResource("3_r")
+parallax = 0.25
+
+[node name="Decor" type="Node2D" parent="." unique_id=1325143679]
+
+[node name="RivalSilhouette1" type="Sprite2D" parent="Decor" unique_id=1404990342]
+modulate = Color(0, 0, 0, 0.5)
+position = Vector2(200, 240)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("13_r")
+script = ExtResource("14_r")
+move_velocity = Vector2(70, 0)
+travel = 3700.0
+
+[node name="Bush1" type="Sprite2D" parent="Decor" unique_id=1568380989]
+position = Vector2(6880, 345)
+scale = Vector2(1.25, 1.1458)
+texture = ExtResource("18_r")
+
+[node name="Bush2" type="Sprite2D" parent="Decor" unique_id=1911891935]
+position = Vector2(9060, 345)
+scale = Vector2(1.25, 1.1458)
+texture = ExtResource("18_r")
+
+[node name="Bush3" type="Sprite2D" parent="Decor" unique_id=663076313]
+position = Vector2(7760, 345)
+scale = Vector2(1.25, 1.1458)
+texture = ExtResource("18_r")
+
+[node name="TreasureBox1" type="Sprite2D" parent="Decor" unique_id=657071039]
+modulate = Color(1, 0.95, 0.7, 1)
+position = Vector2(10650, 342)
+scale = Vector2(2, 2)
+texture = ExtResource("23_r")
+
+[node name="Environment" type="Node2D" parent="." unique_id=1035451429]
+
+[node name="Ground1" parent="Environment" unique_id=1051009864 instance=ExtResource("4_r")]
+position = Vector2(1100, 610)
+size = Vector2(2200, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground2" parent="Environment" unique_id=893027372 instance=ExtResource("4_r")]
+position = Vector2(3250, 610)
+size = Vector2(2100, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground3" parent="Environment" unique_id=1648439069 instance=ExtResource("4_r")]
+position = Vector2(5690, 610)
+size = Vector2(2220, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground4" parent="Environment" unique_id=1640640491 instance=ExtResource("4_r")]
+position = Vector2(7900, 610)
+size = Vector2(2200, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground5" parent="Environment" unique_id=1400339838 instance=ExtResource("4_r")]
+position = Vector2(9975, 610)
+size = Vector2(1950, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="StepA1" parent="Environment" unique_id=8975719 instance=ExtResource("4_r")]
+position = Vector2(1700, 302)
+size = Vector2(200, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="StepA2" parent="Environment" unique_id=202530505 instance=ExtResource("4_r")]
+position = Vector2(2050, 192)
+size = Vector2(200, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="BaitLedge" parent="Environment" unique_id=851335339 instance=ExtResource("4_r")]
+position = Vector2(4440, 352)
+size = Vector2(120, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="StepB1" parent="Environment" unique_id=855267157 instance=ExtResource("4_r")]
+position = Vector2(5250, 302)
+size = Vector2(200, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="StepB2" parent="Environment" unique_id=1410003190 instance=ExtResource("4_r")]
+position = Vector2(5750, 192)
+size = Vector2(200, 24)
+tile_texture = ExtResource("7_r")
+one_way = true
+
+[node name="WallLeft" parent="Environment" unique_id=1346902521 instance=ExtResource("4_r")]
+position = Vector2(0, 60)
+size = Vector2(64, 1520)
+tile_texture = ExtResource("5_r")
+
+[node name="WallRight" parent="Environment" unique_id=1605241559 instance=ExtResource("4_r")]
+position = Vector2(10950, 60)
+size = Vector2(64, 1520)
+tile_texture = ExtResource("5_r")
+
+[node name="Goals" type="Node2D" parent="." unique_id=620985571]
+
+[node name="GoalChest" parent="Goals" unique_id=1839262320 instance=ExtResource("24_r")]
+position = Vector2(10650, 352)
+label_text = "TREASURE"
+texture = ExtResource("23_r")
+sprite_scale = 2.0
+
+[node name="Coins" type="Node2D" parent="." unique_id=237672986]
+
+[node name="Coin1" parent="Coins" unique_id=2070762454 instance=ExtResource("12_r")]
+position = Vector2(400, 360)
+
+[node name="Coin2" parent="Coins" unique_id=1269900010 instance=ExtResource("12_r")]
+position = Vector2(560, 360)
+
+[node name="Coin3" parent="Coins" unique_id=1372850921 instance=ExtResource("12_r")]
+position = Vector2(720, 360)
+
+[node name="Coin4" parent="Coins" unique_id=1049633043 instance=ExtResource("12_r")]
+position = Vector2(880, 360)
+
+[node name="Coin5" parent="Coins" unique_id=249705906 instance=ExtResource("12_r")]
+position = Vector2(1040, 360)
+
+[node name="Coin6" parent="Coins" unique_id=2086494274 instance=ExtResource("12_r")]
+position = Vector2(1200, 360)
+
+[node name="Coin7" parent="Coins" unique_id=999840173 instance=ExtResource("12_r")]
+position = Vector2(1700, 250)
+
+[node name="Coin8" parent="Coins" unique_id=2136643527 instance=ExtResource("12_r")]
+position = Vector2(1800, 250)
+
+[node name="Coin9" parent="Coins" unique_id=1723738259 instance=ExtResource("12_r")]
+position = Vector2(2050, 140)
+
+[node name="Coin10" parent="Coins" unique_id=20966318 instance=ExtResource("12_r")]
+position = Vector2(2150, 140)
+
+[node name="Coin11" parent="Coins" unique_id=1475897421 instance=ExtResource("12_r")]
+position = Vector2(3050, 360)
+
+[node name="Coin12" parent="Coins" unique_id=1311166968 instance=ExtResource("12_r")]
+position = Vector2(3150, 360)
+
+[node name="Coin13" parent="Coins" unique_id=1729588626 instance=ExtResource("12_r")]
+position = Vector2(3250, 360)
+
+[node name="Coin14" parent="Coins" unique_id=488490150 instance=ExtResource("12_r")]
+position = Vector2(4440, 312)
+
+[node name="Coin15" parent="Coins" unique_id=1432742092 instance=ExtResource("12_r")]
+position = Vector2(4700, 360)
+
+[node name="Coin16" parent="Coins" unique_id=1640112498 instance=ExtResource("12_r")]
+position = Vector2(4820, 360)
+
+[node name="Coin17" parent="Coins" unique_id=2019764523 instance=ExtResource("12_r")]
+position = Vector2(4940, 360)
+
+[node name="Coin18" parent="Coins" unique_id=1848000150 instance=ExtResource("12_r")]
+position = Vector2(5060, 360)
+
+[node name="Coin19" parent="Coins" unique_id=1681523721 instance=ExtResource("12_r")]
+position = Vector2(5170, 250)
+
+[node name="Coin20" parent="Coins" unique_id=1159477233 instance=ExtResource("12_r")]
+position = Vector2(5250, 250)
+
+[node name="Coin21" parent="Coins" unique_id=268222922 instance=ExtResource("12_r")]
+position = Vector2(5330, 250)
+
+[node name="Coin22" parent="Coins" unique_id=1870192838 instance=ExtResource("12_r")]
+position = Vector2(5650, 140)
+
+[node name="Coin23" parent="Coins" unique_id=223667521 instance=ExtResource("12_r")]
+position = Vector2(5750, 140)
+
+[node name="Coin24" parent="Coins" unique_id=542775037 instance=ExtResource("12_r")]
+position = Vector2(5850, 140)
+
+[node name="Coin25" parent="Coins" unique_id=1124116283 instance=ExtResource("12_r")]
+position = Vector2(6500, 360)
+
+[node name="Coin26" parent="Coins" unique_id=1203272588 instance=ExtResource("12_r")]
+position = Vector2(6900, 360)
+
+[node name="Coin27" parent="Coins" unique_id=1896530799 instance=ExtResource("12_r")]
+position = Vector2(7000, 360)
+
+[node name="Coin28" parent="Coins" unique_id=897804329 instance=ExtResource("12_r")]
+position = Vector2(7900, 360)
+
+[node name="Coin29" parent="Coins" unique_id=303407791 instance=ExtResource("12_r")]
+position = Vector2(8100, 360)
+
+[node name="Coin30" parent="Coins" unique_id=1706200840 instance=ExtResource("12_r")]
+position = Vector2(8400, 360)
+
+[node name="Coin31" parent="Coins" unique_id=1483599779 instance=ExtResource("12_r")]
+position = Vector2(9700, 360)
+
+[node name="Coin32" parent="Coins" unique_id=2060314108 instance=ExtResource("12_r")]
+position = Vector2(9850, 360)
+
+[node name="Coin33" parent="Coins" unique_id=488315043 instance=ExtResource("12_r")]
+position = Vector2(10000, 360)
+
+[node name="Coin34" parent="Coins" unique_id=1925236036 instance=ExtResource("12_r")]
+position = Vector2(10150, 360)
+
+[node name="Coin35" parent="Coins" unique_id=2026251136 instance=ExtResource("12_r")]
+position = Vector2(10300, 360)
+
+[node name="Coin36" parent="Coins" unique_id=1438688344 instance=ExtResource("12_r")]
+position = Vector2(10450, 360)
+
+[node name="Hazards" type="Node2D" parent="." unique_id=1968936469]
+
+[node name="PitRestart" parent="Hazards" unique_id=1614823135 instance=ExtResource("16_r")]
+position = Vector2(4440, 600)
+size = Vector2(280, 400)
+
+[node name="HedgeTrap1" parent="Hazards" unique_id=406385235 instance=ExtResource("8_r")]
+position = Vector2(2900, 60)
+texture = ExtResource("9_r")
+trigger_size = Vector2(170, 420)
+hazard_name = "hedge_trap"
+debris_color = Color(0.2, 0.5, 0.2, 1)
+
+[node name="HedgeTrap2" parent="Hazards" unique_id=753540568 instance=ExtResource("8_r")]
+position = Vector2(3450, 60)
+texture = ExtResource("9_r")
+trigger_size = Vector2(170, 420)
+hazard_name = "hedge_trap"
+debris_color = Color(0.2, 0.5, 0.2, 1)
+
+[node name="HedgeTrap3" parent="Hazards" unique_id=281457064 instance=ExtResource("8_r")]
+position = Vector2(3900, 60)
+texture = ExtResource("9_r")
+trigger_size = Vector2(170, 420)
+hazard_name = "hedge_trap"
+debris_color = Color(0.2, 0.5, 0.2, 1)
+
+[node name="FallingStone1" parent="Hazards" unique_id=970933612 instance=ExtResource("8_r")]
+position = Vector2(6650, 0)
+texture = ExtResource("15_r")
+trigger_size = Vector2(180, 440)
+shake_time = 0.45
+hazard_name = "stone"
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="FallingStone2" parent="Hazards" unique_id=441723621 instance=ExtResource("8_r")]
+position = Vector2(7050, 0)
+texture = ExtResource("15_r")
+trigger_size = Vector2(180, 440)
+shake_time = 0.45
+hazard_name = "stone"
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
+[node name="Bush1" parent="Hazards" unique_id=1763516525 instance=ExtResource("17_r")]
+position = Vector2(1000, 345)
+
+[node name="Bush2" parent="Hazards" unique_id=1135845005 instance=ExtResource("17_r")]
+position = Vector2(3150, 345)
+
+[node name="Bush3" parent="Hazards" unique_id=602121209 instance=ExtResource("17_r")]
+position = Vector2(6250, 345)
+
+[node name="Bush4" parent="Hazards" unique_id=1866774668 instance=ExtResource("17_r")]
+position = Vector2(7600, 345)
+
+[node name="Bush5" parent="Hazards" unique_id=846080067 instance=ExtResource("17_r")]
+position = Vector2(8600, 345)
+
+[node name="NPCs" type="Node2D" parent="." unique_id=1176029189]
+
+[node name="Enemies" type="Node2D" parent="." unique_id=1985692128]
+
+[node name="Skull1" parent="Enemies" unique_id=1787346110 instance=ExtResource("10_r")]
+position = Vector2(1000, 370)
+patrol_distance = 140.0
+
+[node name="EliteSkull1" parent="Enemies" unique_id=2083783383 instance=ExtResource("11_r")]
+position = Vector2(3650, 368)
+detect_range = 300.0
+leash_distance = 260.0
+
+[node name="Skull2" parent="Enemies" unique_id=1808714904 instance=ExtResource("10_r")]
+position = Vector2(5000, 370)
+patrol_distance = 120.0
+
+[node name="Skull3" parent="Enemies" unique_id=1040436236 instance=ExtResource("10_r")]
+position = Vector2(6200, 370)
+patrol_distance = 120.0
+
+[node name="EliteSkull2" parent="Enemies" unique_id=1699746176 instance=ExtResource("11_r")]
+position = Vector2(9250, 368)
+detect_range = 300.0
+leash_distance = 260.0
+
+[node name="BulletEmitter1" parent="." unique_id=1861449451 instance=ExtResource("19_r")]
+position = Vector2(8300, 360)
+interval = 2.2
+first_delay = 1.0
+
+[node name="SlidingCrate1" parent="." unique_id=719805725 instance=ExtResource("22_r")]
+position = Vector2(8900, 370)
+lifetime = 12.0
+
+[node name="Player" parent="." unique_id=106274146 instance=ExtResource("25_r")]
+position = Vector2(150, 360)
+
+[node name="TouchControls" type="CanvasLayer" parent="." unique_id=1501498822]
+layer = 20
+
+[node name="TouchPad" type="Control" parent="TouchControls" unique_id=241791669]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("26_r")
+
+[node name="HUD" parent="." unique_id=1934399795 instance=ExtResource("27_r")]
+
+[node name="PauseMenu" parent="." unique_id=140206094 instance=ExtResource("28_r")]
+
+[node name="LevelComplete" parent="." unique_id=1681802951 instance=ExtResource("29_r")]
+
+[node name="Checkpoints" type="Node2D" parent="." unique_id=1327428356]
+
+[node name="Checkpoint1" type="Area2D" parent="Checkpoints" unique_id=652316576]
+position = Vector2(2250, 360)
+script = ExtResource("90_cp")
+
+[node name="Checkpoint2" type="Area2D" parent="Checkpoints" unique_id=1101850087]
+position = Vector2(6850, 360)
+script = ExtResource("90_cp")
+
+[node name="Checkpoint3" type="Area2D" parent="Checkpoints" unique_id=556370295]
+position = Vector2(9050, 360)
+script = ExtResource("90_cp")
+
+[node name="Checkpoint4" type="Area2D" parent="Checkpoints" unique_id=41623673]
+position = Vector2(2250, 360)
+script = ExtResource("90_cp")
+
+[node name="Checkpoint5" type="Area2D" parent="Checkpoints" unique_id=1640961541]
+position = Vector2(6850, 360)
+script = ExtResource("90_cp")
+
+[node name="Checkpoint6" type="Area2D" parent="Checkpoints" unique_id=2029296509]
+position = Vector2(9050, 360)
+script = ExtResource("90_cp")
+
+[node name="Checkpoints2" type="Node2D" parent="." unique_id=193741480]

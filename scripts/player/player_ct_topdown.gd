@@ -1,6 +1,6 @@
 class_name PlayerCTTopDown
 extends PlayerBase
-## Naked CT for checkpoint 01: top-down movement through the hedge maze.
+## Naked CT for level 01: top-down movement through the hedge maze.
 
 @export var move_speed: float = 260.0
 @export var acceleration: float = 2400.0

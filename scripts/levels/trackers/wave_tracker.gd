@@ -1,5 +1,5 @@
 extends ObjectiveTracker
-## Checkpoints 05 and 11: clear every wave (and optionally collect coins).
+## Levels 06 and 12: clear every wave (and optionally collect coins).
 
 @export var spawner_path: NodePath
 @export var need_coins: int = 0

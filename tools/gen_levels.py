@@ -1,4 +1,6 @@
-"""Builds the 18 checkpoint scenes from the level-design section of the GDD.
+# LEGACY: these generators predate the level rename and the hand-built levels.
+# Do NOT run them: they would overwrite scenes/levels/ with old checkpoint output.
+"""Builds the 18 level scenes from the level-design section of the GDD.
 Every level is a normal editable Godot scene: move blocks, coins and enemies
 in the editor afterwards."""
 import os, random
@@ -42,14 +44,14 @@ class LB:
         self.n = n
         self.width = width
         self.player_scene = player_scene
-        props = {"checkpoint_number": n, "checkpoint_name": name, "trigger_line": TRIGGERS[n],
+        props = {"level_number": n, "level_name": name, "trigger_line": TRIGGERS[n],
                  "objective_type": objective, "coin_target": coin_target, "survive_seconds": float(survive),
                  "defeat_target": defeat, "objective_text_override": override,
                  "level_bounds": bounds or RECT(0, -600, width, 1320), "kill_y": float(kill_y)}
         if tracker:
             props["tracker_path"] = NP("Tracker")
         props.update(extra or {})
-        self.s = Scene(f"Checkpoint{n:02d}", "Node2D", "res://scripts/levels/level.gd", props)
+        self.s = Scene(f"Level{n:02d}", "Node2D", "res://scripts/levels/level.gd", props)
         self.count = {}
         self.right_wall = None
         if bg:
@@ -158,8 +160,8 @@ class LB:
                     props={"mode": mode, "anchor_right": 1.0, "anchor_bottom": 1.0, "mouse_filter": 2})
         self.s.node("HUD", instance=SC + "ui/hud.tscn")
         self.s.node("PauseMenu", instance=SC + "ui/pause_menu.tscn")
-        self.s.node("CheckpointComplete", instance=SC + "ui/checkpoint_complete.tscn")
-        self.s.write(P(f"scenes/levels/checkpoint_{self.n:02d}.tscn"))
+        self.s.node("LevelComplete", instance=SC + "ui/level_complete.tscn")
+        self.s.write(P(f"scenes/levels/level_{self.n:02d}.tscn"))
 
 
 def side_walls(lb, top=-700, bottom=820):
@@ -355,7 +357,7 @@ def cp01():
 
 # ===================================================================== CP02
 def castle_gauntlet(lb, x0, x1, G):
-    """Mario-style trap run for checkpoint 02: a thwomp-like stone drop, a pit with a bait ledge,
+    """Mario-style trap run for level 03: a thwomp-like stone drop, a pit with a bait ledge,
     a bullet emitter, an invisible floor trap, falling stones, a crate and skull stair, and a narrow last pit."""
     STONE = {"trigger_size": V(180, 440), "damage": 1, "hazard_name": "stone", "debris_color": C(0.8, 0.65, 0.4)}
     # 1. thwomp run: stones drop as you pass under them

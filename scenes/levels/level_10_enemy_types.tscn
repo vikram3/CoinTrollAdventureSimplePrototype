@@ -22,12 +22,12 @@
 [ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="20_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="21_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="22_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="23_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="23_r"]
 
-[node name="Checkpoint09" type="Node2D"]
+[node name="Level10" type="Node2D"]
 script = ExtResource("1_r")
-checkpoint_number = 9
-checkpoint_name = "Enemy Types"
+level_number = 10
+level_name = "Enemy Types"
 trigger_line = "A barreldugo! Flex says get close, let's try it!"
 objective_type = 6
 coin_target = 0
@@ -185,4 +185,4 @@ mouse_filter = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("22_r")]
 
-[node name="CheckpointComplete" parent="." instance=ExtResource("23_r")]
+[node name="LevelComplete" parent="." instance=ExtResource("23_r")]

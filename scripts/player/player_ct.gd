@@ -1,7 +1,7 @@
 class_name PlayerCT
 extends PlayerBase
 ## Side-scrolling CT: run, jump, attack and pick up coins.
-## Used by the naked CT (checkpoint 02) and the suit CT (checkpoints 03-18).
+## Used by the naked CT (level 03) and the suit CT (levels 04-19).
 ## Extras: double jump (jump again in the air), dash (Shift / C) and block
 ## (hold Q / Ctrl on the ground). Mouse: left click attacks, hold right click to block.
 ## Block stops hits from the front, like Alex's shield.

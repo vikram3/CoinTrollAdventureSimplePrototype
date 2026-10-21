@@ -1,5 +1,5 @@
 extends ObjectiveTracker
-## Checkpoint 09: defeat one of each enemy type.
+## Level 10: defeat one of each enemy type.
 
 @export var required_types: PackedStringArray = ["tank", "speed", "projectile"]
 

@@ -1,5 +1,5 @@
 extends Control
-## Plays a cinematic between checkpoints: still panels with speech, a slow
+## Plays a cinematic between levels: still panels with speech, a slow
 ## camera push and a fade. Space/Enter advances a line, Esc skips.
 
 @onready var background: ColorRect = %Background

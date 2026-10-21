@@ -1,2 +1,4 @@
 .godot/
 *.import.tmp
+.godot_stale_cache/
+__pycache__/

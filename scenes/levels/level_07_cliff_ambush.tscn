@@ -17,12 +17,12 @@
 [ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="15_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="16_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="17_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="18_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="18_r"]
 
-[node name="Checkpoint06" type="Node2D"]
+[node name="Level07" type="Node2D"]
 script = ExtResource("1_r")
-checkpoint_number = 6
-checkpoint_name = "Cliff Ambush"
+level_number = 7
+level_name = "Cliff Ambush"
 trigger_line = "Better snap out of it... something doesn't feel right."
 objective_type = 4
 coin_target = 0
@@ -237,4 +237,4 @@ mouse_filter = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("17_r")]
 
-[node name="CheckpointComplete" parent="." instance=ExtResource("18_r")]
+[node name="LevelComplete" parent="." instance=ExtResource("18_r")]

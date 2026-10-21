@@ -11,13 +11,15 @@
 [ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="10_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="11_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="12_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="13_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="13_r"]
 [ext_resource type="PackedScene" path="res://scenes/objects/hide_spot.tscn" id="30_hs"]
 [ext_resource type="Script" path="res://scripts/audio/level_audio.gd" id="31_la"]
 
-[node name="Checkpoint01" type="Node2D"]
+[ext_resource type="Script" path="res://scripts/objects/checkpoint.gd" id="90_cp"]
+[node name="Level01" type="Node2D"]
 script = ExtResource("1_r")
-checkpoint_name = "Bush Maze Intro"
+level_number = 1
+level_name = "Bush Maze Intro"
 trigger_line = "Time to grab those coins before anyone notices..."
 objective_type = 3
 coin_target = 40
@@ -2996,7 +2998,17 @@ mode = "topdown"
 
 [node name="PauseMenu" parent="." unique_id=1123208098 instance=ExtResource("12_r")]
 
-[node name="CheckpointComplete" parent="." unique_id=1961286623 instance=ExtResource("13_r")]
+[node name="LevelComplete" parent="." unique_id=1961286623 instance=ExtResource("13_r")]
 
 [node name="LevelAudio" type="Node" parent="."]
 script = ExtResource("31_la")
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Checkpoint1" type="Area2D" parent="Checkpoints"]
+position = Vector2(1488, 1296)
+script = ExtResource("90_cp")
+
+[node name="Checkpoint2" type="Area2D" parent="Checkpoints"]
+position = Vector2(3024, 2256)
+script = ExtResource("90_cp")

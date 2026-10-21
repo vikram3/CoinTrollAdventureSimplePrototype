@@ -1,6 +1,6 @@
 class_name RestartZone
 extends Area2D
-## Sends the player back to the checkpoint start (pits, fall zones, quicksand).
+## Sends the player back to the level start (pits, fall zones, quicksand).
 
 @export var size: Vector2 = Vector2(400, 200)
 @export var message: String = "Waaah!"

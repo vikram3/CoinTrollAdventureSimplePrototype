@@ -28,6 +28,9 @@ var _charge_cd: float = 0.0
 
 
 func _ready() -> void:
+	var s := GameState.speed_mult()
+	move_speed *= s
+	charge_speed *= s
 	super._ready()
 	_origin_x = global_position.x
 	ensure_edge_ray()

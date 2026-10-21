@@ -16,11 +16,13 @@
 [ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="26_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="27_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="28_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="29_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="29_r"]
 
-[node name="Checkpoint02" type="Node2D"]
+[ext_resource type="Script" path="res://scripts/objects/checkpoint.gd" id="90_cp"]
+[node name="Level02" type="Node2D"]
 script = ExtResource("40_tw")
-checkpoint_name = "Tower Climb"
+level_number = 2
+level_name = "Tower Climb"
 trigger_line = "Time to climb that tower and get a better view..."
 objective_type = 1
 objective_text_override = "Climb to the TOP of the tower!"
@@ -507,4 +509,14 @@ script = ExtResource("26_r")
 
 [node name="PauseMenu" parent="." unique_id=140206094 instance=ExtResource("28_r")]
 
-[node name="CheckpointComplete" parent="." unique_id=1681802951 instance=ExtResource("29_r")]
+[node name="LevelComplete" parent="." unique_id=1681802951 instance=ExtResource("29_r")]
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Checkpoint1" type="Area2D" parent="Checkpoints"]
+position = Vector2(370, -592)
+script = ExtResource("90_cp")
+
+[node name="Checkpoint2" type="Area2D" parent="Checkpoints"]
+position = Vector2(786, -1632)
+script = ExtResource("90_cp")
