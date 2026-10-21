@@ -1,822 +1,2709 @@
-[gd_scene format=3 uid="uid://bifwj3n72cvwy"]
-
-[ext_resource type="Script" uid="uid://sna6faykk7l8" path="res://scripts/levels/level.gd" id="1_r"]
-[ext_resource type="Texture2D" uid="uid://pa1rn6rr3kbp" path="res://assets/environment/grass_topdown.png" id="2_r"]
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/grass_topdown.png" id="2_r"]
 [ext_resource type="PackedScene" path="res://scenes/environment/block.tscn" id="3_r"]
-[ext_resource type="Texture2D" uid="uid://ckawy0wqockf0" path="res://assets/environment/hedge.png" id="4_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/hedge.png" id="4_r"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/skull_topdown.tscn" id="5_r"]
 [ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="6_r"]
 [ext_resource type="PackedScene" path="res://scenes/objects/goal.tscn" id="7_r"]
-[ext_resource type="Texture2D" uid="uid://d2rkor2k0eert" path="res://assets/objects/goal_flag.png" id="8_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/goal_flag.png" id="8_r"]
 [ext_resource type="PackedScene" path="res://scenes/player/player_ct_naked_topdown.tscn" id="9_r"]
-[ext_resource type="Script" uid="uid://ce155otdu8vd5" path="res://scripts/ui/touch_controls.gd" id="10_r"]
+[ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="10_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="11_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="12_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/checkpoint_complete.tscn" id="13_r"]
 [ext_resource type="PackedScene" path="res://scenes/objects/hide_spot.tscn" id="30_hs"]
+[ext_resource type="Script" path="res://scripts/audio/level_audio.gd" id="31_la"]
 
-[node name="Checkpoint01" type="Node2D" unique_id=1580573827]
+[node name="Checkpoint01" type="Node2D"]
 script = ExtResource("1_r")
 checkpoint_name = "Bush Maze Intro"
 trigger_line = "Time to grab those coins before anyone notices..."
 objective_type = 3
-coin_target = 20
-level_bounds = Rect2(0, 0, 2592, 1824)
+coin_target = 40
+level_bounds = Rect2(0, 0, 5280, 3552)
 kill_y = 100000.0
 
-[node name="Decor" type="Node2D" parent="." unique_id=2020505060]
+[node name="Decor" type="Node2D" parent="."]
 
-[node name="Floor" type="Sprite2D" parent="Decor" unique_id=731640919]
+[node name="Floor" type="Sprite2D" parent="Decor"]
 texture_repeat = 2
 texture = ExtResource("2_r")
 centered = false
 region_enabled = true
-region_rect = Rect2(0, 0, 2592, 1824)
+region_rect = Rect2(0, 0, 5280, 3552)
 
-[node name="Environment" type="Node2D" parent="." unique_id=1924292079]
+[node name="Environment" type="Node2D" parent="."]
 
-[node name="Hedge1" parent="Environment" unique_id=1454193342 instance=ExtResource("3_r")]
-position = Vector2(1296, 48)
-size = Vector2(2592, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge2" parent="Environment" unique_id=141466571 instance=ExtResource("3_r")]
+[node name="Hedge1" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(48, 144)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge3" parent="Environment" unique_id=1497939406 instance=ExtResource("3_r")]
-position = Vector2(624, 144)
+[node name="Hedge2" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(240, 144)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge4" parent="Environment" unique_id=1110981182 instance=ExtResource("3_r")]
+[node name="Hedge3" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1200, 144)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge5" parent="Environment" unique_id=1919855296 instance=ExtResource("3_r")]
-position = Vector2(2352, 144)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge6" parent="Environment" unique_id=1018314972 instance=ExtResource("3_r")]
+[node name="Hedge4" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(2544, 144)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge7" parent="Environment" unique_id=455363857 instance=ExtResource("3_r")]
-position = Vector2(144, 240)
-size = Vector2(288, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge8" parent="Environment" unique_id=514949201 instance=ExtResource("3_r")]
-position = Vector2(432, 240)
+[node name="Hedge5" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 144)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge9" parent="Environment" unique_id=696739152 instance=ExtResource("3_r")]
-position = Vector2(720, 240)
+[node name="Hedge6" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3504, 144)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge7" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 144)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge8" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 240)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge9" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(336, 240)
 size = Vector2(288, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge10" parent="Environment" unique_id=795177937 instance=ExtResource("3_r")]
+[node name="Hedge10" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 240)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge11" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1008, 240)
-size = Vector2(96, 96)
+size = Vector2(480, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge11" parent="Environment" unique_id=1138391688 instance=ExtResource("3_r")]
-position = Vector2(1200, 240)
-size = Vector2(96, 96)
+[node name="Hedge12" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1776, 240)
+size = Vector2(864, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge12" parent="Environment" unique_id=1125285328 instance=ExtResource("3_r")]
-position = Vector2(1392, 240)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge13" parent="Environment" unique_id=1559560830 instance=ExtResource("3_r")]
-position = Vector2(1632, 240)
-size = Vector2(192, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge14" parent="Environment" unique_id=1303137226 instance=ExtResource("3_r")]
-position = Vector2(2016, 240)
-size = Vector2(384, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge15" parent="Environment" unique_id=1922533917 instance=ExtResource("3_r")]
+[node name="Hedge13" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(2352, 240)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge16" parent="Environment" unique_id=1933539802 instance=ExtResource("3_r")]
+[node name="Hedge14" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(2544, 240)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge17" parent="Environment" unique_id=1019184092 instance=ExtResource("3_r")]
+[node name="Hedge15" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2736, 240)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge16" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3024, 240)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge17" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3312, 240)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge18" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3600, 240)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge19" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3888, 240)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge20" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4464, 240)
+size = Vector2(864, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge21" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 240)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge22" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 240)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge23" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(48, 336)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge18" parent="Environment" unique_id=135139566 instance=ExtResource("3_r")]
+[node name="Hedge24" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(432, 336)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge19" parent="Environment" unique_id=328197056 instance=ExtResource("3_r")]
-position = Vector2(816, 336)
+[node name="Hedge25" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 336)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge20" parent="Environment" unique_id=2070149095 instance=ExtResource("3_r")]
-position = Vector2(1008, 336)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge21" parent="Environment" unique_id=1250287668 instance=ExtResource("3_r")]
-position = Vector2(1392, 336)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge22" parent="Environment" unique_id=500144023 instance=ExtResource("3_r")]
+[node name="Hedge26" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1968, 336)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge23" parent="Environment" unique_id=1504182755 instance=ExtResource("3_r")]
+[node name="Hedge27" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2352, 336)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge28" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(2544, 336)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge24" parent="Environment" unique_id=733824914 instance=ExtResource("3_r")]
-position = Vector2(48, 432)
+[node name="Hedge29" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2736, 336)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge25" parent="Environment" unique_id=1416310075 instance=ExtResource("3_r")]
-position = Vector2(240, 432)
+[node name="Hedge30" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3312, 336)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge26" parent="Environment" unique_id=510362580 instance=ExtResource("3_r")]
+[node name="Hedge31" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3888, 336)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge32" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 336)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge33" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 336)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge34" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(144, 432)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge35" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(432, 432)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge27" parent="Environment" unique_id=1275186374 instance=ExtResource("3_r")]
+[node name="Hedge36" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(624, 432)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge28" parent="Environment" unique_id=1559841338 instance=ExtResource("3_r")]
-position = Vector2(816, 432)
+[node name="Hedge37" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 432)
+size = Vector2(864, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge38" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1776, 432)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge29" parent="Environment" unique_id=25618968 instance=ExtResource("3_r")]
-position = Vector2(1008, 432)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge30" parent="Environment" unique_id=1670613520 instance=ExtResource("3_r")]
-position = Vector2(1344, 432)
-size = Vector2(384, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge31" parent="Environment" unique_id=1476176129 instance=ExtResource("3_r")]
-position = Vector2(1728, 432)
-size = Vector2(192, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge32" parent="Environment" unique_id=2021024295 instance=ExtResource("3_r")]
+[node name="Hedge39" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1968, 432)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge33" parent="Environment" unique_id=1790859391 instance=ExtResource("3_r")]
+[node name="Hedge40" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 432)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge41" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(2352, 432)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge42" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2544, 432)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge43" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 432)
 size = Vector2(480, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge34" parent="Environment" unique_id=2009536332 instance=ExtResource("3_r")]
+[node name="Hedge44" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3408, 432)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge45" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 432)
+size = Vector2(1248, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge46" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 432)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge47" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 432)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge48" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(48, 528)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge35" parent="Environment" unique_id=129838724 instance=ExtResource("3_r")]
+[node name="Hedge49" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(240, 528)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge36" parent="Environment" unique_id=1587266858 instance=ExtResource("3_r")]
+[node name="Hedge50" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(432, 528)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge37" parent="Environment" unique_id=1791030559 instance=ExtResource("3_r")]
-position = Vector2(816, 528)
+[node name="Hedge51" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1008, 528)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge38" parent="Environment" unique_id=284397811 instance=ExtResource("3_r")]
-position = Vector2(1200, 528)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge39" parent="Environment" unique_id=821594205 instance=ExtResource("3_r")]
+[node name="Hedge52" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1776, 528)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge40" parent="Environment" unique_id=2035683467 instance=ExtResource("3_r")]
+[node name="Hedge53" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1968, 528)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge41" parent="Environment" unique_id=3675128 instance=ExtResource("3_r")]
+[node name="Hedge54" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(2160, 528)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge42" parent="Environment" unique_id=215464285 instance=ExtResource("3_r")]
+[node name="Hedge55" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(2544, 528)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge43" parent="Environment" unique_id=274183859 instance=ExtResource("3_r")]
-position = Vector2(144, 624)
+[node name="Hedge56" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3696, 528)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge57" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 528)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge58" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 528)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge59" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 528)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge60" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 528)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge61" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 624)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge62" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(240, 624)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge63" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(528, 624)
 size = Vector2(288, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge44" parent="Environment" unique_id=124882523 instance=ExtResource("3_r")]
-position = Vector2(720, 624)
+[node name="Hedge64" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(816, 624)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge65" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1008, 624)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge66" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1296, 624)
 size = Vector2(288, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge45" parent="Environment" unique_id=500862899 instance=ExtResource("3_r")]
-position = Vector2(1200, 624)
-size = Vector2(480, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge46" parent="Environment" unique_id=1694837738 instance=ExtResource("3_r")]
+[node name="Hedge67" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1584, 624)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge47" parent="Environment" unique_id=840178761 instance=ExtResource("3_r")]
+[node name="Hedge68" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1776, 624)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge48" parent="Environment" unique_id=1790089012 instance=ExtResource("3_r")]
-position = Vector2(2064, 624)
+[node name="Hedge69" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 624)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge70" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 624)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge71" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2544, 624)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge72" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 624)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge73" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3408, 624)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge74" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3984, 624)
 size = Vector2(288, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge49" parent="Environment" unique_id=1397242068 instance=ExtResource("3_r")]
-position = Vector2(2352, 624)
+[node name="Hedge75" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 624)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge50" parent="Environment" unique_id=1791177802 instance=ExtResource("3_r")]
-position = Vector2(2544, 624)
+[node name="Hedge76" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4560, 624)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge77" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 624)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge51" parent="Environment" unique_id=791781168 instance=ExtResource("3_r")]
+[node name="Hedge78" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 624)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge79" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 624)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge80" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(48, 720)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge52" parent="Environment" unique_id=2081563532 instance=ExtResource("3_r")]
-position = Vector2(432, 720)
+[node name="Hedge81" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(240, 720)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge53" parent="Environment" unique_id=1209658719 instance=ExtResource("3_r")]
+[node name="Hedge82" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(816, 720)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge54" parent="Environment" unique_id=903305771 instance=ExtResource("3_r")]
-position = Vector2(1008, 720)
+[node name="Hedge83" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 720)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge55" parent="Environment" unique_id=1171882349 instance=ExtResource("3_r")]
-position = Vector2(1584, 720)
+[node name="Hedge84" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1776, 720)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge56" parent="Environment" unique_id=1927227908 instance=ExtResource("3_r")]
-position = Vector2(2352, 720)
+[node name="Hedge85" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 720)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge57" parent="Environment" unique_id=19179092 instance=ExtResource("3_r")]
-position = Vector2(2544, 720)
+[node name="Hedge86" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 720)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge58" parent="Environment" unique_id=441176029 instance=ExtResource("3_r")]
+[node name="Hedge87" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 720)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge88" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3120, 720)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge89" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3888, 720)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge90" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4080, 720)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge91" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 720)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge92" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 720)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge93" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 720)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge94" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(48, 816)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge59" parent="Environment" unique_id=751401993 instance=ExtResource("3_r")]
-position = Vector2(336, 816)
-size = Vector2(288, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge60" parent="Environment" unique_id=1806806408 instance=ExtResource("3_r")]
+[node name="Hedge95" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(624, 816)
+size = Vector2(864, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge96" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 816)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge61" parent="Environment" unique_id=292763023 instance=ExtResource("3_r")]
-position = Vector2(816, 816)
+[node name="Hedge97" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1584, 816)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge98" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 816)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge62" parent="Environment" unique_id=1073121700 instance=ExtResource("3_r")]
-position = Vector2(1008, 816)
+[node name="Hedge99" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2544, 816)
+size = Vector2(864, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge100" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3120, 816)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge63" parent="Environment" unique_id=729651825 instance=ExtResource("3_r")]
-position = Vector2(1296, 816)
+[node name="Hedge101" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3408, 816)
 size = Vector2(288, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge64" parent="Environment" unique_id=1614777873 instance=ExtResource("3_r")]
-position = Vector2(1584, 816)
+[node name="Hedge102" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3792, 816)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge103" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4080, 816)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge65" parent="Environment" unique_id=77912120 instance=ExtResource("3_r")]
-position = Vector2(2064, 816)
-size = Vector2(672, 96)
+[node name="Hedge104" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4368, 816)
+size = Vector2(288, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge66" parent="Environment" unique_id=9346070 instance=ExtResource("3_r")]
-position = Vector2(2544, 816)
+[node name="Hedge105" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4656, 816)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge67" parent="Environment" unique_id=1938737769 instance=ExtResource("3_r")]
+[node name="Hedge106" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 816)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge107" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 816)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge108" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 816)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge109" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(48, 912)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge68" parent="Environment" unique_id=323086657 instance=ExtResource("3_r")]
+[node name="Hedge110" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge111" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1008, 912)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge69" parent="Environment" unique_id=2075360851 instance=ExtResource("3_r")]
+[node name="Hedge112" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge113" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1584, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge114" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge115" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(2544, 912)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge70" parent="Environment" unique_id=60483095 instance=ExtResource("3_r")]
+[node name="Hedge116" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge117" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3120, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge118" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3504, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge119" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3696, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge120" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4080, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge121" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge122" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge123" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge124" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(48, 1008)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge71" parent="Environment" unique_id=1509429275 instance=ExtResource("3_r")]
-position = Vector2(288, 1008)
-size = Vector2(192, 96)
+[node name="Hedge125" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(240, 1008)
+size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge72" parent="Environment" unique_id=603403990 instance=ExtResource("3_r")]
-position = Vector2(576, 1008)
-size = Vector2(192, 96)
+[node name="Hedge126" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(432, 1008)
+size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge73" parent="Environment" unique_id=184662657 instance=ExtResource("3_r")]
+[node name="Hedge127" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 1008)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge128" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(816, 1008)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge129" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1008, 1008)
-size = Vector2(480, 96)
+size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge74" parent="Environment" unique_id=1620014993 instance=ExtResource("3_r")]
+[node name="Hedge130" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1296, 1008)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge131" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1584, 1008)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge132" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 1008)
 size = Vector2(480, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge75" parent="Environment" unique_id=1472781084 instance=ExtResource("3_r")]
-position = Vector2(1968, 1008)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge76" parent="Environment" unique_id=1604655232 instance=ExtResource("3_r")]
-position = Vector2(2160, 1008)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge77" parent="Environment" unique_id=1161709533 instance=ExtResource("3_r")]
+[node name="Hedge133" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(2352, 1008)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge78" parent="Environment" unique_id=634582793 instance=ExtResource("3_r")]
+[node name="Hedge134" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(2544, 1008)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge79" parent="Environment" unique_id=854999540 instance=ExtResource("3_r")]
+[node name="Hedge135" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2736, 1008)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge136" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 1008)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge137" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3312, 1008)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge138" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3696, 1008)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge139" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3888, 1008)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge140" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4368, 1008)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge141" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 1008)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge142" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 1008)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge143" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 1008)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge144" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(48, 1104)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge80" parent="Environment" unique_id=1072296212 instance=ExtResource("3_r")]
+[node name="Hedge145" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(240, 1104)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge81" parent="Environment" unique_id=1846744650 instance=ExtResource("3_r")]
+[node name="Hedge146" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(816, 1104)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge82" parent="Environment" unique_id=1584145439 instance=ExtResource("3_r")]
-position = Vector2(1200, 1104)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge83" parent="Environment" unique_id=1101003993 instance=ExtResource("3_r")]
+[node name="Hedge147" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1392, 1104)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge84" parent="Environment" unique_id=1233339773 instance=ExtResource("3_r")]
+[node name="Hedge148" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1776, 1104)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge85" parent="Environment" unique_id=497183768 instance=ExtResource("3_r")]
-position = Vector2(1968, 1104)
+[node name="Hedge149" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 1104)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge86" parent="Environment" unique_id=444671081 instance=ExtResource("3_r")]
-position = Vector2(2352, 1104)
+[node name="Hedge150" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2736, 1104)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge87" parent="Environment" unique_id=889769525 instance=ExtResource("3_r")]
-position = Vector2(2544, 1104)
+[node name="Hedge151" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3120, 1104)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge88" parent="Environment" unique_id=71273732 instance=ExtResource("3_r")]
+[node name="Hedge152" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3504, 1104)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge153" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3696, 1104)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge154" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 1104)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge155" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 1104)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge156" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(48, 1200)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge89" parent="Environment" unique_id=1659122805 instance=ExtResource("3_r")]
-position = Vector2(336, 1200)
-size = Vector2(288, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge90" parent="Environment" unique_id=1993378797 instance=ExtResource("3_r")]
-position = Vector2(624, 1200)
+[node name="Hedge157" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(240, 1200)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge91" parent="Environment" unique_id=1773050064 instance=ExtResource("3_r")]
+[node name="Hedge158" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(528, 1200)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge159" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(816, 1200)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge92" parent="Environment" unique_id=1146051505 instance=ExtResource("3_r")]
-position = Vector2(1008, 1200)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge93" parent="Environment" unique_id=227995415 instance=ExtResource("3_r")]
-position = Vector2(1200, 1200)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge94" parent="Environment" unique_id=1327163102 instance=ExtResource("3_r")]
+[node name="Hedge160" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1392, 1200)
+size = Vector2(864, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge161" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 1200)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge95" parent="Environment" unique_id=1676386 instance=ExtResource("3_r")]
-position = Vector2(1584, 1200)
+[node name="Hedge162" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 1200)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge96" parent="Environment" unique_id=1778752390 instance=ExtResource("3_r")]
-position = Vector2(1872, 1200)
+[node name="Hedge163" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2448, 1200)
 size = Vector2(288, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge97" parent="Environment" unique_id=583537557 instance=ExtResource("3_r")]
-position = Vector2(2256, 1200)
-size = Vector2(288, 96)
+[node name="Hedge164" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 1200)
+size = Vector2(480, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge98" parent="Environment" unique_id=2140964874 instance=ExtResource("3_r")]
-position = Vector2(2544, 1200)
+[node name="Hedge165" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3312, 1200)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge99" parent="Environment" unique_id=854993902 instance=ExtResource("3_r")]
+[node name="Hedge166" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3504, 1200)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge167" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3888, 1200)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge168" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4368, 1200)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge169" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 1200)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge170" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 1200)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge171" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(48, 1296)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge100" parent="Environment" unique_id=1124704269 instance=ExtResource("3_r")]
+[node name="Hedge172" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(432, 1296)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge101" parent="Environment" unique_id=395614117 instance=ExtResource("3_r")]
-position = Vector2(1392, 1296)
+[node name="Hedge173" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(816, 1296)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge102" parent="Environment" unique_id=372497932 instance=ExtResource("3_r")]
-position = Vector2(1584, 1296)
+[node name="Hedge174" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1776, 1296)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge103" parent="Environment" unique_id=1640840801 instance=ExtResource("3_r")]
+[node name="Hedge175" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1968, 1296)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge104" parent="Environment" unique_id=1540725993 instance=ExtResource("3_r")]
-position = Vector2(2544, 1296)
+[node name="Hedge176" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3120, 1296)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge105" parent="Environment" unique_id=1456628449 instance=ExtResource("3_r")]
-position = Vector2(144, 1392)
+[node name="Hedge177" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3312, 1296)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge178" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3696, 1296)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge179" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 1296)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge180" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 1296)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge181" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 1296)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge182" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 1392)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge183" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(240, 1392)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge184" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 1392)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge185" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1104, 1392)
 size = Vector2(288, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge106" parent="Environment" unique_id=324341337 instance=ExtResource("3_r")]
-position = Vector2(528, 1392)
-size = Vector2(288, 96)
+[node name="Hedge186" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1584, 1392)
+size = Vector2(480, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge107" parent="Environment" unique_id=1498081894 instance=ExtResource("3_r")]
-position = Vector2(912, 1392)
-size = Vector2(288, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge108" parent="Environment" unique_id=586595168 instance=ExtResource("3_r")]
-position = Vector2(1296, 1392)
-size = Vector2(288, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge109" parent="Environment" unique_id=747832988 instance=ExtResource("3_r")]
-position = Vector2(1680, 1392)
-size = Vector2(288, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge110" parent="Environment" unique_id=669932326 instance=ExtResource("3_r")]
+[node name="Hedge187" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1968, 1392)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge111" parent="Environment" unique_id=900261086 instance=ExtResource("3_r")]
-position = Vector2(2256, 1392)
-size = Vector2(288, 96)
-tile_texture = ExtResource("4_r")
-
-[node name="Hedge112" parent="Environment" unique_id=679875798 instance=ExtResource("3_r")]
-position = Vector2(2544, 1392)
+[node name="Hedge188" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 1392)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge113" parent="Environment" unique_id=900581736 instance=ExtResource("3_r")]
+[node name="Hedge189" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2448, 1392)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge190" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2832, 1392)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge191" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3120, 1392)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge192" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3408, 1392)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge193" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3696, 1392)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge194" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3888, 1392)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge195" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4368, 1392)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge196" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 1392)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge197" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5136, 1392)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge198" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(48, 1488)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge114" parent="Environment" unique_id=1142783397 instance=ExtResource("3_r")]
-position = Vector2(432, 1488)
+[node name="Hedge199" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(240, 1488)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge115" parent="Environment" unique_id=65870330 instance=ExtResource("3_r")]
-position = Vector2(816, 1488)
+[node name="Hedge200" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 1488)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge116" parent="Environment" unique_id=1109946149 instance=ExtResource("3_r")]
-position = Vector2(1584, 1488)
+[node name="Hedge201" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1392, 1488)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge117" parent="Environment" unique_id=251951045 instance=ExtResource("3_r")]
+[node name="Hedge202" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1776, 1488)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge118" parent="Environment" unique_id=99366919 instance=ExtResource("3_r")]
+[node name="Hedge203" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1968, 1488)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge119" parent="Environment" unique_id=187307019 instance=ExtResource("3_r")]
-position = Vector2(2352, 1488)
+[node name="Hedge204" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2736, 1488)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge120" parent="Environment" unique_id=726341792 instance=ExtResource("3_r")]
-position = Vector2(2544, 1488)
+[node name="Hedge205" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 1488)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge121" parent="Environment" unique_id=785289526 instance=ExtResource("3_r")]
+[node name="Hedge206" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3120, 1488)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge207" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3312, 1488)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge208" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3696, 1488)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge209" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 1488)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge210" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 1488)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge211" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 1488)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge212" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 1488)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge213" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(48, 1584)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge122" parent="Environment" unique_id=1342618227 instance=ExtResource("3_r")]
-position = Vector2(528, 1584)
-size = Vector2(672, 96)
+[node name="Hedge214" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(240, 1584)
+size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge123" parent="Environment" unique_id=1972770837 instance=ExtResource("3_r")]
-position = Vector2(1296, 1584)
-size = Vector2(672, 96)
+[node name="Hedge215" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(816, 1584)
+size = Vector2(864, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge124" parent="Environment" unique_id=962625040 instance=ExtResource("3_r")]
+[node name="Hedge216" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1392, 1584)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge217" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1584, 1584)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge218" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(1776, 1584)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge125" parent="Environment" unique_id=1650199641 instance=ExtResource("3_r")]
-position = Vector2(2064, 1584)
+[node name="Hedge219" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 1584)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge220" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2256, 1584)
 size = Vector2(288, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge126" parent="Environment" unique_id=1007157646 instance=ExtResource("3_r")]
-position = Vector2(2352, 1584)
+[node name="Hedge221" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2640, 1584)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge222" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 1584)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge127" parent="Environment" unique_id=23958658 instance=ExtResource("3_r")]
-position = Vector2(2544, 1584)
+[node name="Hedge223" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3120, 1584)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge128" parent="Environment" unique_id=1441243481 instance=ExtResource("3_r")]
+[node name="Hedge224" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3312, 1584)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge225" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3504, 1584)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge226" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3888, 1584)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge227" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 1584)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge228" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4464, 1584)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge229" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4752, 1584)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge230" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 1584)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge231" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 1584)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge232" parent="Environment" instance=ExtResource("3_r")]
 position = Vector2(48, 1680)
 size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Hedge129" parent="Environment" unique_id=23619095 instance=ExtResource("3_r")]
-position = Vector2(1296, 1776)
-size = Vector2(2592, 96)
+[node name="Hedge233" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(432, 1680)
+size = Vector2(96, 96)
 tile_texture = ExtResource("4_r")
 
-[node name="Goals" type="Node2D" parent="." unique_id=1968367688]
+[node name="Hedge234" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 1680)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
 
-[node name="Goal" parent="Goals" unique_id=1645427575 instance=ExtResource("7_r")]
-position = Vector2(2544, 1690)
+[node name="Hedge235" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1584, 1680)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge236" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 1680)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge237" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2544, 1680)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge238" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3312, 1680)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge239" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3504, 1680)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge240" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 1680)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge241" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4464, 1680)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge242" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 1680)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge243" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 1680)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge244" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(144, 1776)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge245" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(432, 1776)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge246" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 1776)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge247" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(912, 1776)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge248" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1392, 1776)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge249" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1776, 1776)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge250" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 1776)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge251" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 1776)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge252" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2352, 1776)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge253" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2544, 1776)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge254" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2736, 1776)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge255" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3024, 1776)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge256" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3312, 1776)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge257" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3792, 1776)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge258" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 1776)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge259" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4752, 1776)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge260" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 1776)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge261" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge262" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(432, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge263" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge264" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1008, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge265" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1776, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge266" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge267" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge268" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2352, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge269" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2736, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge270" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4080, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge271" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge272" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4464, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge273" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge274" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(240, 1968)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge275" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 1968)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge276" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(912, 1968)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge277" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1488, 1968)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge278" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 1968)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge279" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 1968)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge280" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2640, 1968)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge281" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3120, 1968)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge282" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3600, 1968)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge283" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4080, 1968)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge284" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 1968)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge285" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4464, 1968)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge286" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4656, 1968)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge287" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4944, 1968)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge288" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 1968)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge289" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge290" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge291" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge292" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1584, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge293" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge294" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge295" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3312, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge296" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3888, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge297" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4080, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge298" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge299" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4656, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge300" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge301" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge302" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 2160)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge303" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(432, 2160)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge304" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1008, 2160)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge305" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1392, 2160)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge306" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1584, 2160)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge307" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1872, 2160)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge308" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 2160)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge309" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2640, 2160)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge310" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3408, 2160)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge311" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3888, 2160)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge312" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4368, 2160)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge313" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 2160)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge314" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5136, 2160)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge315" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 2256)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge316" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(816, 2256)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge317" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 2256)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge318" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1392, 2256)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge319" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1584, 2256)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge320" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1776, 2256)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge321" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 2256)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge322" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4080, 2256)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge323" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 2256)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge324" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 2256)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge325" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge326" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(240, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge327" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(528, 2352)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge328" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(816, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge329" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1008, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge330" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge331" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1392, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge332" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1584, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge333" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1776, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge334" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge335" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2448, 2352)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge336" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3312, 2352)
+size = Vector2(864, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge337" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3888, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge338" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4080, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge339" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge340" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4560, 2352)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge341" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge342" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge343" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge344" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge345" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(240, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge346" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(432, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge347" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1008, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge348" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge349" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2736, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge350" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge351" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3888, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge352" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge353" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4464, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge354" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge355" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge356" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 2544)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge357" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(336, 2544)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge358" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1104, 2544)
+size = Vector2(1056, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge359" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 2544)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge360" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2448, 2544)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge361" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2736, 2544)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge362" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 2544)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge363" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3120, 2544)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge364" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3408, 2544)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge365" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3792, 2544)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge366" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4176, 2544)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge367" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4656, 2544)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge368" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 2544)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge369" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 2544)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge370" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 2640)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge371" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(432, 2640)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge372" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1008, 2640)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge373" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2352, 2640)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge374" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2544, 2640)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge375" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2736, 2640)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge376" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3504, 2640)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge377" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3888, 2640)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge378" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 2640)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge379" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 2640)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge380" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 2736)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge381" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(240, 2736)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge382" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(432, 2736)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge383" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(720, 2736)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge384" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1008, 2736)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge385" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 2736)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge386" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1488, 2736)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge387" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2064, 2736)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge388" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2544, 2736)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge389" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 2736)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge390" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3504, 2736)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge391" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4080, 2736)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge392" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4464, 2736)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge393" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4944, 2736)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge394" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 2832)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge395" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(240, 2832)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge396" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 2832)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge397" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1008, 2832)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge398" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 2832)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge399" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1392, 2832)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge400" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2544, 2832)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge401" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 2832)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge402" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3312, 2832)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge403" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3696, 2832)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge404" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 2832)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge405" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4656, 2832)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge406" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 2832)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge407" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 2928)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge408" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(336, 2928)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge409" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 2928)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge410" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1008, 2928)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge411" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1392, 2928)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge412" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1680, 2928)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge413" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 2928)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge414" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2352, 2928)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge415" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2736, 2928)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge416" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 2928)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge417" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3216, 2928)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge418" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3504, 2928)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge419" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3888, 2928)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge420" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 2928)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge421" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4464, 2928)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge422" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4752, 2928)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge423" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 2928)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge424" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 2928)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge425" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge426" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge427" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge428" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1392, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge429" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1776, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge430" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge431" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2928, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge432" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3120, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge433" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3504, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge434" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4272, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge435" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4464, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge436" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4848, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge437" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge438" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge439" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(144, 3120)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge440" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(432, 3120)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge441" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(816, 3120)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge442" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 3120)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge443" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1392, 3120)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge444" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1584, 3120)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge445" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1776, 3120)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge446" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 3120)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge447" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 3120)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge448" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2352, 3120)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge449" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2832, 3120)
+size = Vector2(672, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge450" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3792, 3120)
+size = Vector2(1056, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge451" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4464, 3120)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge452" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4656, 3120)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge453" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4944, 3120)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge454" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 3120)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge455" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 3216)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge456" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(432, 3216)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge457" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1200, 3216)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge458" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1776, 3216)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge459" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 3216)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge460" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2352, 3216)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge461" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3504, 3216)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge462" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4080, 3216)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge463" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 3216)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge464" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 3216)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge465" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 3312)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge466" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(336, 3312)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge467" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 3312)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge468" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(816, 3312)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge469" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1104, 3312)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge470" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1488, 3312)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge471" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1872, 3312)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge472" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2160, 3312)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge473" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2448, 3312)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge474" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2736, 3312)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge475" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3120, 3312)
+size = Vector2(480, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge476" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3504, 3312)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge477" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3696, 3312)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge478" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3984, 3312)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge479" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4368, 3312)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge480" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4752, 3312)
+size = Vector2(288, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge481" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5040, 3312)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge482" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 3312)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge483" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 3408)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge484" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(624, 3408)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge485" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1392, 3408)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge486" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(1968, 3408)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge487" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2736, 3408)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge488" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(3696, 3408)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge489" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(4464, 3408)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge490" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 3408)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="Hedge491" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2640, 3504)
+size = Vector2(5280, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="BorderTop" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2640, 48)
+size = Vector2(5280, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="BorderBottom" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(2640, 3504)
+size = Vector2(5280, 96)
+tile_texture = ExtResource("4_r")
+
+[node name="BorderLeft" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(48, 1776)
+size = Vector2(96, 3552)
+tile_texture = ExtResource("4_r")
+
+[node name="BorderRight" parent="Environment" instance=ExtResource("3_r")]
+position = Vector2(5232, 1776)
+size = Vector2(96, 3552)
+tile_texture = ExtResource("4_r")
+
+[node name="Goals" type="Node2D" parent="."]
+
+[node name="Goal" parent="Goals" instance=ExtResource("7_r")]
+position = Vector2(4752, 2832)
 texture = ExtResource("8_r")
 
-[node name="Coins" type="Node2D" parent="." unique_id=231981702]
+[node name="Coins" type="Node2D" parent="."]
 
-[node name="Coin1" parent="Coins" unique_id=19251963 instance=ExtResource("6_r")]
-position = Vector2(240, 336)
+[node name="Coin1" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(1488, 2352)
 
-[node name="Coin2" parent="Coins" unique_id=652515244 instance=ExtResource("6_r")]
-position = Vector2(144, 432)
+[node name="Coin2" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2064, 1392)
 
-[node name="Coin3" parent="Coins" unique_id=1382778996 instance=ExtResource("6_r")]
-position = Vector2(624, 336)
+[node name="Coin3" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(5136, 3408)
 
-[node name="Coin4" parent="Coins" unique_id=1177741517 instance=ExtResource("6_r")]
-position = Vector2(336, 720)
+[node name="Coin4" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2928, 528)
 
-[node name="Coin5" parent="Coins" unique_id=1770306115 instance=ExtResource("6_r")]
-position = Vector2(144, 720)
-
-[node name="Coin6" parent="Coins" unique_id=243502023 instance=ExtResource("6_r")]
-position = Vector2(624, 720)
-
-[node name="Coin7" parent="Coins" unique_id=1763967234 instance=ExtResource("6_r")]
-position = Vector2(624, 912)
-
-[node name="Coin8" parent="Coins" unique_id=876952460 instance=ExtResource("6_r")]
-position = Vector2(144, 1104)
-
-[node name="Coin9" parent="Coins" unique_id=1924748612 instance=ExtResource("6_r")]
-position = Vector2(624, 1104)
-
-[node name="Coin10" parent="Coins" unique_id=693338150 instance=ExtResource("6_r")]
-position = Vector2(624, 1296)
-
-[node name="Coin11" parent="Coins" unique_id=1017639774 instance=ExtResource("6_r")]
-position = Vector2(912, 624)
-
-[node name="Coin12" parent="Coins" unique_id=1227639356 instance=ExtResource("6_r")]
-position = Vector2(912, 1104)
-
-[node name="Coin13" parent="Coins" unique_id=782766373 instance=ExtResource("6_r")]
-position = Vector2(912, 336)
-
-[node name="Coin14" parent="Coins" unique_id=1095795629 instance=ExtResource("6_r")]
-position = Vector2(1104, 1392)
-
-[node name="Coin15" parent="Coins" unique_id=656654436 instance=ExtResource("6_r")]
-position = Vector2(1104, 432)
-
-[node name="Coin16" parent="Coins" unique_id=136844277 instance=ExtResource("6_r")]
-position = Vector2(1104, 1488)
-
-[node name="Coin17" parent="Coins" unique_id=1908061821 instance=ExtResource("6_r")]
-position = Vector2(1200, 336)
-
-[node name="Coin18" parent="Coins" unique_id=865127321 instance=ExtResource("6_r")]
-position = Vector2(1104, 144)
-
-[node name="Coin19" parent="Coins" unique_id=31037723 instance=ExtResource("6_r")]
-position = Vector2(1296, 1104)
-
-[node name="Coin20" parent="Coins" unique_id=724880628 instance=ExtResource("6_r")]
-position = Vector2(1488, 1488)
-
-[node name="Coin21" parent="Coins" unique_id=1666615797 instance=ExtResource("6_r")]
-position = Vector2(1104, 816)
-
-[node name="Coin22" parent="Coins" unique_id=196072860 instance=ExtResource("6_r")]
-position = Vector2(1488, 1104)
-
-[node name="Coin23" parent="Coins" unique_id=894267505 instance=ExtResource("6_r")]
-position = Vector2(1488, 624)
-
-[node name="Coin24" parent="Coins" unique_id=133730116 instance=ExtResource("6_r")]
-position = Vector2(1680, 1104)
-
-[node name="Coin25" parent="Coins" unique_id=703464451 instance=ExtResource("6_r")]
-position = Vector2(1584, 432)
-
-[node name="Coin26" parent="Coins" unique_id=924023605 instance=ExtResource("6_r")]
-position = Vector2(1296, 720)
-
-[node name="Coin27" parent="Coins" unique_id=155963766 instance=ExtResource("6_r")]
+[node name="Coin5" parent="Coins" instance=ExtResource("6_r")]
 position = Vector2(1392, 528)
 
-[node name="Coin28" parent="Coins" unique_id=1208551410 instance=ExtResource("6_r")]
-position = Vector2(1776, 336)
+[node name="Coin6" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(3312, 1104)
 
-[node name="Coin29" parent="Coins" unique_id=1506475699 instance=ExtResource("6_r")]
-position = Vector2(1776, 720)
+[node name="Coin7" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(1392, 336)
 
-[node name="Coin30" parent="Coins" unique_id=93948758 instance=ExtResource("6_r")]
-position = Vector2(1296, 528)
+[node name="Coin8" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(4560, 1200)
 
-[node name="Coin31" parent="Coins" unique_id=1085197623 instance=ExtResource("6_r")]
-position = Vector2(1680, 1584)
+[node name="Coin9" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(4656, 1680)
 
-[node name="Coin32" parent="Coins" unique_id=1069468351 instance=ExtResource("6_r")]
-position = Vector2(2064, 1104)
+[node name="Coin10" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2928, 2256)
 
-[node name="Coin33" parent="Coins" unique_id=418507727 instance=ExtResource("6_r")]
-position = Vector2(2160, 1104)
+[node name="Coin11" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(1872, 2448)
 
-[node name="Coin34" parent="Coins" unique_id=1348310274 instance=ExtResource("6_r")]
-position = Vector2(2256, 720)
+[node name="Coin12" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2640, 1104)
 
-[node name="Coin35" parent="Coins" unique_id=1387702621 instance=ExtResource("6_r")]
-position = Vector2(2256, 528)
+[node name="Coin13" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(4368, 3120)
 
-[node name="Coin36" parent="Coins" unique_id=1094957870 instance=ExtResource("6_r")]
-position = Vector2(2256, 1296)
+[node name="Coin14" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(912, 3024)
 
-[node name="Coin37" parent="Coins" unique_id=2139621231 instance=ExtResource("6_r")]
-position = Vector2(2064, 336)
+[node name="Coin15" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(1872, 1200)
 
-[node name="Coin38" parent="Coins" unique_id=905073791 instance=ExtResource("6_r")]
+[node name="Coin16" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(3024, 144)
+
+[node name="Coin17" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(1776, 2448)
+
+[node name="Coin18" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(3888, 2256)
+
+[node name="Coin19" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2448, 1680)
+
+[node name="Coin20" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(720, 528)
+
+[node name="Coin21" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(240, 2640)
+
+[node name="Coin22" parent="Coins" instance=ExtResource("6_r")]
 position = Vector2(2064, 1488)
 
-[node name="Coin39" parent="Coins" unique_id=637270493 instance=ExtResource("6_r")]
-position = Vector2(2160, 1488)
+[node name="Coin23" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2448, 912)
 
-[node name="Coin40" parent="Coins" unique_id=2035341136 instance=ExtResource("6_r")]
-position = Vector2(2448, 240)
+[node name="Coin24" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(4752, 144)
 
-[node name="Hazards" type="Node2D" parent="." unique_id=1677104558]
+[node name="Coin25" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(4944, 1488)
 
-[node name="NPCs" type="Node2D" parent="." unique_id=809421012]
+[node name="Coin26" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(1104, 624)
 
-[node name="Enemies" type="Node2D" parent="." unique_id=962669306]
+[node name="Coin27" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2064, 2064)
 
-[node name="Skull1" parent="Enemies" unique_id=477350487 instance=ExtResource("5_r")]
-position = Vector2(144, 1680)
-patrol_points = PackedVector2Array(0, 0, 2304, 0)
+[node name="Coin28" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(3984, 2064)
+
+[node name="Coin29" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2256, 624)
+
+[node name="Coin30" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(4176, 912)
+
+[node name="Coin31" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2832, 2352)
+
+[node name="Coin32" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(3216, 528)
+
+[node name="Coin33" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(5136, 1776)
+
+[node name="Coin34" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(3024, 720)
+
+[node name="Coin35" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(1296, 1104)
+
+[node name="Coin36" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(1488, 1872)
+
+[node name="Coin37" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(816, 912)
+
+[node name="Coin38" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(432, 3024)
+
+[node name="Coin39" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2832, 1104)
+
+[node name="Coin40" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(336, 144)
+
+[node name="Coin41" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(3504, 336)
+
+[node name="Coin42" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(5136, 816)
+
+[node name="Coin43" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(1104, 720)
+
+[node name="Coin44" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(5136, 432)
+
+[node name="Coin45" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(1680, 2352)
+
+[node name="Coin46" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(4848, 1872)
+
+[node name="Coin47" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2160, 336)
+
+[node name="Coin48" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(1872, 2640)
+
+[node name="Coin49" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2448, 528)
+
+[node name="Coin50" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(1872, 1392)
+
+[node name="Coin51" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(4176, 1104)
+
+[node name="Coin52" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(336, 2832)
+
+[node name="Coin53" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(4848, 2640)
+
+[node name="Coin54" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(432, 2832)
+
+[node name="Coin55" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(1872, 3120)
+
+[node name="Coin56" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2256, 1872)
+
+[node name="Coin57" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(4176, 3024)
+
+[node name="Coin58" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(3408, 2928)
+
+[node name="Coin59" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(3888, 3408)
+
+[node name="Coin60" parent="Coins" instance=ExtResource("6_r")]
+position = Vector2(2352, 2256)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Skull1" parent="Enemies" instance=ExtResource("5_r")]
+position = Vector2(4752, 624)
+patrol_points = PackedVector2Array(0, 0, 0, 480)
+nav_rect = Rect2(0, 0, 5280, 3552)
 lines_patrol = PackedStringArray("Length of this hallway is a crime.", "Another lap, another lap. Lovely.", "I could do this blindfolded. Have done, actually.")
 lines_detected = PackedStringArray("Oi, troll! Eyes up here, I am right in front of you!", "There is the naked lump of trouble!", "Well well, a troll who forgot his trousers.")
 lines_chase = PackedStringArray("Stop running, you coward!", "Running is for people with places to be!", "I will catch you by the next hedge, trust me.")
@@ -826,9 +2713,10 @@ lines_lost = PackedStringArray("Where did he go? Hiding like a coward!", "Blast,
 lines_search = PackedStringArray("Come on out, I can smell the coins!", "Bushes do not hide much from me.", "I am standing right here waiting, troll.")
 lines_give_up = PackedStringArray("Fine, back to the hallway.", "Not worth another lap.", "Coward. Back to patrol.")
 
-[node name="Skull2" parent="Enemies" unique_id=1088366262 instance=ExtResource("5_r")]
-position = Vector2(1104, 912)
-patrol_points = PackedVector2Array(0, 0, 1344, 0)
+[node name="Skull2" parent="Enemies" instance=ExtResource("5_r")]
+position = Vector2(1872, 1584)
+patrol_points = PackedVector2Array(0, 0, 0, 480)
+nav_rect = Rect2(0, 0, 5280, 3552)
 lines_patrol = PackedStringArray("Is it nap time yet?", "Quiet... too quiet. I do not like it.", "Counting hedges again. Forty-one. Forty-two...")
 lines_detected = PackedStringArray("Oh! Oh no, it is the troll!", "Eek, you are naked! Put something on!", "Do not look at me like that, I am just doing my job!")
 lines_chase = PackedStringArray("Please stop chasing me!", "Wait, come back? No, do not come back!", "I am going, I am going!")
@@ -838,9 +2726,10 @@ lines_lost = PackedStringArray("He is gone! Did he go? Did he?", "Where did he g
 lines_search = PackedStringArray("Hello? Troll? Please be friendly.", "Something rustled. It was me.", "I will just look under this bush. Oh, it is a spider.")
 lines_give_up = PackedStringArray("Phew. Okay. Back to patrol.", "Maybe he went home.", "Nap time after this, I promise.")
 
-[node name="Skull3" parent="Enemies" unique_id=2010393637 instance=ExtResource("5_r")]
-position = Vector2(2448, 528)
-patrol_points = PackedVector2Array(0, 0, 0, 1152)
+[node name="Skull3" parent="Enemies" instance=ExtResource("5_r")]
+position = Vector2(2064, 2832)
+patrol_points = PackedVector2Array(0, 0, 0, 576)
+nav_rect = Rect2(0, 0, 5280, 3552)
 lines_patrol = PackedStringArray("Up and down, down and up, the maze has no top.", "Nobody writes songs for skulls. Not one.", "The wind is cold tonight, and so is my heart.")
 lines_detected = PackedStringArray("A troll in the moonlight, how romantic... and rude.", "You there, unclothed one! Halt, in the name of the maze!", "I see you. Oh, I see you very well.")
 lines_chase = PackedStringArray("Run, little troll, like the wind through the hedges!", "Your bare knees are showing, troll!", "Every chase ends in the same place, you know.")
@@ -850,9 +2739,10 @@ lines_lost = PackedStringArray("Bushes make a poor metaphor for hiding.", "He sl
 lines_search = PackedStringArray("Come out, come out, my naked muse.", "Shadows are easy to read. Where are you, shadow?", "I shall wait, troll, for poetry takes patience.")
 lines_give_up = PackedStringArray("Some verses are never finished.", "The maze keeps its secrets. For now.", "Back to my rounds. Back to the rhymes.")
 
-[node name="Skull4" parent="Enemies" unique_id=1553388085 instance=ExtResource("5_r")]
-position = Vector2(1296, 144)
-patrol_points = PackedVector2Array(0, 0, 960, 0)
+[node name="Skull4" parent="Enemies" instance=ExtResource("5_r")]
+position = Vector2(4656, 3216)
+patrol_points = PackedVector2Array(0, 0, 288, 0)
+nav_rect = Rect2(0, 0, 5280, 3552)
 lines_patrol = PackedStringArray("Doing push-ups on the bone. Set twelve.", "Protein in the hedges, that is my secret.", "Nobody beats a skull in a hedge race.")
 lines_detected = PackedStringArray("Look at those legs, troll! Those are not gym legs!", "Naked and fast, eh? Not fast enough!", "Hey, you! Coins on the ground, mine now!")
 lines_chase = PackedStringArray("Keep it up, troll, I am warming up!", "This is my cardio, and you are my cardio!", "Faster, faster, I am on a roll!")
@@ -862,9 +2752,10 @@ lines_lost = PackedStringArray("He used the bushes! Dirty tactics!", "Gone? I di
 lines_search = PackedStringArray("I can see your bare feet under there!", "Come on, troll, I have got all day and a lot of reps!", "Nobody out-sprints a skull, come out!")
 lines_give_up = PackedStringArray("Fine, cooling down now.", "Next time, troll. Next time.", "Back to the cardio route.")
 
-[node name="Skull5" parent="Enemies" unique_id=444188829 instance=ExtResource("5_r")]
-position = Vector2(720, 720)
-patrol_points = PackedVector2Array(0, 0, 0, 768)
+[node name="Skull5" parent="Enemies" instance=ExtResource("5_r")]
+position = Vector2(2928, 336)
+patrol_points = PackedVector2Array(0, 0, 288, 0)
+nav_rect = Rect2(0, 0, 5280, 3552)
 lines_patrol = PackedStringArray("Back in my day the maze had no hedges.", "These bones creak. Every single one.", "Ten steps, turn around, ten steps back. Thrilling.")
 lines_detected = PackedStringArray("You there! Youngster with no clothes!", "Ah, a troll. Thought you had gone out of fashion.", "Stop right there or I will tell your mother!")
 lines_chase = PackedStringArray("Slow down! I am too old for this!", "Come back here and face an elder!", "Back in my day, trolls had manners!")
@@ -874,9 +2765,10 @@ lines_lost = PackedStringArray("Bushes! Ruining the maze for everyone!", "Where 
 lines_search = PackedStringArray("I know you are in there, rascal!", "Come out before my knees give out!", "Hmph. Still here, troll, still waiting.")
 lines_give_up = PackedStringArray("Fine. My back hurts anyway.", "Enough of this, back to my laps.", "Hmph. Let him stay in his bush.")
 
-[node name="Skull6" parent="Enemies" unique_id=52952861 instance=ExtResource("5_r")]
-position = Vector2(528, 144)
-patrol_points = PackedVector2Array(0, 0, 0, 768)
+[node name="Skull6" parent="Enemies" instance=ExtResource("5_r")]
+position = Vector2(144, 2544)
+patrol_points = PackedVector2Array(0, 0, 0, 480)
+nav_rect = Rect2(0, 0, 5280, 3552)
 lines_patrol = PackedStringArray("The night is long, and so is this corridor.", "I was once a king of bones. Now I count hedges.", "Oh fate, why must I patrol this dreary path?")
 lines_detected = PackedStringArray("Halt, intruder! I see your bare bottom!", "A trespasser in my realm! Unclothed, too!", "Thou shalt not pass, naked one!")
 lines_chase = PackedStringArray("Flee if you must, troll, I follow!", "Your coins shall be mine, bare one!", "The hunt is on, and I am the hunter!")
@@ -885,6 +2777,205 @@ lines_caught = PackedStringArray("Caught in my grasp! Victory!", "The bone king 
 lines_lost = PackedStringArray("He has escaped into the hedges! Coward!", "The shadows have swallowed him!", "Fled like a scared rabbit!")
 lines_search = PackedStringArray("Show yourself, bare one! I command it!", "I smell your coins, troll, you cannot hide forever!", "I am patient. Kings are always patient.")
 lines_give_up = PackedStringArray("Let him go. The maze is mine.", "A king does not chase forever.", "Back to my watch. Back to my throne.")
+
+[node name="Bushes" type="Node2D" parent="."]
+
+[node name="Bush1" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(4752, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot1" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(4752, 912)
+size = Vector2(96, 96)
+hint = "Get in the bush to hide from skulls!"
+
+[node name="Bush2" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(1872, 3024)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot2" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(1872, 3024)
+size = Vector2(96, 96)
+
+[node name="Bush3" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(3216, 336)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot3" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(3216, 336)
+size = Vector2(96, 96)
+
+[node name="Bush4" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(2832, 2064)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot4" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(2832, 2064)
+size = Vector2(96, 96)
+
+[node name="Bush5" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(2256, 336)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot5" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(2256, 336)
+size = Vector2(96, 96)
+
+[node name="Bush6" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(1296, 3216)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot6" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(1296, 3216)
+size = Vector2(96, 96)
+
+[node name="Bush7" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(2640, 3216)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot7" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(2640, 3216)
+size = Vector2(96, 96)
+
+[node name="Bush8" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(336, 912)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot8" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(336, 912)
+size = Vector2(96, 96)
+
+[node name="Bush9" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(3984, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot9" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(3984, 2448)
+size = Vector2(96, 96)
+
+[node name="Bush10" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(2064, 1680)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot10" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(2064, 1680)
+size = Vector2(96, 96)
+
+[node name="Bush11" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(3216, 2448)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot11" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(3216, 2448)
+size = Vector2(96, 96)
+
+[node name="Bush12" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(4560, 3216)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot12" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(4560, 3216)
+size = Vector2(96, 96)
+
+[node name="Bush13" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(4368, 2640)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot13" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(4368, 2640)
+size = Vector2(96, 96)
+
+[node name="Bush14" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(3216, 1872)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot14" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(3216, 1872)
+size = Vector2(96, 96)
+
+[node name="Bush15" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(1680, 3408)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot15" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(1680, 3408)
+size = Vector2(96, 96)
+
+[node name="Bush16" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(3600, 720)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot16" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(3600, 720)
+size = Vector2(96, 96)
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="NPCs" type="Node2D" parent="."]
 
 [node name="Player" parent="." unique_id=499675606 instance=ExtResource("9_r")]
 position = Vector2(144, 144)
@@ -907,159 +2998,5 @@ mode = "topdown"
 
 [node name="CheckpointComplete" parent="." unique_id=1961286623 instance=ExtResource("13_r")]
 
-[node name="Bushes" type="Node2D" parent="." unique_id=880100001]
-[node name="Bush1" parent="Bushes" unique_id=880100011 instance=ExtResource("3_r")]
-position = Vector2(1104, 816)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-collision_layer = 0
-z_index = 1
-modulate = Color(0.6, 0.9, 1, 1)
-
-[node name="HideSpot1" parent="Bushes" instance=ExtResource("30_hs")]
-position = Vector2(1104, 816)
-size = Vector2(96, 96)
-hint = "Get in the bush to hide from skulls!"
-
-[node name="Bush2" parent="Bushes" unique_id=880100012 instance=ExtResource("3_r")]
-position = Vector2(2448, 240)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-collision_layer = 0
-z_index = 1
-modulate = Color(0.6, 0.9, 1, 1)
-
-[node name="HideSpot2" parent="Bushes" instance=ExtResource("30_hs")]
-position = Vector2(2448, 240)
-size = Vector2(96, 96)
-hint = "Get in the bush to hide from skulls!"
-
-[node name="Bush3" parent="Bushes" unique_id=880100013 instance=ExtResource("3_r")]
-position = Vector2(2160, 1488)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-collision_layer = 0
-z_index = 1
-modulate = Color(0.6, 0.9, 1, 1)
-
-[node name="HideSpot3" parent="Bushes" instance=ExtResource("30_hs")]
-position = Vector2(2160, 1488)
-size = Vector2(96, 96)
-hint = "Get in the bush to hide from skulls!"
-
-[node name="Bush4" parent="Bushes" unique_id=880100014 instance=ExtResource("3_r")]
-position = Vector2(144, 432)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-collision_layer = 0
-z_index = 1
-modulate = Color(0.6, 0.9, 1, 1)
-
-[node name="HideSpot4" parent="Bushes" instance=ExtResource("30_hs")]
-position = Vector2(144, 432)
-size = Vector2(96, 96)
-hint = "Get in the bush to hide from skulls!"
-
-[node name="Bush5" parent="Bushes" unique_id=880100015 instance=ExtResource("3_r")]
-position = Vector2(624, 1296)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-collision_layer = 0
-z_index = 1
-modulate = Color(0.6, 0.9, 1, 1)
-
-[node name="HideSpot5" parent="Bushes" instance=ExtResource("30_hs")]
-position = Vector2(624, 1296)
-size = Vector2(96, 96)
-hint = "Get in the bush to hide from skulls!"
-
-[node name="Bush6" parent="Bushes" unique_id=880100016 instance=ExtResource("3_r")]
-position = Vector2(1776, 336)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-collision_layer = 0
-z_index = 1
-modulate = Color(0.6, 0.9, 1, 1)
-
-[node name="HideSpot6" parent="Bushes" instance=ExtResource("30_hs")]
-position = Vector2(1776, 336)
-size = Vector2(96, 96)
-hint = "Get in the bush to hide from skulls!"
-
-[node name="Bush7" parent="Bushes" unique_id=880100017 instance=ExtResource("3_r")]
-position = Vector2(1104, 144)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-collision_layer = 0
-z_index = 1
-modulate = Color(0.6, 0.9, 1, 1)
-
-[node name="HideSpot7" parent="Bushes" instance=ExtResource("30_hs")]
-position = Vector2(1104, 144)
-size = Vector2(96, 96)
-hint = "Get in the bush to hide from skulls!"
-
-[node name="Bush8" parent="Bushes" unique_id=880100018 instance=ExtResource("3_r")]
-position = Vector2(1488, 1488)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-collision_layer = 0
-z_index = 1
-modulate = Color(0.6, 0.9, 1, 1)
-
-[node name="HideSpot8" parent="Bushes" instance=ExtResource("30_hs")]
-position = Vector2(1488, 1488)
-size = Vector2(96, 96)
-hint = "Get in the bush to hide from skulls!"
-
-[node name="Bush9" parent="Bushes" unique_id=880100019 instance=ExtResource("3_r")]
-position = Vector2(144, 1104)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-collision_layer = 0
-z_index = 1
-modulate = Color(0.6, 0.9, 1, 1)
-
-[node name="HideSpot9" parent="Bushes" instance=ExtResource("30_hs")]
-position = Vector2(144, 1104)
-size = Vector2(96, 96)
-hint = "Get in the bush to hide from skulls!"
-
-[node name="Bush10" parent="Bushes" unique_id=880100020 instance=ExtResource("3_r")]
-position = Vector2(2256, 720)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-collision_layer = 0
-z_index = 1
-modulate = Color(0.6, 0.9, 1, 1)
-
-[node name="HideSpot10" parent="Bushes" instance=ExtResource("30_hs")]
-position = Vector2(2256, 720)
-size = Vector2(96, 96)
-hint = "Get in the bush to hide from skulls!"
-
-[node name="Bush11" parent="Bushes" unique_id=880100021 instance=ExtResource("3_r")]
-position = Vector2(624, 336)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-collision_layer = 0
-z_index = 1
-modulate = Color(0.6, 0.9, 1, 1)
-
-[node name="HideSpot11" parent="Bushes" instance=ExtResource("30_hs")]
-position = Vector2(624, 336)
-size = Vector2(96, 96)
-hint = "Get in the bush to hide from skulls!"
-
-[node name="Bush12" parent="Bushes" unique_id=880100022 instance=ExtResource("3_r")]
-position = Vector2(1680, 1104)
-size = Vector2(96, 96)
-tile_texture = ExtResource("4_r")
-collision_layer = 0
-z_index = 1
-modulate = Color(0.6, 0.9, 1, 1)
-
-[node name="HideSpot12" parent="Bushes" instance=ExtResource("30_hs")]
-position = Vector2(1680, 1104)
-size = Vector2(96, 96)
-hint = "Get in the bush to hide from skulls!"
+[node name="LevelAudio" type="Node" parent="."]
+script = ExtResource("31_la")

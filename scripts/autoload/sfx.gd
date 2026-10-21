@@ -29,6 +29,9 @@ func _ready() -> void:
 	_streams["complete"] = _make(PackedFloat32Array([523.0, 659.0, 784.0, 1046.0]), 0.1, 0.4, false)
 	_streams["chime"] = _make(PackedFloat32Array([1760.0, 2637.0]), 0.06, 0.35, false)
 	_streams["select"] = _make(PackedFloat32Array([660.0]), 0.04, 0.3, false)
+	_streams["alert"] = _make(PackedFloat32Array([600.0, 900.0, 600.0]), 0.07, 0.35, false)
+	_streams["rustle"] = _make(PackedFloat32Array([220.0, 300.0]), 0.1, 0.22, true)
+	_streams["step"] = _make(PackedFloat32Array([120.0]), 0.03, 0.12, true)
 
 
 func play(sound: String, pitch_jitter: float = 0.05, pitch_scale: float = 1.0) -> void:

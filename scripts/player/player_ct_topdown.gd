@@ -5,6 +5,8 @@ extends PlayerBase
 @export var move_speed: float = 260.0
 @export var acceleration: float = 2400.0
 
+var _step_t: float = 0.0
+
 
 func _ready() -> void:
 	super._ready()
@@ -24,6 +26,8 @@ func _physics_process(delta: float) -> void:
 	if in_bush != is_hidden:
 		is_hidden = in_bush
 		sprite.modulate.a = 0.35 if is_hidden else 1.0
+		if is_hidden:
+			Sfx.play("rustle", 0.1)
 	if _knock_timer > 0.0:
 		_knock_timer -= delta
 		velocity = velocity.move_toward(Vector2.ZERO, 1400.0 * delta)
@@ -37,6 +41,11 @@ func _physics_process(delta: float) -> void:
 	if not velocity.is_finite():
 		velocity = Vector2.ZERO
 	move_and_slide()
+	if velocity.length() > 60.0 and not is_hidden:
+		_step_t -= delta
+		if _step_t <= 0.0:
+			_step_t = 0.32
+			Sfx.play("step", 0.15)
 	if _knock_timer > 0.0:
 		play_anim("hurt")
 	elif velocity.length() > 20.0:

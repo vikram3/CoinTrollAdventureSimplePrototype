@@ -82,6 +82,7 @@ func _enemy_process(delta: float) -> void:
 			_chasing = true
 			_searching = false
 			_chase_bark = 0.0
+			Sfx.play("alert")
 			say_line(lines_detected, "detected", 2.4, true)
 		_grace_left = chase_grace
 		_last_seen = p.global_position
@@ -99,6 +100,7 @@ func _enemy_process(delta: float) -> void:
 			_search_target = _last_seen
 			_search_pick = 0.0
 			_said_search = false
+			Sfx.play("select")
 			say_line(lines_lost, "lost", 2.2, true)
 	elif _searching:
 		_search_left -= delta
@@ -295,6 +297,7 @@ func _try_lunge(p: PlayerBase, d: float) -> void:
 	_lunge_cd = 2.2
 	_lunge_t = 0.3
 	_lunge_dir = (p.global_position - global_position).normalized()
+	Sfx.play("swing")
 	say_line(lines_attack, "attack", 1.8, true)
 
 
