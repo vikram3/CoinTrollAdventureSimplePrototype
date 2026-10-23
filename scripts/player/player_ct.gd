@@ -29,6 +29,10 @@ extends PlayerBase
 @export var dash_cooldown: float = 0.6
 @export_group("Block")
 @export var can_block: bool = true
+@export_group("Combo and advanced moves")
+@export var combo_window_time: float = 0.55
+@export var dive_speed: float = 1100.0
+@export var wall_jump_push: float = 380.0
 @export var block_move_speed: float = 90.0
 
 var _coyote: float = 0.0
@@ -44,6 +48,12 @@ var _dash_cd: float = 0.0
 var _dash_dir: int = 1
 var _blocking: bool = false
 var _mouse_attack: bool = false
+var _combo_step: int = 0
+var _combo_window: float = 0.0
+var _current_damage: int = 1
+var _block_time: float = 0.0
+var _counter_t: float = 0.0
+var _diving: bool = false
 
 @onready var attack_area: Area2D = $AttackArea
 @onready var swoosh: Node2D = get_node_or_null("AttackArea/Swoosh") as Node2D
@@ -84,13 +94,18 @@ func _physics_process(delta: float) -> void:
 	_dash_cd -= delta
 	if not is_on_floor() and not _dashing:
 		velocity.y = minf(velocity.y + gravity * delta, max_fall_speed)
+	if _diving:
+		velocity.y = dive_speed
+	_combo_window = maxf(_combo_window - delta, 0.0)
+	_counter_t = maxf(_counter_t - delta, 0.0)
 
 	var dir := 0.0
 	if controls_enabled and _knock_timer <= 0.0 and not is_stunned():
 		dir = Input.get_axis("move_left", "move_right")
 
 	# Block: hold on the ground. Blocking stops jumping, dashing and attacking.
-	_blocking = can_block and controls_enabled and not is_stunned() and is_on_floor() and not _dashing and (Input.is_action_pressed("block") or Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT))
+	_blocking = can_block and _has("block") and controls_enabled and not is_stunned() and is_on_floor() and not _dashing and (Input.is_action_pressed("block") or Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT))
+	_block_time = _block_time + delta if _blocking else 0.0
 	self_modulate = Color(0.7, 0.85, 1.0) if _blocking else Color.WHITE
 
 	# Dash: a short fast burst with no gravity. Dashing is invulnerable (see take_damage).
@@ -101,14 +116,14 @@ func _physics_process(delta: float) -> void:
 		if _dash_time <= 0.0:
 			_dashing = false
 			velocity.x *= 0.4
-	elif can_dash and controls_enabled and not is_stunned() and not _blocking and not is_hidden \
+	elif can_dash and _has("dash") and controls_enabled and not is_stunned() and not _blocking and not is_hidden \
 			and Input.is_action_just_pressed("dash") and _dash_cd <= 0.0:
 		_start_dash(dir)
 
 	# Jump with coyote time, input buffering and one extra jump in the air.
 	if is_on_floor():
 		_coyote = coyote_time
-		_air_jumps_left = max_air_jumps if can_double_jump else 0
+		_air_jumps_left = _max_air_jumps()
 	else:
 		_coyote -= delta
 	var jump_pressed := controls_enabled and not is_stunned() and (Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("move_up"))
@@ -122,6 +137,13 @@ func _physics_process(delta: float) -> void:
 			_buffer = 0.0
 			_coyote = 0.0
 			Sfx.play("jump")
+		elif _has("wall_jump") and not is_on_floor() and is_on_wall():
+			var wall_n := get_wall_normal()
+			velocity.y = jump_velocity * 0.9
+			velocity.x = wall_n.x * wall_jump_push
+			facing = 1 if wall_n.x > 0.0 else -1
+			_buffer = 0.0
+			Sfx.play("jump")
 		elif _air_jumps_left > 0:
 			velocity.y = double_jump_velocity
 			_air_jumps_left -= 1
@@ -130,6 +152,13 @@ func _physics_process(delta: float) -> void:
 	var jump_released := Input.is_action_just_released("jump") or Input.is_action_just_released("move_up")
 	if jump_released and velocity.y < 0.0:
 		velocity.y *= jump_cut_multiplier
+
+	# Air dive: attack while in the air and holding DOWN to plunge onto the ground.
+	if _has("air_dive") and controls_enabled and not is_on_floor() and not _dashing and not _diving \
+			and Input.is_action_just_pressed("attack") and Input.is_action_pressed("move_down"):
+		_diving = true
+		velocity.x = 0.0
+		Sfx.play("swing")
 
 	# Horizontal movement (the dash sets its own velocity above).
 	if _dashing:
@@ -155,7 +184,7 @@ func _physics_process(delta: float) -> void:
 		swoosh.scale.x = float(facing)
 
 	# Attack.
-	if can_attack and controls_enabled and not is_stunned() and not _blocking and not _dashing and (Input.is_action_just_pressed("attack") or _mouse_attack) and _attack_cd <= 0.0:
+	if can_attack and controls_enabled and not is_stunned() and not _blocking and not _dashing and not _diving and (Input.is_action_just_pressed("attack") or _mouse_attack) and _attack_cd <= 0.0:
 		_start_attack()
 	_attack_cd -= delta
 	if _attack_time > 0.0:
@@ -170,6 +199,9 @@ func _physics_process(delta: float) -> void:
 	if not velocity.is_finite():
 		velocity = Vector2.ZERO
 	move_and_slide()
+	if _diving and is_on_floor():
+		_diving = false
+		_land_slam()
 	_update_animation()
 
 
@@ -190,6 +222,8 @@ func take_damage(amount: int, from_position: Vector2 = Vector2.INF, knockback: V
 	if from_position != Vector2.INF and amount > 0 and not is_dead and not invincible and not is_hidden and is_blocking_from(from_position):
 		Sfx.play("block")
 		shake_camera(3.0, 0.1)
+		if _has("counter") and _block_time < 0.25:
+			_counter_t = 0.6
 		return false
 	return super.take_damage(amount, from_position, knockback, source)
 
@@ -208,6 +242,16 @@ func _start_dash(dir: float) -> void:
 
 
 func _start_attack() -> void:
+	var chained := _has("combo") and _combo_window > 0.0
+	_combo_step = (_combo_step + 1) % 3 if chained else 0
+	_combo_window = combo_window_time if _has("combo") else 0.0
+	var dmg := attack_damage
+	if _combo_step == 2:
+		dmg += 1
+	if _counter_t > 0.0:
+		dmg *= 2
+		_counter_t = 0.0
+	_current_damage = dmg
 	_attack_time = attack_duration
 	_attack_cd = attack_cooldown
 	_hit_this_swing.clear()
@@ -216,13 +260,38 @@ func _start_attack() -> void:
 	Sfx.play("swing")
 
 
+## Max extra jumps in the air: double jump, plus one more with triple jump.
+func _max_air_jumps() -> int:
+	var n := 0
+	if can_double_jump and _has("double_jump"):
+		n = max_air_jumps
+	if _has("triple_jump"):
+		n += 1
+	return n
+
+
+func _has(ability: String) -> bool:
+	return GameState.has_ability(ability)
+
+
+## Air dive landing: a short ground shockwave that hits everything next to CT.
+func _land_slam() -> void:
+	_current_damage = 2
+	_attack_time = 0.2
+	_hit_this_swing.clear()
+	if swoosh:
+		swoosh.visible = true
+	shake_camera(6.0, 0.2)
+	Sfx.play("boom")
+
+
 func _apply_attack_hits() -> void:
 	for body in attack_area.get_overlapping_bodies():
 		if body in _hit_this_swing:
 			continue
 		if body.has_method("take_hit"):
 			_hit_this_swing.append(body)
-			body.call("take_hit", attack_damage, global_position, self, "melee")
+			body.call("take_hit", _current_damage, global_position, self, "melee")
 
 
 func _update_animation() -> void:

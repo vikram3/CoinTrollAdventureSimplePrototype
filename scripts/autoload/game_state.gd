@@ -3,6 +3,7 @@ extends Node
 ## Autoloaded as "GameState".
 
 signal coins_changed(value: int)
+signal ability_unlocked(ability: String)
 
 const SAVE_PATH := "user://coin_troll_levels.cfg"
 const MAIN_MENU_SCENE := "res://scenes/ui/main_menu.tscn"
@@ -17,6 +18,8 @@ var cinematic_next_level: int = 0
 var show_end_card: bool = false
 var coin_streak: int = 0
 var difficulty: int = 1
+## Moves CT has learned. Chapter 1 starts with none; the Chapter 2 tutorial and later levels grant them.
+var abilities: Dictionary = {}
 
 enum Difficulty { EASY, MEDIUM, HARD }
 const DIFFICULTY_NAMES := ["Easy", "Medium", "Hard"]
@@ -27,6 +30,19 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_ensure_input_actions()
 	load_progress()
+
+
+# --- Abilities -------------------------------------------------------------
+
+func has_ability(ability: String) -> bool:
+	return abilities.has(ability)
+
+
+func unlock_ability(ability: String) -> void:
+	if abilities.has(ability):
+		return
+	abilities[ability] = true
+	ability_unlocked.emit(ability)
 
 
 # --- Coins -----------------------------------------------------------------
