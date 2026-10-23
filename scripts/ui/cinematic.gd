@@ -1,6 +1,6 @@
 extends Control
 ## Plays a cinematic between levels: still panels with speech, a slow
-## camera push and a fade. Space/Enter advances a line, Esc skips.
+## camera push and a fade. Space/Enter advances a line. Esc or the SKIP button skips.
 
 @onready var background: ColorRect = %Background
 @onready var title_label: Label = %TitleLabel
@@ -35,7 +35,32 @@ func _ready() -> void:
 		_finish.call_deferred()
 		return
 	title_label.text = str(data.get("title", ""))
+	_add_skip_button()
 	_run(data)
+
+
+## On-screen SKIP button for touch and mouse players (Esc / pause also skip).
+func _add_skip_button() -> void:
+	var skip := Button.new()
+	skip.name = "SkipButton"
+	skip.text = "SKIP >>"
+	skip.focus_mode = Control.FOCUS_NONE
+	skip.custom_minimum_size = Vector2(170, 64)
+	skip.add_theme_font_size_override("font_size", 26)
+	skip.anchor_left = 1.0
+	skip.anchor_right = 1.0
+	skip.offset_left = -190.0
+	skip.offset_right = -20.0
+	skip.offset_top = 20.0
+	skip.offset_bottom = 84.0
+	skip.pressed.connect(_on_skip_pressed)
+	add_child(skip)
+	skip.z_index = 10
+
+
+func _on_skip_pressed() -> void:
+	_skip = true
+	_advance = true
 
 
 func _unhandled_input(event: InputEvent) -> void:
