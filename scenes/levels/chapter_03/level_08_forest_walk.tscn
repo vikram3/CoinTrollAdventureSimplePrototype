@@ -282,22 +282,22 @@ leash_distance = 280.0
 [node name="HideSpot1" parent="Hazards" instance=ExtResource("14_r")]
 position = Vector2(1200, 350)
 size = Vector2(110, 100)
-hint = "Hold DOWN to hide!"
+hint = "Get inside to hide!"
 
 [node name="HideSpot2" parent="Hazards" instance=ExtResource("14_r")]
 position = Vector2(3050, 350)
 size = Vector2(110, 100)
-hint = "Hold DOWN to hide!"
+hint = "Get inside to hide!"
 
 [node name="HideSpot3" parent="Hazards" instance=ExtResource("14_r")]
 position = Vector2(5000, 350)
 size = Vector2(110, 100)
-hint = "Hold DOWN to hide!"
+hint = "Get inside to hide!"
 
 [node name="HideSpot4" parent="Hazards" instance=ExtResource("14_r")]
 position = Vector2(6700, 350)
 size = Vector2(110, 100)
-hint = "Hold DOWN to hide!"
+hint = "Get inside to hide!"
 
 [node name="GateGoal" parent="Goals" instance=ExtResource("10_r")]
 position = Vector2(7620, 352)

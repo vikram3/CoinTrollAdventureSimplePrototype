@@ -302,12 +302,12 @@ lifetime = 10.0
 [node name="HideSpot1" parent="Hazards" instance=ExtResource("14_r")]
 position = Vector2(3000, 350)
 size = Vector2(110, 100)
-hint = "Hold DOWN to hide!"
+hint = "Get inside to hide!"
 
 [node name="HideSpot2" parent="Hazards" instance=ExtResource("14_r")]
 position = Vector2(6000, 350)
 size = Vector2(110, 100)
-hint = "Hold DOWN to hide!"
+hint = "Get inside to hide!"
 
 [node name="GateGoal" parent="Goals" instance=ExtResource("10_r")]
 position = Vector2(6820, 352)

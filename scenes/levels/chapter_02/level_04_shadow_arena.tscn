@@ -322,7 +322,7 @@ patrol_distance = 120.0
 [node name="HideSpot1" parent="Hazards" instance=ExtResource("14_r")]
 position = Vector2(3900, 350)
 size = Vector2(110, 100)
-hint = "Hold DOWN to hide!"
+hint = "Get inside to hide!"
 
 [node name="Emitter1" parent="." instance=ExtResource("17_r")]
 position = Vector2(2300, 360)

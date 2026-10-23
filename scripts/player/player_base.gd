@@ -196,9 +196,16 @@ func _tick_timers(delta: float) -> void:
 			sprite.modulate.a = 1.0
 
 
-## Hold DOWN inside a hiding spot to hide. Hidden CT stays still.
+## CT hides automatically whenever his centre is inside a hiding spot. No button needed.
 func update_hiding() -> void:
-	var want: bool = can_hide and controls_enabled and not is_dead and is_on_floor() and Input.is_action_pressed("move_down")
+	var in_spot := false
+	if not is_dead:
+		for spot in get_tree().get_nodes_in_group("hide_spot"):
+			if spot.has_method("contains_point") and spot.call("contains_point", global_position):
+				in_spot = true
+				break
+	can_hide = in_spot
+	var want: bool = in_spot and not is_dead
 	if want != is_hidden:
 		is_hidden = want
 		sprite.modulate.a = 0.35 if is_hidden else 1.0

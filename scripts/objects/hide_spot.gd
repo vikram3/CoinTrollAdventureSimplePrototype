@@ -1,13 +1,13 @@
 class_name HideSpot
 extends Area2D
-## A bush or crate CT can hide in. Stand with his centre inside it and hold DOWN (or HIDE on touch).
+## A bush or crate CT can hide in. CT hides automatically while his centre is inside it.
 ## Hidden CT is ignored by enemies and can't be hurt. While CT is inside, the bush is solid for skulls.
 
 ## Physics layer used by occupied bushes. Skulls collide with it; CT does not.
 const BUSH_BLOCK_LAYER := 16
 
 @export var size: Vector2 = Vector2(120, 110)
-@export var hint: String = "Hold DOWN to hide!"
+@export var hint: String = "Get inside to hide!"
 
 ## True while CT is hiding inside this bush.
 var occupied: bool = false

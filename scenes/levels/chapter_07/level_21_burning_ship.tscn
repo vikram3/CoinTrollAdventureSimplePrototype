@@ -211,7 +211,7 @@ show_sprite = true
 [node name="HideSpot1" parent="Hazards" instance=ExtResource("16_r")]
 position = Vector2(1800, 345)
 size = Vector2(120, 110)
-hint = "Hold DOWN to hide!"
+hint = "Get inside to hide!"
 
 [node name="Bush1" type="Sprite2D" parent="Decor"]
 position = Vector2(1800, 345)
@@ -221,7 +221,7 @@ scale = Vector2(1.25, 1.1458)
 [node name="HideSpot2" parent="Hazards" instance=ExtResource("16_r")]
 position = Vector2(4900, 350)
 size = Vector2(110, 100)
-hint = "Hold DOWN to hide!"
+hint = "Get inside to hide!"
 
 [node name="Bush2" type="Sprite2D" parent="Decor"]
 position = Vector2(4900, 350)
