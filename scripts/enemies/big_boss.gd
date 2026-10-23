@@ -77,7 +77,7 @@ func _enemy_process(delta: float) -> void:
 	apply_gravity(delta)
 	_timer -= delta
 	_watch_airborne(delta)
-	if global_position.y > 1600.0:
+	if global_position.y > 1600.0 or ((state == State.JUMP or state == State.FALL) and global_position.y > _spawn_position.y + 600.0):
 		_respawn()
 		return
 	var target := get_target()
@@ -196,6 +196,9 @@ func _teleport_onto(target: Node2D) -> void:
 		side = 1.0
 	var land_x := clampf(target.global_position.x + side * 40.0, arena_min_x, arena_max_x)
 	var land_y := _goal_y(target)
+	if not _has_floor_at(land_x, land_y):
+		_teleport_cd = 1.0
+		return
 	var dy := land_y - global_position.y
 	var rise := clampf(maxf(120.0, 60.0 - dy), 120.0, 260.0)
 	var vy := -sqrt(2.0 * gravity * rise)
@@ -213,6 +216,14 @@ func _teleport_onto(target: Node2D) -> void:
 	if warning:
 		warning.visible = false
 	Sfx.play("swing")
+
+
+## True when there is solid ground under x near y (so a leap never lands in a pit or in the air).
+func _has_floor_at(x: float, y: float) -> bool:
+	var space := get_world_2d().direct_space_state
+	var q := PhysicsRayQueryParameters2D.create(Vector2(x, y - 200.0), Vector2(x, y + 160.0), 1)
+	q.exclude = [get_rid()]
+	return not space.intersect_ray(q).is_empty()
 
 
 func _begin_windup(target: Node2D) -> void:
