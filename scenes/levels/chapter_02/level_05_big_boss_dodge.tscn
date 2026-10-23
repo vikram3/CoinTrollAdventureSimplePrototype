@@ -34,7 +34,7 @@ trigger_line = "Big Boss is coming. Keep dodging, don't let him catch you!"
 objective_type = 4
 survive_seconds = 60.0
 objective_text_override = "Dodge Big Boss for 60 seconds"
-level_bounds = Rect2(0, -400, 7400, 1120)
+level_bounds = Rect2(0, -400, 9800, 1120)
 kill_y = 900
 
 
@@ -60,7 +60,7 @@ size = Vector2(40, 1400)
 tile_texture = ExtResource("5_r")
 
 [node name="WallRight" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(7420, 300.0)
+position = Vector2(9820, 300.0)
 size = Vector2(40, 1400)
 tile_texture = ExtResource("5_r")
 
@@ -85,8 +85,18 @@ size = Vector2(1040, 420)
 tile_texture = ExtResource("6_r")
 
 [node name="Ground5" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(6940.0, 610.0)
-size = Vector2(920, 420)
+position = Vector2(6890.0, 610.0)
+size = Vector2(820, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground6" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(8020.0, 610.0)
+size = Vector2(960, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground7" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(9270.0, 610.0)
+size = Vector2(1060, 420)
 tile_texture = ExtResource("6_r")
 
 [node name="PitA" parent="Hazards" instance=ExtResource("9_r")]
@@ -104,6 +114,14 @@ size = Vector2(260, 400)
 [node name="PitD" parent="Hazards" instance=ExtResource("9_r")]
 position = Vector2(6340.0, 600)
 size = Vector2(280, 400)
+
+[node name="PitE" parent="Hazards" instance=ExtResource("9_r")]
+position = Vector2(7420.0, 600)
+size = Vector2(240, 400)
+
+[node name="PitF" parent="Hazards" instance=ExtResource("9_r")]
+position = Vector2(8620.0, 600)
+size = Vector2(240, 400)
 
 [node name="LedgeA" parent="Environment" instance=ExtResource("4_r")]
 position = Vector2(1900.0, 312)
@@ -138,6 +156,21 @@ tile_texture = ExtResource("7_r")
 [node name="LedgeG" parent="Environment" instance=ExtResource("4_r")]
 position = Vector2(5890.0, 232)
 size = Vector2(180, 24)
+tile_texture = ExtResource("7_r")
+
+[node name="LedgeH" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(7800.0, 312)
+size = Vector2(200, 24)
+tile_texture = ExtResource("7_r")
+
+[node name="LedgeI" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(8390.0, 232)
+size = Vector2(180, 24)
+tile_texture = ExtResource("7_r")
+
+[node name="LedgeJ" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(9100.0, 312)
+size = Vector2(200, 24)
 tile_texture = ExtResource("7_r")
 
 [node name="CoinA1" parent="Coins" instance=ExtResource("8_r")]
@@ -254,10 +287,70 @@ position = Vector2(6710, 360)
 [node name="CoinI6" parent="Coins" instance=ExtResource("8_r")]
 position = Vector2(6750, 360)
 
+[node name="CoinJ1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(7600, 360)
+
+[node name="CoinJ2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(7640, 360)
+
+[node name="CoinJ3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(7680, 360)
+
+[node name="CoinJ4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(7720, 360)
+
+[node name="CoinJ5" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(7760, 360)
+
+[node name="CoinK1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(7760, 250)
+
+[node name="CoinK2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(7800, 250)
+
+[node name="CoinK3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(7840, 250)
+
+[node name="CoinL1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(8330, 160)
+
+[node name="CoinL2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(8370, 160)
+
+[node name="CoinL3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(8410, 160)
+
+[node name="CoinM1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(9020, 250)
+
+[node name="CoinM2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(9060, 250)
+
+[node name="CoinM3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(9100, 250)
+
+[node name="CoinN1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(9400, 360)
+
+[node name="CoinN2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(9440, 360)
+
+[node name="CoinN3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(9480, 360)
+
+[node name="CoinN4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(9520, 360)
+
+[node name="CoinN5" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(9560, 360)
+
+[node name="CoinN6" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(9600, 360)
+
 [node name="BigBoss1" parent="Enemies" instance=ExtResource("25_r")]
 position = Vector2(900, 320)
 arena_min_x = 0.0
-arena_max_x = 7200
+arena_max_x = 9600
 telegraph_time = 0.45
 preferred_distance = 150.0
 slam_chance = 0.5
@@ -267,7 +360,7 @@ walk_speed = 230.0
 recover_time = 0.5
 illusion_chance = 0.25
 teleport_distance = 650.0
-teleport_cooldown = 5.0
+teleport_cooldown = 3.0
 
 [node name="Skull1" parent="Enemies" instance=ExtResource("12_r")]
 position = Vector2(1100, 370)
@@ -286,6 +379,15 @@ leash_distance = 260.0
 position = Vector2(5600, 370)
 patrol_distance = 120.0
 
+[node name="Skull4" parent="Enemies" instance=ExtResource("12_r")]
+position = Vector2(8000, 370)
+patrol_distance = 120.0
+
+[node name="Elite2" parent="Enemies" instance=ExtResource("13_r")]
+position = Vector2(9400, 368)
+detect_range = 300.0
+leash_distance = 260.0
+
 [node name="HideSpot1" parent="Hazards" instance=ExtResource("14_r")]
 position = Vector2(1300, 350)
 size = Vector2(110, 100)
@@ -298,6 +400,11 @@ hint = "Hold DOWN to hide!"
 
 [node name="HideSpot3" parent="Hazards" instance=ExtResource("14_r")]
 position = Vector2(6080, 350)
+size = Vector2(110, 100)
+hint = "Hold DOWN to hide!"
+
+[node name="HideSpot4" parent="Hazards" instance=ExtResource("14_r")]
+position = Vector2(8900, 350)
 size = Vector2(110, 100)
 hint = "Hold DOWN to hide!"
 
@@ -325,10 +432,23 @@ lifetime = 10.0
 position = Vector2(5000, 370)
 lifetime = 10.0
 
+[node name="Stone3" parent="Hazards" instance=ExtResource("15_r")]
+position = Vector2(9300, 0)
+texture = ExtResource("16_r")
+trigger_size = Vector2(180, 440)
+shake_time = 0.45
+hazard_name = "stone"
+debris_color = Color(0.8, 0.65, 0.4, 1)
+
 [node name="Emitter1" parent="." instance=ExtResource("17_r")]
 position = Vector2(3500, 360)
 interval = 2.6
 first_delay = 1.5
+
+[node name="Emitter2" parent="." instance=ExtResource("17_r")]
+position = Vector2(8200, 360)
+interval = 3.0
+first_delay = 2.0
 
 [node name="Checkpoints" type="Node2D" parent="."]
 
@@ -343,6 +463,14 @@ position = Vector2(3700, 360)
 [node name="Checkpoint3" type="Area2D" parent="Checkpoints"]
 script = ExtResource("24_r")
 position = Vector2(5300, 360)
+
+[node name="Checkpoint4" type="Area2D" parent="Checkpoints"]
+script = ExtResource("24_r")
+position = Vector2(7600, 360)
+
+[node name="Checkpoint5" type="Area2D" parent="Checkpoints"]
+script = ExtResource("24_r")
+position = Vector2(9100, 360)
 
 [node name="Player" parent="." instance=ExtResource("19_r")]
 position = Vector2(150, 360)
