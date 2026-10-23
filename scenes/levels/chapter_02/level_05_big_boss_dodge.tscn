@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=26 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_r"]
 [ext_resource type="PackedScene" path="res://scenes/environment/background.tscn" id="2_r"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="22_r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="23_r"]
 [ext_resource type="Script" path="res://scripts/objects/checkpoint.gd" id="24_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/big_boss.tscn" id="25_r"]
 
 [node name="Level05" type="Node2D"]
 script = ExtResource("1_r")
@@ -252,7 +253,7 @@ position = Vector2(6710, 360)
 [node name="CoinI6" parent="Coins" instance=ExtResource("8_r")]
 position = Vector2(6750, 360)
 
-[node name="BigBoss1" parent="Enemies" instance=ExtResource("big_boss")]
+[node name="BigBoss1" parent="Enemies" instance=ExtResource("25_r")]
 position = Vector2(900, 320)
 arena_min_x = 0.0
 arena_max_x = 7200
