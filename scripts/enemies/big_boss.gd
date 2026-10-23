@@ -33,6 +33,8 @@ enum State { IDLE, WINDUP, SLASH, JUMP, FALL, RECOVER, STAGGER, STORY, DROP }
 @export var teleport_distance: float = 0.0
 @export var teleport_cooldown: float = 4.0
 var _teleport_cd: float = 0.0
+var _stuck_pos: Vector2 = Vector2.ZERO
+var _stuck_time: float = 0.0
 @export_group("Lines")
 @export var lines_stagger: PackedStringArray = ["Grrh... lucky shot!", "What?! How?", "You'll pay for that!"]
 
@@ -83,6 +85,19 @@ func _enemy_process(delta: float) -> void:
 	var target := get_target()
 	tint = Color.WHITE
 	_teleport_cd = maxf(_teleport_cd - delta, 0.0)
+	# Stuck far from CT (wedged under a ledge or against a wall): reappear above CT after 2 s without movement.
+	if target and teleport_distance > 0.0 and absf(target.global_position.x - global_position.x) > teleport_distance:
+		if global_position.distance_to(_stuck_pos) > 40.0:
+			_stuck_pos = global_position
+			_stuck_time = 0.0
+		else:
+			_stuck_time += delta
+			if _stuck_time > 2.0:
+				_stuck_time = 0.0
+				_reappear_above(target)
+				return
+	else:
+		_stuck_time = 0.0
 	match state:
 		State.DROP:
 			velocity.x = 0.0
@@ -191,6 +206,13 @@ func _respawn() -> void:
 ## The landing spot shows the slam marker, and the landing hits like a slam.
 func _teleport_onto(target: Node2D) -> void:
 	var from_x := global_position.x
+	# No leap from under a ledge or ceiling: he would bump his head and stall in the air.
+	var space := get_world_2d().direct_space_state
+	var up := PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0.0, -160.0), 1)
+	up.exclude = [get_rid()]
+	if not space.intersect_ray(up).is_empty():
+		_teleport_cd = 0.5
+		return
 	var side := signf(from_x - target.global_position.x)
 	if side == 0.0:
 		side = 1.0
@@ -200,12 +222,11 @@ func _teleport_onto(target: Node2D) -> void:
 		_teleport_cd = 1.0
 		return
 	var dy := land_y - global_position.y
-	var rise := clampf(maxf(120.0, 60.0 - dy), 120.0, 260.0)
-	var vy := -sqrt(2.0 * gravity * rise)
-	var disc := maxf(vy * vy + 2.0 * gravity * dy, 0.0)
-	var flight := (-vy + sqrt(disc)) / gravity
-	velocity.y = vy
-	velocity.x = clampf((land_x - from_x) / maxf(flight, 0.2), -1100.0, 1100.0)
+	# Flight time grows with distance so a far leap still reaches CT (max ~1.6 s airborne).
+	var dx := land_x - from_x
+	var flight := clampf(absf(dx) / 1200.0, 1.0, 1.6)
+	velocity.x = clampf(dx / flight, -1600.0, 1600.0)
+	velocity.y = (dy - 0.5 * gravity * flight * flight) / flight
 	state = State.JUMP
 	_teleport_cd = teleport_cooldown
 	_slam_target_x = land_x
@@ -224,6 +245,19 @@ func _has_floor_at(x: float, y: float) -> bool:
 	var q := PhysicsRayQueryParameters2D.create(Vector2(x, y - 200.0), Vector2(x, y + 160.0), 1)
 	q.exclude = [get_rid()]
 	return not space.intersect_ray(q).is_empty()
+
+
+## Puts Big Boss back in play above CT's side and lets him drop in.
+func _reappear_above(target: Node2D) -> void:
+	var side := signf(global_position.x - target.global_position.x)
+	if side == 0.0:
+		side = 1.0
+	global_position = Vector2(clampf(target.global_position.x + side * 120.0, arena_min_x, arena_max_x),
+			_goal_y(target) - 160.0)
+	velocity = Vector2.ZERO
+	_air_time = 0.0
+	_teleport_cd = teleport_cooldown
+	state = State.FALL
 
 
 func _begin_windup(target: Node2D) -> void:
