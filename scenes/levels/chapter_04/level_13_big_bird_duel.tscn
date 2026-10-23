@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=35 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_r"]
 [ext_resource type="PackedScene" path="res://scenes/environment/background.tscn" id="2_r"]
@@ -6,19 +6,34 @@
 [ext_resource type="PackedScene" path="res://scenes/environment/block.tscn" id="4_r"]
 [ext_resource type="Texture2D" path="res://assets/environment/wall_stone.png" id="5_r"]
 [ext_resource type="Texture2D" path="res://assets/environment/ground_deck.png" id="6_r"]
-[ext_resource type="PackedScene" path="res://scenes/objects/restart_zone.tscn" id="7_r"]
-[ext_resource type="Texture2D" path="res://assets/environment/throne.png" id="8_r"]
-[ext_resource type="Texture2D" path="res://assets/environment/crowd.png" id="9_r"]
-[ext_resource type="PackedScene" path="res://scenes/npc/commenter.tscn" id="10_r"]
-[ext_resource type="Texture2D" path="res://assets/npc/queen.png" id="11_r"]
-[ext_resource type="Texture2D" path="res://assets/characters/CT/ct_idle.png" id="12_r"]
-[ext_resource type="Texture2D" path="res://assets/npc/lala.png" id="13_r"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/big_bird.tscn" id="14_r"]
-[ext_resource type="PackedScene" path="res://scenes/player/player_alex.tscn" id="15_r"]
-[ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="16_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="17_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="18_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="19_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ledge_stone.png" id="7_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="8_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/restart_zone.tscn" id="9_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/goal.tscn" id="10_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/chest.png" id="11_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/skull.tscn" id="12_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/elite_skull.tscn" id="13_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hide_spot.tscn" id="14_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/falling_hazard.tscn" id="15_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/stone.png" id="16_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazard_emitter.tscn" id="17_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/sliding_crate.tscn" id="18_r"]
+[ext_resource type="PackedScene" path="res://scenes/player/player_ct.tscn" id="19_r"]
+[ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="20_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="21_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="22_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="23_r"]
+[ext_resource type="Script" path="res://scripts/objects/checkpoint.gd" id="24_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ledge_wood.png" id="25_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/throne.png" id="26_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/crowd.png" id="27_r"]
+[ext_resource type="PackedScene" path="res://scenes/npc/commenter.tscn" id="28_r"]
+[ext_resource type="Texture2D" path="res://assets/npc/queen.png" id="29_r"]
+[ext_resource type="Texture2D" path="res://assets/characters/CT/ct_idle.png" id="30_r"]
+[ext_resource type="Texture2D" path="res://assets/npc/lala.png" id="31_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/big_bird.tscn" id="32_r"]
+[ext_resource type="PackedScene" path="res://scenes/player/player_alex.tscn" id="33_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/restart_zone.tscn" id="34_r"]
 
 [node name="Level13" type="Node2D"]
 script = ExtResource("1_r")
@@ -26,12 +41,11 @@ level_number = 13
 level_name = "Big Bird Duel"
 trigger_line = "Big Bird went straight for projectiles, dodge and get close!"
 objective_type = 5
-coin_target = 0
-survive_seconds = 0.0
 defeat_target = 1
 objective_text_override = "Defeat Big Bird"
-level_bounds = Rect2(1200, -600, 2300, 1220)
-kill_y = 1400.0
+level_bounds = Rect2(1200, -600, 3000, 1220)
+kill_y = 1400
+
 
 [node name="Background" parent="." instance=ExtResource("2_r")]
 texture = ExtResource("3_r")
@@ -47,8 +61,6 @@ parallax = 0.25
 
 [node name="Hazards" type="Node2D" parent="."]
 
-[node name="NPCs" type="Node2D" parent="."]
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Wall1" parent="Environment" instance=ExtResource("4_r")]
@@ -57,83 +69,153 @@ size = Vector2(64, 1420)
 tile_texture = ExtResource("5_r")
 
 [node name="Wall2" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(3500, 10)
+position = Vector2(4200, 10)
 size = Vector2(64, 1420)
 tile_texture = ExtResource("5_r")
 
 [node name="Ground1" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(1660, 510)
-size = Vector2(920, 420)
+position = Vector2(1750.0, 510.0)
+size = Vector2(1100, 420)
 tile_texture = ExtResource("6_r")
 
 [node name="Ground2" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(2890, 510)
-size = Vector2(1220, 420)
+position = Vector2(3350.0, 510.0)
+size = Vector2(1700, 420)
 tile_texture = ExtResource("6_r")
 
-[node name="FallRestartZone1" parent="Hazards" instance=ExtResource("7_r")]
-position = Vector2(2200, 1000)
-size = Vector2(700, 400)
+[node name="FallRestartZone1" parent="Hazards" instance=ExtResource("34_r")]
+position = Vector2(2400, 1000)
+size = Vector2(200, 400)
 message = "Whoa!"
 
+[node name="Ledge1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(2840.0, 202)
+size = Vector2(180, 24)
+tile_texture = ExtResource("25_r")
+one_way = true
+
+[node name="Ledge2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(3440.0, 182)
+size = Vector2(180, 24)
+tile_texture = ExtResource("25_r")
+one_way = true
+
+[node name="Ledge3" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(3790.0, 232)
+size = Vector2(180, 24)
+tile_texture = ExtResource("25_r")
+one_way = true
+
+[node name="Pillar1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(3060, 355)
+size = Vector2(56, 110)
+tile_texture = ExtResource("5_r")
+
+[node name="Pillar2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(4040, 355)
+size = Vector2(56, 110)
+tile_texture = ExtResource("5_r")
+
+[node name="CoinA1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2740, 140)
+
+[node name="CoinA2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2780, 140)
+
+[node name="CoinA3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2820, 140)
+
+[node name="CoinA4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2860, 140)
+
+[node name="CoinB1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3340, 110)
+
+[node name="CoinB2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3380, 110)
+
+[node name="CoinB3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3420, 110)
+
+[node name="CoinB4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3460, 110)
+
+[node name="CoinC1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3690, 160)
+
+[node name="CoinC2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3730, 160)
+
+[node name="CoinC3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3770, 160)
+
+[node name="CoinC4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3810, 160)
+
 [node name="Throne1" type="Sprite2D" parent="Decor"]
-position = Vector2(1300, 235)
-texture = ExtResource("8_r")
+position = Vector2(1350, 235)
+texture = ExtResource("26_r")
 modulate = Color(0.85, 0.85, 0.95, 1)
 
 [node name="Crowd1" type="Sprite2D" parent="Decor"]
 position = Vector2(1750, 255)
-texture = ExtResource("9_r")
+texture = ExtResource("27_r")
 modulate = Color(0.65, 0.65, 0.8, 0.9)
 
 [node name="Crowd2" type="Sprite2D" parent="Decor"]
-position = Vector2(3000, 255)
-texture = ExtResource("9_r")
+position = Vector2(3300, 255)
+texture = ExtResource("27_r")
 modulate = Color(0.65, 0.65, 0.8, 0.9)
 
-[node name="Queen1" parent="Decor" instance=ExtResource("10_r")]
+[node name="Queen1" parent="Decor" instance=ExtResource("28_r")]
 position = Vector2(1300, 205)
-texture = ExtResource("11_r")
+texture = ExtResource("29_r")
 lines = PackedStringArray("Show me your shield, Alex.", "Close the distance!")
 bubble_height = 70.0
 first_delay = 6.0
 
-[node name="CT1" parent="Decor" instance=ExtResource("10_r")]
+[node name="CT1" parent="Decor" instance=ExtResource("28_r")]
 position = Vector2(1620, 268)
-texture = ExtResource("12_r")
+texture = ExtResource("30_r")
 lines = PackedStringArray("Get close, Alex!", "Shield! SHIELD!", "I can't watch... okay I'm watching.")
 first_delay = 3.0
 interval_min = 5.0
 interval_max = 8.0
 
-[node name="Lala1" parent="Decor" instance=ExtResource("10_r")]
+[node name="Lala1" parent="Decor" instance=ExtResource("28_r")]
 position = Vector2(1700, 268)
-texture = ExtResource("13_r")
+texture = ExtResource("31_r")
 lines = PackedStringArray("Up close he's helpless!", "Block the boomerang, then strike.")
 first_delay = 8.0
 interval_min = 7.0
 interval_max = 11.0
 
-[node name="BigBird1" parent="Enemies" instance=ExtResource("14_r")]
-position = Vector2(2600, 200)
-arena_min_x = 2330.0
-arena_max_x = 3440.0
+[node name="BigBird1" parent="Enemies" instance=ExtResource("32_r")]
+position = Vector2(3100, 200)
+arena_min_x = 2800.0
+arena_max_x = 3950.0
 
-[node name="Player" parent="." instance=ExtResource("15_r")]
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Checkpoint1" type="Area2D" parent="Checkpoints"]
+script = ExtResource("24_r")
+position = Vector2(1900, 260)
+
+[node name="Player" parent="." instance=ExtResource("33_r")]
 position = Vector2(1500, 260)
 
 [node name="TouchControls" type="CanvasLayer" parent="."]
 layer = 20
 
 [node name="TouchPad" type="Control" parent="TouchControls"]
-script = ExtResource("16_r")
+script = ExtResource("20_r")
 mode = "alex"
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="HUD" parent="." instance=ExtResource("17_r")]
+[node name="HUD" parent="." instance=ExtResource("21_r")]
 
-[node name="PauseMenu" parent="." instance=ExtResource("18_r")]
+[node name="PauseMenu" parent="." instance=ExtResource("22_r")]
 
-[node name="LevelComplete" parent="." instance=ExtResource("19_r")]
+[node name="LevelComplete" parent="." instance=ExtResource("23_r")]
