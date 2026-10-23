@@ -24,7 +24,7 @@ func _ready() -> void:
 func _build_layout() -> void:
 	for i in _pressed.size():
 		if _pressed[i]:
-			Input.action_release(str(_buttons[i]["action"]))
+			_drive_actions(str(_buttons[i]["action"]), false)
 	_buttons.clear()
 	_pressed.clear()
 	_owner_of.clear()
@@ -53,6 +53,9 @@ func _build_layout() -> void:
 			_add("attack", "HIT", Vector2(w - 250.0, h - 120.0), 72.0)
 			_add("jump", "JUMP", Vector2(w - 100.0, h - 120.0), 72.0)
 			_add("move_down", "HIDE", Vector2(w - 410.0, h - 120.0), 58.0)
+			_add("dash", "DASH", Vector2(w - 100.0, h - 270.0), 58.0)
+			_add("block", "BLOCK", Vector2(w - 250.0, h - 270.0), 58.0)
+			_add("move_down+attack", "DIVE", Vector2(w - 410.0, h - 270.0), 58.0)
 	queue_redraw()
 
 
@@ -74,12 +77,17 @@ func _set_button(i: int, down: bool) -> void:
 	if _pressed[i] == down:
 		return
 	_pressed[i] = down
-	var action: String = str(_buttons[i]["action"])
-	if down:
-		Input.action_press(action)
-	else:
-		Input.action_release(action)
+	_drive_actions(str(_buttons[i]["action"]), down)
 	queue_redraw()
+
+
+## An action string can name several actions joined by "+" (e.g. "move_down+attack" for the dive button).
+func _drive_actions(action_list: String, down: bool) -> void:
+	for action in action_list.split("+"):
+		if down:
+			Input.action_press(action)
+		else:
+			Input.action_release(action)
 
 
 func _input(event: InputEvent) -> void:
