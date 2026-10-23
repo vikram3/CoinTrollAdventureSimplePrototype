@@ -30,10 +30,10 @@
 script = ExtResource("1_r")
 level_number = 5
 level_name = "Rooftop Chase"
-trigger_line = "Big Boss is coming. Dodge him until Pink Girl arrives!"
+trigger_line = "Big Boss is coming. Keep dodging, don't let him catch you!"
 objective_type = 4
 survive_seconds = 60.0
-objective_text_override = "Dodge Big Boss until Pink Girl arrives"
+objective_text_override = "Dodge Big Boss for 60 seconds"
 level_bounds = Rect2(0, -400, 7400, 1120)
 kill_y = 900
 
@@ -266,6 +266,8 @@ idle_time_max = 0.6
 walk_speed = 230.0
 recover_time = 0.5
 illusion_chance = 0.25
+teleport_distance = 650.0
+teleport_cooldown = 5.0
 
 [node name="Skull1" parent="Enemies" instance=ExtResource("12_r")]
 position = Vector2(1100, 370)

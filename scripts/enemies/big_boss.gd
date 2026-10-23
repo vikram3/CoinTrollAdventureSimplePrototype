@@ -28,6 +28,11 @@ enum State { IDLE, WINDUP, SLASH, JUMP, FALL, RECOVER, STAGGER, STORY, DROP }
 ## Chance per attack that Big Boss leaves a fading illusion copy of himself behind.
 ## Cosmetic only for now: the copy never hits anything.
 @export var illusion_chance: float = 0.0
+## Teleport: when the target is this far away (px) in IDLE, Big Boss vanishes and drops onto the target.
+## 0 disables it.
+@export var teleport_distance: float = 0.0
+@export var teleport_cooldown: float = 4.0
+var _teleport_cd: float = 0.0
 @export_group("Lines")
 @export var lines_stagger: PackedStringArray = ["Grrh... lucky shot!", "What?! How?", "You'll pay for that!"]
 
@@ -77,6 +82,7 @@ func _enemy_process(delta: float) -> void:
 		return
 	var target := get_target()
 	tint = Color.WHITE
+	_teleport_cd = maxf(_teleport_cd - delta, 0.0)
 	match state:
 		State.DROP:
 			velocity.x = 0.0
@@ -99,6 +105,10 @@ func _enemy_process(delta: float) -> void:
 					velocity.x = move_toward(velocity.x, 0.0, 800.0 * delta)
 			else:
 				velocity.x = 0.0
+			if target and teleport_distance > 0.0 and _teleport_cd <= 0.0 and is_on_floor() \
+					and absf(target.global_position.x - global_position.x) > teleport_distance:
+				_teleport_onto(target)
+				return
 			if randf() < 0.002:
 				say_line(lines_idle, "idle")
 			if target and is_on_floor() and _goal_y(target) - global_position.y > 60.0:
@@ -175,6 +185,18 @@ func _respawn() -> void:
 	velocity = Vector2.ZERO
 	_air_time = 0.0
 	_to_idle()
+
+
+## Vanishes and reappears above the target, then falls onto them (the fall lands as a slam).
+func _teleport_onto(target: Node2D) -> void:
+	var x := clampf(target.global_position.x, arena_min_x, arena_max_x)
+	global_position = Vector2(x, _goal_y(target) - 200.0)
+	velocity = Vector2.ZERO
+	state = State.FALL
+	_teleport_cd = teleport_cooldown
+	if warning:
+		warning.visible = false
+	Sfx.play("warning")
 
 
 func _begin_windup(target: Node2D) -> void:
