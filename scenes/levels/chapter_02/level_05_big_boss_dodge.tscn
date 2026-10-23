@@ -30,9 +30,10 @@
 script = ExtResource("1_r")
 level_number = 5
 level_name = "Rooftop Chase"
-trigger_line = "Big Boss is coming. Keep moving, don't let him catch you!"
-objective_type = 1
-time_limit = 150.0
+trigger_line = "Big Boss is coming. Dodge him until Pink Girl arrives!"
+objective_type = 4
+survive_seconds = 60.0
+objective_text_override = "Dodge Big Boss until Pink Girl arrives"
 level_bounds = Rect2(0, -400, 7400, 1120)
 kill_y = 900
 
@@ -326,13 +327,6 @@ lifetime = 10.0
 position = Vector2(3500, 360)
 interval = 2.6
 first_delay = 1.5
-
-[node name="GateGoal" parent="Goals" instance=ExtResource("10_r")]
-position = Vector2(7000, 352)
-label_text = "THE ROOF EXIT"
-texture = ExtResource("11_r")
-sprite_scale = 2.0
-show_sprite = false
 
 [node name="Checkpoints" type="Node2D" parent="."]
 
