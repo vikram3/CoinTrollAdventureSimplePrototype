@@ -8,6 +8,9 @@ signal ability_unlocked(ability: String)
 const SAVE_PATH := "user://coin_troll_levels.cfg"
 const MAIN_MENU_SCENE := "res://scenes/ui/main_menu.tscn"
 const CINEMATIC_SCENE := "res://scenes/cinematics/cinematic.tscn"
+## TEMPORARY dev buttons (touch/mobile testing): "DEV: Skip level" in the pause menu and
+## "DEV: Unlock all levels" in the main menu. Set to false, or delete the buttons, before release.
+const DEV_TOOLS := true
 
 var current_level: int = 1
 var coins: int = 0
@@ -259,7 +262,7 @@ func _debug_toast(text: String) -> void:
 func debug_skip_level() -> void:
 	var level := get_tree().get_first_node_in_group("level") as Level
 	if level == null or level.finished:
-		_debug_toast("F3 only works inside a level")
+		_debug_toast("skip only works inside a level")
 		return
 	_debug_toast("skipping level %d" % current_level)
 	level.finished = true

@@ -12,6 +12,24 @@ func _ready() -> void:
 	resume_button.pressed.connect(resume)
 	restart_button.pressed.connect(_on_restart_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
+	if GameState.DEV_TOOLS:
+		_add_dev_skip_button()
+
+
+## TEMPORARY dev button: completes the current level right away (see GameState.DEV_TOOLS).
+func _add_dev_skip_button() -> void:
+	var skip := Button.new()
+	skip.name = "DevSkipButton"
+	skip.text = "DEV: Skip level"
+	skip.pressed.connect(_on_dev_skip_pressed)
+	var parent := resume_button.get_parent()
+	parent.add_child(skip)
+	parent.move_child(skip, resume_button.get_index() + 1)
+
+
+func _on_dev_skip_pressed() -> void:
+	resume()
+	GameState.debug_skip_level()
 
 
 func _unhandled_input(event: InputEvent) -> void:

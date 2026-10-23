@@ -49,7 +49,25 @@ func _ready() -> void:
 	main_buttons.add_child(_difficulty_button)
 	main_buttons.move_child(_difficulty_button, select_button.get_index())
 	_refresh_difficulty_button()
+	if GameState.DEV_TOOLS:
+		_add_dev_unlock_button()
 	continue_button.grab_focus()
+
+
+## TEMPORARY dev button: unlocks every level and rebuilds the menu (see GameState.DEV_TOOLS).
+func _add_dev_unlock_button() -> void:
+	var unlock := Button.new()
+	unlock.name = "DevUnlockButton"
+	unlock.text = "DEV: Unlock all levels"
+	unlock.pressed.connect(_on_dev_unlock_pressed)
+	main_buttons.add_child(unlock)
+	main_buttons.move_child(unlock, select_button.get_index())
+
+
+func _on_dev_unlock_pressed() -> void:
+	Sfx.play("select")
+	GameState.debug_unlock_all()
+	get_tree().reload_current_scene()
 
 
 func _unhandled_input(event: InputEvent) -> void:
