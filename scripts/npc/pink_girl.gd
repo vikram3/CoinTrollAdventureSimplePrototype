@@ -9,6 +9,10 @@ extends CharacterBody2D
 @export var attack_damage: int = 1
 @export var attack_interval: float = 1.1
 @export var block_duration: float = 1.1
+## Shield toss: when she blocks, she throws a friendly projectile back at Big Boss.
+@export var shield_throw_scene: PackedScene
+@export var shield_throw_damage: int = 2
+@export var shield_throw_cooldown: float = 1.5
 @export var gravity: float = 1900.0
 @export var min_x: float = -100000.0
 @export var max_x: float = 100000.0
@@ -25,6 +29,7 @@ var _attack_cd: float = 0.8
 var _hurt_timer: float = 0.0
 var _won: bool = false
 var _talk_cd: float = 0.0
+var _throw_cd: float = 0.0
 var _picker := SpeechPicker.new()
 
 @onready var sprite: Sprite2D = $Sprite
@@ -46,6 +51,7 @@ func _physics_process(delta: float) -> void:
 	_block_timer -= delta
 	_hurt_timer -= delta
 	_talk_cd -= delta
+	_throw_cd -= delta
 	var boss_alive := is_instance_valid(boss) and not boss.disabled
 	if _won or not boss_alive:
 		velocity.x = move_toward(velocity.x, 0.0, 1000.0 * delta)
@@ -91,6 +97,7 @@ func receive_attack(_damage: int, from_position: Vector2) -> bool:
 		Sfx.play("block")
 		if _talk_cd <= 0.0:
 			_say(_picker.pick("block", lines_block))
+		_throw_shield()
 		return true
 	_hurt_timer = 0.5
 	var dir := signf(global_position.x - from_position.x)
@@ -99,6 +106,23 @@ func receive_attack(_damage: int, from_position: Vector2) -> bool:
 	var tw := create_tween()
 	tw.tween_property(sprite, "modulate", Color.WHITE, 0.3)
 	return false
+
+
+## Shield toss: after a block, the shield flies back at Big Boss as a friendly shot.
+func _throw_shield() -> void:
+	if shield_throw_scene == null or _throw_cd > 0.0 or not is_instance_valid(boss):
+		return
+	_throw_cd = shield_throw_cooldown
+	var shot := shield_throw_scene.instantiate() as Projectile
+	if shot == null:
+		return
+	shot.hostile = false
+	shot.damage = shield_throw_damage
+	shot.shooter = self
+	shot.direction = (boss.global_position - global_position + Vector2(0.0, -40.0)).normalized()
+	shot.global_position = global_position + Vector2(0.0, -40.0)
+	get_parent().add_child(shot)
+	Sfx.play("swing")
 
 
 func _on_boss_defeated(_enemy: EnemyBase) -> void:

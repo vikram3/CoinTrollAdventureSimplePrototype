@@ -1,0 +1,347 @@
+[gd_scene load_steps=31 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/background.tscn" id="2_r"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/bg_forest.png" id="3_r"]
+[ext_resource type="PackedScene" path="res://scenes/environment/block.tscn" id="4_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/wall_stone.png" id="5_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ground_forest.png" id="6_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ledge_stone.png" id="7_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="8_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/restart_zone.tscn" id="9_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/goal.tscn" id="10_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/chest.png" id="11_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/skull.tscn" id="12_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/elite_skull.tscn" id="13_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hide_spot.tscn" id="14_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/falling_hazard.tscn" id="15_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/stone.png" id="16_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazard_emitter.tscn" id="17_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/sliding_crate.tscn" id="18_r"]
+[ext_resource type="PackedScene" path="res://scenes/player/player_ct.tscn" id="19_r"]
+[ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="20_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="21_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="22_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="23_r"]
+[ext_resource type="Script" path="res://scripts/objects/checkpoint.gd" id="24_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/horn.tscn" id="25_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/barreldugo.tscn" id="26_r"]
+[ext_resource type="PackedScene" path="res://scenes/npc/felix.tscn" id="27_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/chaser.tscn" id="28_r"]
+[ext_resource type="Texture2D" path="res://assets/enemies/forest_chaser.png" id="29_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/log.png" id="30_r"]
+
+[node name="Level09" type="Node2D"]
+script = ExtResource("1_r")
+level_number = 9
+level_name = "Forest Chase"
+trigger_line = "Horn is somewhere in these woods... keep moving!"
+objective_type = 1
+level_bounds = Rect2(0, -600, 7000, 1320)
+kill_y = 900
+
+
+[node name="Background" parent="." instance=ExtResource("2_r")]
+texture = ExtResource("3_r")
+parallax = 0.25
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Goals" type="Node2D" parent="."]
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="WallLeft" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(-20, 200.0)
+size = Vector2(40, 1600)
+tile_texture = ExtResource("5_r")
+
+[node name="WallRight" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(7020, 200.0)
+size = Vector2(40, 1600)
+tile_texture = ExtResource("5_r")
+
+[node name="Ground1" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(800.0, 610.0)
+size = Vector2(1600, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground2" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(2620.0, 610.0)
+size = Vector2(1560, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground3" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(4420.0, 610.0)
+size = Vector2(1560, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="Ground4" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(6200.0, 610.0)
+size = Vector2(1600, 420)
+tile_texture = ExtResource("6_r")
+
+[node name="PitA" parent="Hazards" instance=ExtResource("9_r")]
+position = Vector2(1720.0, 600)
+size = Vector2(240, 400)
+
+[node name="PitB" parent="Hazards" instance=ExtResource("9_r")]
+position = Vector2(3520.0, 600)
+size = Vector2(240, 400)
+
+[node name="PitC" parent="Hazards" instance=ExtResource("9_r")]
+position = Vector2(5300.0, 600)
+size = Vector2(200, 400)
+
+[node name="LogLedgeA" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(1800.0, 292)
+size = Vector2(200, 24)
+tile_texture = ExtResource("7_r")
+
+[node name="LogLedgeB" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(3600.0, 252)
+size = Vector2(200, 24)
+tile_texture = ExtResource("7_r")
+
+[node name="LogLedgeC" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(5335.0, 292)
+size = Vector2(170, 24)
+tile_texture = ExtResource("7_r")
+
+[node name="CoinA1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(300, 360)
+
+[node name="CoinA2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(340, 360)
+
+[node name="CoinA3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(380, 360)
+
+[node name="CoinA4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(420, 360)
+
+[node name="CoinA5" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(460, 360)
+
+[node name="CoinA6" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(500, 360)
+
+[node name="CoinB1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(1700, 230)
+
+[node name="CoinB2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(1740, 230)
+
+[node name="CoinB3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(1780, 230)
+
+[node name="CoinB4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(1820, 230)
+
+[node name="CoinC1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2500, 360)
+
+[node name="CoinC2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2540, 360)
+
+[node name="CoinC3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2580, 360)
+
+[node name="CoinC4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2620, 360)
+
+[node name="CoinC5" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2660, 360)
+
+[node name="CoinC6" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2700, 360)
+
+[node name="CoinD1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3550, 190)
+
+[node name="CoinD2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3590, 190)
+
+[node name="CoinD3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3630, 190)
+
+[node name="CoinE1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(4400, 360)
+
+[node name="CoinE2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(4440, 360)
+
+[node name="CoinE3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(4480, 360)
+
+[node name="CoinE4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(4520, 360)
+
+[node name="CoinE5" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(4560, 360)
+
+[node name="CoinE6" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(4600, 360)
+
+[node name="CoinF1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(5300, 230)
+
+[node name="CoinF2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(5340, 230)
+
+[node name="CoinF3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(5380, 230)
+
+[node name="CoinG1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(6100, 360)
+
+[node name="CoinG2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(6140, 360)
+
+[node name="CoinG3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(6180, 360)
+
+[node name="CoinG4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(6220, 360)
+
+[node name="CoinG5" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(6260, 360)
+
+[node name="CoinG6" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(6300, 360)
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="Felix" parent="NPCs" instance=ExtResource("27_r")]
+position = Vector2(120, 380)
+opening_lines = PackedStringArray("Horn is somewhere in these woods... keep moving!", "Do not look back. Seriously, do not look back.")
+opening_interval = 3.5
+
+[node name="Chaser" parent="." instance=ExtResource("28_r")]
+position = Vector2(-150, 420)
+speed = 420.0
+start_delay = 1.6
+texture = ExtResource("29_r")
+kill_message = "Horn caught me!"
+
+[node name="FallingLog1" parent="Hazards" instance=ExtResource("15_r")]
+position = Vector2(1000, 70)
+texture = ExtResource("30_r")
+trigger_size = Vector2(220, 420)
+damage = 1
+knockback = Vector2(300, -250)
+hazard_name = "log"
+shake_time = 0.4
+
+[node name="FallingLog2" parent="Hazards" instance=ExtResource("15_r")]
+position = Vector2(2650, 70)
+texture = ExtResource("30_r")
+trigger_size = Vector2(220, 420)
+damage = 1
+knockback = Vector2(300, -250)
+hazard_name = "log"
+shake_time = 0.4
+
+[node name="FallingLog3" parent="Hazards" instance=ExtResource("15_r")]
+position = Vector2(4300, 70)
+texture = ExtResource("30_r")
+trigger_size = Vector2(220, 420)
+damage = 1
+knockback = Vector2(300, -250)
+hazard_name = "log"
+shake_time = 0.4
+
+[node name="FallingLog4" parent="Hazards" instance=ExtResource("15_r")]
+position = Vector2(5900, 70)
+texture = ExtResource("30_r")
+trigger_size = Vector2(220, 420)
+damage = 1
+knockback = Vector2(300, -250)
+hazard_name = "log"
+shake_time = 0.4
+
+[node name="Skull1" parent="Enemies" instance=ExtResource("12_r")]
+position = Vector2(1000, 370)
+patrol_distance = 120.0
+
+[node name="Barrel1" parent="Enemies" instance=ExtResource("26_r")]
+position = Vector2(2100, 394)
+fire_interval = 2.0
+
+[node name="Skull2" parent="Enemies" instance=ExtResource("12_r")]
+position = Vector2(3000, 370)
+patrol_distance = 140.0
+
+[node name="Barrel2" parent="Enemies" instance=ExtResource("26_r")]
+position = Vector2(3900, 394)
+fire_interval = 1.7
+
+[node name="Skull3" parent="Enemies" instance=ExtResource("12_r")]
+position = Vector2(4700, 370)
+patrol_distance = 140.0
+
+[node name="Elite1" parent="Enemies" instance=ExtResource("13_r")]
+position = Vector2(5600, 368)
+detect_range = 320.0
+leash_distance = 280.0
+
+[node name="SlidingCrate1" parent="." instance=ExtResource("18_r")]
+position = Vector2(2000, 370)
+lifetime = 10.0
+
+[node name="SlidingCrate2" parent="." instance=ExtResource("18_r")]
+position = Vector2(4800, 370)
+lifetime = 10.0
+
+[node name="HideSpot1" parent="Hazards" instance=ExtResource("14_r")]
+position = Vector2(3000, 350)
+size = Vector2(110, 100)
+hint = "Hold DOWN to hide!"
+
+[node name="HideSpot2" parent="Hazards" instance=ExtResource("14_r")]
+position = Vector2(6000, 350)
+size = Vector2(110, 100)
+hint = "Hold DOWN to hide!"
+
+[node name="GateGoal" parent="Goals" instance=ExtResource("10_r")]
+position = Vector2(6820, 352)
+label_text = "HORN'S CLEARING"
+texture = ExtResource("11_r")
+sprite_scale = 2.0
+show_sprite = false
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Checkpoint1" type="Area2D" parent="Checkpoints"]
+script = ExtResource("24_r")
+position = Vector2(1900, 360)
+
+[node name="Checkpoint2" type="Area2D" parent="Checkpoints"]
+script = ExtResource("24_r")
+position = Vector2(3700, 360)
+
+[node name="Checkpoint3" type="Area2D" parent="Checkpoints"]
+script = ExtResource("24_r")
+position = Vector2(5500, 360)
+
+[node name="Player" parent="." instance=ExtResource("19_r")]
+position = Vector2(150, 360)
+
+[node name="TouchControls" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="TouchPad" type="Control" parent="TouchControls"]
+script = ExtResource("20_r")
+mode = "platformer"
+
+[node name="HUD" parent="." instance=ExtResource("21_r")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("22_r")]
+
+[node name="LevelComplete" parent="." instance=ExtResource("23_r")]

@@ -25,6 +25,9 @@ enum State { IDLE, WINDUP, SLASH, JUMP, FALL, RECOVER, STAGGER, STORY, DROP }
 @export var arena_min_x: float = -100000.0
 @export var arena_max_x: float = 100000.0
 @export var story_mode: bool = false
+## Chance per attack that Big Boss leaves a fading illusion copy of himself behind.
+## Cosmetic only for now: the copy never hits anything.
+@export var illusion_chance: float = 0.0
 @export_group("Lines")
 @export var lines_stagger: PackedStringArray = ["Grrh... lucky shot!", "What?! How?", "You'll pay for that!"]
 
@@ -176,6 +179,8 @@ func _respawn() -> void:
 
 func _begin_windup(target: Node2D) -> void:
 	_next_attack = "slam" if randf() < slam_chance else "slash"
+	if illusion_chance > 0.0 and randf() < illusion_chance:
+		_spawn_illusion()
 	state = State.WINDUP
 	_timer = telegraph_time
 	if warning:
@@ -234,6 +239,29 @@ func _spawn_wave(scene: PackedScene, dir: int, offset: Vector2) -> void:
 	w.boss = self
 	get_parent().add_child(w)
 	w.global_position = global_position + offset
+
+
+## A faded copy of Big Boss that drifts off and vanishes: the "illusion figure" from the comic.
+func _spawn_illusion() -> void:
+	if not sprite or not get_parent():
+		return
+	var ghost := Sprite2D.new()
+	var src := sprite as Sprite2D
+	if src:
+		ghost.texture = src.texture
+		ghost.hframes = src.hframes
+		ghost.vframes = src.vframes
+		ghost.frame = src.frame
+		ghost.flip_h = src.flip_h
+		ghost.scale = src.scale
+	ghost.modulate = Color(0.8, 0.5, 1.0, 0.55)
+	ghost.top_level = true
+	get_parent().add_child(ghost)
+	ghost.global_position = global_position + Vector2(randf_range(-90.0, 90.0), 0.0)
+	var tw := ghost.create_tween()
+	tw.tween_property(ghost, "global_position:x", ghost.global_position.x + 60.0 * (1.0 if randf() < 0.5 else -1.0), 1.0)
+	tw.parallel().tween_property(ghost, "modulate:a", 0.0, 1.0)
+	tw.tween_callback(ghost.queue_free)
 
 
 func _to_idle() -> void:
