@@ -257,11 +257,14 @@ position = Vector2(6750, 360)
 position = Vector2(900, 320)
 arena_min_x = 0.0
 arena_max_x = 7200
-telegraph_time = 0.8
-preferred_distance = 240.0
-slam_chance = 0.35
-idle_time_min = 0.6
-idle_time_max = 1.2
+telegraph_time = 0.45
+preferred_distance = 150.0
+slam_chance = 0.5
+idle_time_min = 0.2
+idle_time_max = 0.6
+walk_speed = 230.0
+recover_time = 0.5
+illusion_chance = 0.25
 
 [node name="Skull1" parent="Enemies" instance=ExtResource("12_r")]
 position = Vector2(1100, 370)
