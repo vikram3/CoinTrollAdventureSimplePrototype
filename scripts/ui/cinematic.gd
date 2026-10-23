@@ -19,6 +19,8 @@ var _previewing: bool = false
 var _advance: bool = false
 var _skip: bool = false
 var _done: bool = false
+## Panel-level navigation: -1 = previous panel, 1 = next panel, 0 = none.
+var _nav: int = 0
 
 
 func _ready() -> void:
@@ -36,7 +38,46 @@ func _ready() -> void:
 		return
 	title_label.text = str(data.get("title", ""))
 	_add_skip_button()
+	_add_nav_buttons()
 	_run(data)
+
+
+## PREV and NEXT buttons along the bottom corners, for touch and mouse players.
+func _add_nav_buttons() -> void:
+	_add_button("PrevButton", "<< PREV", Vector2(20.0, -150.0), Vector2(-20.0, -150.0), func(): _go(-1))
+	_add_button("NextButton", "NEXT >>", Vector2(-190.0, -150.0), Vector2(-20.0, -150.0), func(): _go(1))
+
+
+func _add_button(node_name: String, text: String, left_top: Vector2, right_top: Vector2, on_press: Callable) -> void:
+	var b := Button.new()
+	b.name = node_name
+	b.text = text
+	b.focus_mode = Control.FOCUS_NONE
+	b.custom_minimum_size = Vector2(170, 64)
+	b.add_theme_font_size_override("font_size", 26)
+	b.anchor_top = 1.0
+	b.anchor_bottom = 1.0
+	if node_name == "PrevButton":
+		b.anchor_left = 0.0
+		b.anchor_right = 0.0
+		b.offset_left = left_top.x
+		b.offset_right = left_top.x + 170.0
+	else:
+		b.anchor_left = 1.0
+		b.anchor_right = 1.0
+		b.offset_left = right_top.x
+		b.offset_right = right_top.x + 170.0
+	b.offset_top = left_top.y
+	b.offset_bottom = left_top.y + 64.0
+	b.pressed.connect(on_press)
+	add_child(b)
+	b.z_index = 10
+
+
+## Jumps to the previous or next panel (dir -1 / 1).
+func _go(dir: int) -> void:
+	_nav = dir
+	_advance = true
 
 
 ## On-screen SKIP button for touch and mouse players (Esc / pause also skip).
@@ -68,6 +109,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		_skip = true
 		_advance = true
 		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("ui_left"):
+		_go(-1)
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("ui_right"):
+		_go(1)
+		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed("jump") or event.is_action_pressed("attack") or event.is_action_pressed("ui_accept"):
 		_advance = true
 		get_viewport().set_input_as_handled()
@@ -77,22 +124,45 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _run(data: Dictionary) -> void:
 	var panels: Array = data.get("panels", [])
-	for panel in panels:
-		if _skip:
-			break
-		await _show_panel(panel)
-		var lines: Array = panel.get("lines", [])
-		for line in lines:
-			if _skip:
-				break
+	# Flatten the cinematic into steps: one "panel" step, then one "line" step per line.
+	var steps: Array = []
+	var panel_starts: Array = []
+	for pi in panels.size():
+		panel_starts.append(steps.size())
+		steps.append({"kind": "panel", "panel": pi})
+		for li in (panels[pi].get("lines", []) as Array).size():
+			steps.append({"kind": "line", "panel": pi, "line": li})
+	var idx := 0
+	while idx < steps.size() and not _skip:
+		var step: Dictionary = steps[idx]
+		var pi: int = step.panel
+		var lines: Array = panels[pi].get("lines", [])
+		if step.kind == "panel":
+			await _show_panel(panels[pi])
+			if lines.is_empty():
+				await _wait(2.5)
+		else:
+			var line: Array = lines[step.line]
 			_show_line(line)
 			var hold := clampf(2.0 + str(line[1]).length() * 0.035, 2.0, 4.0)
 			await _wait(hold)
-		if not _skip:
-			var tw := create_tween()
-			tw.tween_property(frame, "modulate:a", 0.0, 0.3)
-			tw.parallel().tween_property(bubble, "modulate:a", 0.0, 0.3)
-			await tw.finished
+			var last_in_panel: bool = step.line == lines.size() - 1
+			if last_in_panel and _nav == 0 and not _skip:
+				var tw := create_tween()
+				tw.tween_property(frame, "modulate:a", 0.0, 0.3)
+				tw.parallel().tween_property(bubble, "modulate:a", 0.0, 0.3)
+				await tw.finished
+		if _nav != 0:
+			var target := pi + _nav
+			_nav = 0
+			_advance = false
+			if target < 0:
+				target = 0
+			if target >= panels.size():
+				break
+			idx = panel_starts[target]
+			continue
+		idx += 1
 	_finish()
 
 
@@ -126,7 +196,7 @@ func _show_line(line: Array) -> void:
 func _wait(seconds: float) -> void:
 	_advance = false
 	var t := 0.0
-	while t < seconds and not _advance and not _skip:
+	while t < seconds and not _advance and _nav == 0 and not _skip:
 		await get_tree().process_frame
 		t += get_process_delta_time()
 
