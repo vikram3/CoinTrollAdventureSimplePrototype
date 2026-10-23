@@ -25,6 +25,11 @@ extends EnemyBase
 @export var lines_lost: PackedStringArray = ["Blasted bushes!", "Where did that naked troll go?!", "He can't have vanished..."]
 @export var lines_search: PackedStringArray = ["Come out, come out, wherever you are...", "I know you're in there.", "Nobody hides from me in MY maze."]
 @export var lines_give_up: PackedStringArray = ["Hmph. Back to my rounds.", "Not worth it.", "He'll turn up. They always do."]
+@export_group("Teamwork")
+## Two skulls this close can talk. A skull that knows where CT is tells the others.
+@export var comm_range: float = 90.0
+@export var lines_tell: PackedStringArray = ["Psst! The troll is near the hedges, over that way!", "I just saw him! Come on, bones!", "Keep your eyes open, he went this way!"]
+@export var lines_heard: PackedStringArray = ["Right, I'm on my way!", "Thanks, mate, I see the trail!", "Let's corner the troll together!"]
 
 const NAV_CELL := 32.0
 const NAV_CLEAR := 28.0
@@ -53,6 +58,7 @@ var _lunge_dir: Vector2 = Vector2.ZERO
 var _path: PackedVector2Array = PackedVector2Array()
 var _path_goal: Vector2 = Vector2.INF
 var _path_t: float = 0.0
+var _comm_cd: float = 0.0
 
 
 func _ready() -> void:
@@ -63,6 +69,7 @@ func _ready() -> void:
 	use_gravity = false
 	super._ready()
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
+	add_to_group("skull_topdown")
 	_origin = global_position
 	if patrol_points.size() < 2:
 		patrol_points = PackedVector2Array([Vector2.ZERO, Vector2.ZERO])
@@ -112,6 +119,10 @@ func _enemy_process(delta: float) -> void:
 			_searching = false
 			say_line(lines_give_up, "give_up", 2.0, true)
 
+	_comm_cd = maxf(_comm_cd - delta, 0.0)
+	if _comm_cd <= 0.0 and (_chasing or _searching):
+		_share_intel()
+
 	if _lunge_t > 0.0:
 		_lunge_t -= delta
 		velocity = _lunge_dir * lunge_speed
@@ -149,6 +160,40 @@ func _enemy_process(delta: float) -> void:
 	velocity = _steer(target, spd, delta)
 	if absf(velocity.x) > 1.0:
 		face(int(signf(velocity.x)))
+
+
+## Tells a nearby skull that has no news where CT was last seen. The new skull searches there too,
+## and passes it on when it meets the next skull, so the word spreads through the maze.
+func _share_intel() -> void:
+	for other in get_tree().get_nodes_in_group("skull_topdown"):
+		if other == self or not is_instance_valid(other) or not other.has_method("receive_alert"):
+			continue
+		if other.global_position.distance_to(global_position) > comm_range:
+			continue
+		if other.is_chasing_now():
+			continue
+		other.receive_alert(_last_seen)
+		say_line(lines_tell, "tell", 2.4, true)
+		_comm_cd = 4.0
+		return
+
+
+func is_chasing_now() -> bool:
+	return _chasing
+
+
+## Called by another skull that met this one: start searching where CT was last seen.
+func receive_alert(pos: Vector2) -> void:
+	if _chasing:
+		return
+	_last_seen = pos
+	_searching = true
+	_search_left = search_seconds
+	_search_target = pos
+	_search_pick = 0.0
+	_said_search = false
+	_comm_cd = 1.0
+	say_line(lines_heard, "heard", 2.2, true)
 
 
 ## Walk straight at the target when nothing blocks the way, otherwise follow a grid path around hedges.

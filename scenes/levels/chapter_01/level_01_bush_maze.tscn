@@ -3012,3 +3012,129 @@ script = ExtResource("90_cp")
 [node name="Checkpoint2" type="Area2D" parent="Checkpoints"]
 position = Vector2(3024, 2256)
 script = ExtResource("90_cp")
+
+[node name="Skull7" parent="Enemies" instance=ExtResource("5_r")]
+position = Vector2(336, 144)
+patrol_points = PackedVector2Array(0, 0, 256, 0)
+nav_rect = Rect2(0, 0, 5280, 3552)
+
+[node name="Skull8" parent="Enemies" instance=ExtResource("5_r")]
+position = Vector2(3984, 2064)
+patrol_points = PackedVector2Array(0, 0, 0, 448)
+nav_rect = Rect2(0, 0, 5280, 3552)
+
+[node name="Skull9" parent="Enemies" instance=ExtResource("5_r")]
+position = Vector2(5136, 1776)
+patrol_points = PackedVector2Array(0, 0, 256, 0)
+nav_rect = Rect2(0, 0, 5280, 3552)
+
+[node name="Skull10" parent="Enemies" instance=ExtResource("5_r")]
+position = Vector2(1392, 528)
+patrol_points = PackedVector2Array(0, 0, 0, 448)
+nav_rect = Rect2(0, 0, 5280, 3552)
+
+[node name="Skull11" parent="Enemies" instance=ExtResource("5_r")]
+position = Vector2(2928, 2256)
+patrol_points = PackedVector2Array(0, 0, 256, 0)
+nav_rect = Rect2(0, 0, 5280, 3552)
+
+[node name="Skull12" parent="Enemies" instance=ExtResource("5_r")]
+position = Vector2(912, 3024)
+patrol_points = PackedVector2Array(0, 0, 0, 448)
+nav_rect = Rect2(0, 0, 5280, 3552)
+
+[node name="HideSpot17" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(2832, 1104)
+size = Vector2(96, 96)
+
+[node name="Bush17" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(2832, 1104)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot18" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(1488, 2352)
+size = Vector2(96, 96)
+
+[node name="Bush18" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(1488, 2352)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot19" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(240, 2640)
+size = Vector2(96, 96)
+
+[node name="Bush19" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(240, 2640)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot20" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(4752, 144)
+size = Vector2(96, 96)
+
+[node name="Bush20" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(4752, 144)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot21" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(3888, 3408)
+size = Vector2(96, 96)
+
+[node name="Bush21" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(3888, 3408)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot22" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(5136, 3408)
+size = Vector2(96, 96)
+
+[node name="Bush22" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(5136, 3408)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot23" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(4176, 1104)
+size = Vector2(96, 96)
+
+[node name="Bush23" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(4176, 1104)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
+
+[node name="HideSpot24" parent="Bushes" instance=ExtResource("30_hs")]
+position = Vector2(1296, 1104)
+size = Vector2(96, 96)
+
+[node name="Bush24" parent="Bushes" instance=ExtResource("3_r")]
+position = Vector2(1296, 1104)
+size = Vector2(96, 96)
+tile_texture = ExtResource("4_r")
+collision_layer = 0
+z_index = 1
+modulate = Color(0.6, 0.9, 1, 1)
