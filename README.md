@@ -44,5 +44,5 @@ Run these headless from the project folder to catch broken scripts or scenes bef
 
 ## Notes
 - Chapter 4 levels 10-13 keep their original layouts. Chapters 5-8 reuse some earlier layouts with new names and story text.
-- Level 20 reuses the Chapter 4 Big Bird arena, with CT as the player. It doesn't have a Sacavuelo enemy yet.
+- Level 20 reuses the Chapter 4 Big Bird arena with CT as the player. Big Bird is the Sacavuelo enemy (see scripts/enemies/big_bird.gd), so no new enemy is needed.
 - `tools/gen_*.py` and `tools/tscn.py` are old generators for the earlier flat level layout. Don't run them on the current chapter scenes, because they would overwrite the chapter levels.
