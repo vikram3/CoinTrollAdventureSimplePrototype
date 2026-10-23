@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3]
+[gd_scene load_steps=35 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_r"]
 [ext_resource type="PackedScene" path="res://scenes/environment/background.tscn" id="2_r"]
@@ -6,25 +6,34 @@
 [ext_resource type="PackedScene" path="res://scenes/environment/block.tscn" id="4_r"]
 [ext_resource type="Texture2D" path="res://assets/environment/wall_stone.png" id="5_r"]
 [ext_resource type="Texture2D" path="res://assets/environment/ground_deck.png" id="6_r"]
-[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="7_r"]
-[ext_resource type="Texture2D" path="res://assets/environment/crate_big.png" id="8_r"]
-[ext_resource type="Texture2D" path="res://assets/environment/ledge_wood.png" id="9_r"]
-[ext_resource type="Texture2D" path="res://assets/environment/crowd.png" id="10_r"]
-[ext_resource type="PackedScene" path="res://scenes/npc/commenter.tscn" id="11_r"]
-[ext_resource type="Texture2D" path="res://assets/characters/Alex/alex_idle.png" id="12_r"]
-[ext_resource type="Texture2D" path="res://assets/npc/felix.png" id="13_r"]
-[ext_resource type="Texture2D" path="res://assets/npc/lala.png" id="14_r"]
-[ext_resource type="PackedScene" path="res://scenes/objects/hide_spot.tscn" id="15_r"]
-[ext_resource type="Texture2D" path="res://assets/environment/hedge.png" id="16_r"]
-[ext_resource type="PackedScene" path="res://scenes/player/player_ct.tscn" id="17_r"]
-[ext_resource type="PackedScene" path="res://scenes/objects/wave_spawner.tscn" id="18_r"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/skull.tscn" id="19_r"]
-[ext_resource type="PackedScene" path="res://scenes/objects/hazard_emitter.tscn" id="20_r"]
-[ext_resource type="Script" path="res://scripts/levels/trackers/wave_tracker.gd" id="21_r"]
-[ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="22_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="23_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="24_r"]
-[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="25_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ledge_stone.png" id="7_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="8_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/restart_zone.tscn" id="9_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/goal.tscn" id="10_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/chest.png" id="11_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/skull.tscn" id="12_r"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/elite_skull.tscn" id="13_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hide_spot.tscn" id="14_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/falling_hazard.tscn" id="15_r"]
+[ext_resource type="Texture2D" path="res://assets/objects/stone.png" id="16_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hazard_emitter.tscn" id="17_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/sliding_crate.tscn" id="18_r"]
+[ext_resource type="PackedScene" path="res://scenes/player/player_ct.tscn" id="19_r"]
+[ext_resource type="Script" path="res://scripts/ui/touch_controls.gd" id="20_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="21_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="22_r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="23_r"]
+[ext_resource type="Script" path="res://scripts/objects/checkpoint.gd" id="24_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/ledge_wood.png" id="25_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/crate_big.png" id="26_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/hedge.png" id="27_r"]
+[ext_resource type="Texture2D" path="res://assets/environment/crowd.png" id="28_r"]
+[ext_resource type="PackedScene" path="res://scenes/npc/commenter.tscn" id="29_r"]
+[ext_resource type="Texture2D" path="res://assets/characters/Alex/alex_idle.png" id="30_r"]
+[ext_resource type="Texture2D" path="res://assets/npc/felix.png" id="31_r"]
+[ext_resource type="Texture2D" path="res://assets/npc/lala.png" id="32_r"]
+[ext_resource type="PackedScene" path="res://scenes/objects/wave_spawner.tscn" id="33_r"]
+[ext_resource type="Script" path="res://scripts/levels/trackers/wave_tracker.gd" id="34_r"]
 
 [node name="Level12" type="Node2D"]
 script = ExtResource("1_r")
@@ -32,13 +41,9 @@ level_number = 12
 level_name = "Warm-up Before the Duel"
 trigger_line = "Alex accepted the duel... somebody's gotta warm up for him!"
 objective_type = 6
-coin_target = 0
-survive_seconds = 0.0
-defeat_target = 0
-objective_text_override = ""
 level_bounds = Rect2(0, -600, 5200, 1320)
-kill_y = 900.0
-tracker_path = NodePath("Tracker")
+kill_y = 1100
+
 
 [node name="Background" parent="." instance=ExtResource("2_r")]
 texture = ExtResource("3_r")
@@ -54,295 +59,275 @@ parallax = 0.25
 
 [node name="Hazards" type="Node2D" parent="."]
 
-[node name="NPCs" type="Node2D" parent="."]
-
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Wall1" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(0, 60)
-size = Vector2(64, 1520)
+[node name="WallLeft" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(-20, 250.0)
+size = Vector2(40, 1700)
+tile_texture = ExtResource("5_r")
+
+[node name="WallRight" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(5220, 250.0)
+size = Vector2(40, 1700)
 tile_texture = ExtResource("5_r")
 
 [node name="Ground1" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(1800, 610)
-size = Vector2(3600, 420)
+position = Vector2(850.0, 610.0)
+size = Vector2(1700, 420)
 tile_texture = ExtResource("6_r")
 
 [node name="Ground2" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(4400, 610)
-size = Vector2(1600, 420)
+position = Vector2(2600.0, 610.0)
+size = Vector2(1400, 420)
 tile_texture = ExtResource("6_r")
 
-[node name="Coin1" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(3800, 364)
+[node name="Ground3" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(4350.0, 610.0)
+size = Vector2(1700, 420)
+tile_texture = ExtResource("6_r")
 
-[node name="Coin2" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(3852, 364)
+[node name="PitA" parent="Hazards" instance=ExtResource("9_r")]
+position = Vector2(1800.0, 600)
+size = Vector2(200, 400)
 
-[node name="Coin3" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(3904, 364)
-
-[node name="Coin4" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(3956, 364)
-
-[node name="Coin5" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(4008, 364)
-
-[node name="Coin6" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(4060, 364)
-
-[node name="Pillar1" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(4070, 355)
-size = Vector2(60, 90)
-tile_texture = ExtResource("8_r")
-
-[node name="Coin7" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(4030, 266)
-
-[node name="Coin8" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(4070, 266)
-
-[node name="Coin9" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(4110, 266)
+[node name="PitB" parent="Hazards" instance=ExtResource("9_r")]
+position = Vector2(3400.0, 600)
+size = Vector2(200, 400)
 
 [node name="SectionLedge1" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(4364, 262)
-size = Vector2(188, 24)
-tile_texture = ExtResource("9_r")
+position = Vector2(900.0, 292)
+size = Vector2(200, 24)
+tile_texture = ExtResource("25_r")
 one_way = true
-
-[node name="Coin10" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(4300, 210)
-
-[node name="Coin11" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(4364, 210)
-
-[node name="Coin12" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(4428, 210)
 
 [node name="SectionLedge2" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(4723, 262)
-size = Vector2(176, 24)
-tile_texture = ExtResource("9_r")
+position = Vector2(2400.0, 272)
+size = Vector2(200, 24)
+tile_texture = ExtResource("25_r")
 one_way = true
 
-[node name="Coin13" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(4665, 210)
+[node name="SectionLedge3" parent="Environment" instance=ExtResource("4_r")]
+position = Vector2(4300.0, 274)
+size = Vector2(200, 24)
+tile_texture = ExtResource("25_r")
+one_way = true
 
-[node name="Coin14" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(4723, 210)
+[node name="CoinA1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(200, 364)
 
-[node name="Coin15" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(4781, 210)
+[node name="CoinA2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(240, 364)
+
+[node name="CoinA3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(280, 364)
+
+[node name="CoinA4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(320, 364)
+
+[node name="CoinA5" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(360, 364)
+
+[node name="CoinB1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(880, 226)
+
+[node name="CoinB2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(920, 226)
+
+[node name="CoinB3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(960, 226)
+
+[node name="CoinB4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(1000, 226)
+
+[node name="CoinC1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(1100, 364)
+
+[node name="CoinC2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(1140, 364)
+
+[node name="CoinC3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(1180, 364)
+
+[node name="CoinC4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(1220, 364)
+
+[node name="CoinC5" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(1260, 364)
+
+[node name="CoinD1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2000, 364)
+
+[node name="CoinD2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2040, 364)
+
+[node name="CoinD3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2080, 364)
+
+[node name="CoinD4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2120, 364)
+
+[node name="CoinD5" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2160, 364)
+
+[node name="CoinE1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2360, 222)
+
+[node name="CoinE2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2400, 222)
+
+[node name="CoinE3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2440, 222)
+
+[node name="CoinE4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(2480, 222)
+
+[node name="CoinF1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3600, 364)
+
+[node name="CoinF2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3640, 364)
+
+[node name="CoinF3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3680, 364)
+
+[node name="CoinF4" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3720, 364)
+
+[node name="CoinF5" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(3760, 364)
+
+[node name="CoinG1" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(4260, 220)
+
+[node name="CoinG2" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(4300, 220)
+
+[node name="CoinG3" parent="Coins" instance=ExtResource("8_r")]
+position = Vector2(4340, 220)
 
 [node name="CargoCrate1" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(950, 372)
+position = Vector2(1250, 372)
 size = Vector2(56, 56)
-tile_texture = ExtResource("8_r")
+tile_texture = ExtResource("26_r")
 
 [node name="CargoCrate2" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(1850, 372)
+position = Vector2(2900, 372)
 size = Vector2(56, 56)
-tile_texture = ExtResource("8_r")
+tile_texture = ExtResource("26_r")
 
 [node name="CargoCrate3" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(2950, 372)
+position = Vector2(4700, 372)
 size = Vector2(56, 56)
-tile_texture = ExtResource("8_r")
+tile_texture = ExtResource("26_r")
 
 [node name="Crowd1" type="Sprite2D" parent="Decor"]
 position = Vector2(900, 355)
-texture = ExtResource("10_r")
+texture = ExtResource("28_r")
 modulate = Color(0.7, 0.7, 0.85, 0.9)
 
 [node name="Crowd2" type="Sprite2D" parent="Decor"]
-position = Vector2(2600, 355)
-texture = ExtResource("10_r")
+position = Vector2(3900, 355)
+texture = ExtResource("28_r")
 modulate = Color(0.7, 0.7, 0.85, 0.9)
 
-[node name="Alex1" parent="Decor" instance=ExtResource("11_r")]
+[node name="Alex1" parent="Decor" instance=ExtResource("29_r")]
 position = Vector2(520, 365)
-texture = ExtResource("12_r")
+texture = ExtResource("30_r")
 lines = PackedStringArray("I've got this duel.", "Warm 'em up for me, CT!")
 modulate = Color(0.8, 0.8, 0.95, 1)
 
-[node name="Felix1" parent="Decor" instance=ExtResource("11_r")]
+[node name="Felix1" parent="Decor" instance=ExtResource("29_r")]
 position = Vector2(640, 368)
-texture = ExtResource("13_r")
+texture = ExtResource("31_r")
 lines = PackedStringArray("Grab the coins the crowd throws!", "Watch the deck shots!")
 modulate = Color(0.8, 0.8, 0.95, 1)
 first_delay = 4.0
 
-[node name="Lala1" parent="Decor" instance=ExtResource("11_r")]
-position = Vector2(3200, 368)
-texture = ExtResource("14_r")
+[node name="Lala1" parent="Decor" instance=ExtResource("29_r")]
+position = Vector2(4950, 368)
+texture = ExtResource("32_r")
 lines = PackedStringArray("Fascinating creature, that troll.", "Big Bird is weak up close...")
 modulate = Color(0.8, 0.8, 0.95, 1)
 flip = true
 first_delay = 7.0
 
-[node name="Coin16" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(200, 364)
-
-[node name="Coin17" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(310, 364)
-
-[node name="Coin18" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(420, 364)
-
-[node name="Coin19" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(530, 364)
-
-[node name="Coin20" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(640, 364)
-
-[node name="Coin21" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(750, 364)
-
-[node name="Coin22" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(860, 364)
-
-[node name="Coin23" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(970, 300)
-
-[node name="Coin24" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(1080, 364)
-
-[node name="Coin25" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(1190, 364)
-
-[node name="Coin26" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(1300, 364)
-
-[node name="Coin27" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(1410, 364)
-
-[node name="Coin28" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(1520, 364)
-
-[node name="Coin29" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(1630, 364)
-
-[node name="Coin30" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(1740, 364)
-
-[node name="Coin31" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(1850, 300)
-
-[node name="Coin32" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(1960, 364)
-
-[node name="Coin33" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(2070, 364)
-
-[node name="Coin34" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(2180, 364)
-
-[node name="Coin35" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(2290, 364)
-
-[node name="Coin36" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(2400, 364)
-
-[node name="Coin37" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(2510, 364)
-
-[node name="Coin38" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(2620, 364)
-
-[node name="Coin39" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(2730, 364)
-
-[node name="Coin40" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(2840, 364)
-
-[node name="Coin41" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(2950, 300)
-
-[node name="Coin42" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(3060, 364)
-
-[node name="Coin43" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(3170, 364)
-
-[node name="Coin44" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(3280, 364)
-
-[node name="Coin45" parent="Coins" instance=ExtResource("7_r")]
-position = Vector2(3390, 364)
-
-[node name="HideSpot1" parent="Hazards" instance=ExtResource("15_r")]
-position = Vector2(1400, 345)
+[node name="HideSpot1" parent="Hazards" instance=ExtResource("14_r")]
+position = Vector2(2050, 345)
 size = Vector2(120, 110)
 hint = "Hold DOWN to hide!"
 
 [node name="Bush1" type="Sprite2D" parent="Decor"]
-position = Vector2(1400, 345)
-texture = ExtResource("16_r")
+position = Vector2(2050, 345)
+texture = ExtResource("27_r")
 scale = Vector2(1.25, 1.1458)
 
-[node name="HideSpot2" parent="Hazards" instance=ExtResource("15_r")]
-position = Vector2(2400, 350)
+[node name="HideSpot2" parent="Hazards" instance=ExtResource("14_r")]
+position = Vector2(4600, 350)
 size = Vector2(110, 100)
 hint = "Hold DOWN to hide!"
 
 [node name="Bush2" type="Sprite2D" parent="Decor"]
-position = Vector2(2400, 350)
-texture = ExtResource("8_r")
-scale = Vector2(0.6875, 0.625)
+position = Vector2(4600, 350)
+texture = ExtResource("27_r")
+scale = Vector2(1.25, 1.1458)
 
-[node name="Wall2" parent="Environment" instance=ExtResource("4_r")]
-position = Vector2(5200, 60)
-size = Vector2(64, 1520)
-tile_texture = ExtResource("5_r")
+[node name="DeckShotLeft" parent="Hazards" instance=ExtResource("17_r")]
+position = Vector2(60, 378)
+direction = Vector2(1, 0)
+interval = 5.5
+first_delay = 6.0
 
-[node name="Player" parent="." instance=ExtResource("17_r")]
-position = Vector2(200, 360)
+[node name="DeckShotRight" parent="Hazards" instance=ExtResource("17_r")]
+position = Vector2(5140, 378)
+direction = Vector2(-1, 0)
+interval = 4.5
+first_delay = 3.0
 
-[node name="WaveSpawner" parent="." instance=ExtResource("18_r")]
-enemy_scene = ExtResource("19_r")
-wave_counts = PackedInt32Array(2, 2)
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Checkpoint1" type="Area2D" parent="Checkpoints"]
+script = ExtResource("24_r")
+position = Vector2(1000, 360)
+
+[node name="Checkpoint2" type="Area2D" parent="Checkpoints"]
+script = ExtResource("24_r")
+position = Vector2(3650, 360)
+
+[node name="WaveSpawner" parent="." instance=ExtResource("33_r")]
+enemy_scene = ExtResource("12_r")
+wave_counts = PackedInt32Array(2, 3, 3)
 start_delay = 2.5
 delay_between_waves = 3.0
 detect_range_override = 900.0
 spread = 80.0
 
 [node name="SpawnA" type="Marker2D" parent="WaveSpawner"]
-position = Vector2(1250, 340)
+position = Vector2(1400, 340)
 
 [node name="SpawnB" type="Marker2D" parent="WaveSpawner"]
-position = Vector2(2650, 340)
+position = Vector2(2700, 340)
 
-[node name="DeckShotRight" parent="." instance=ExtResource("20_r")]
-position = Vector2(5140, 378)
-direction = Vector2(-1, 0)
-interval = 4.5
-first_delay = 3.0
-
-[node name="DeckShotLeft" parent="." instance=ExtResource("20_r")]
-position = Vector2(60, 378)
-direction = Vector2(1, 0)
-interval = 5.5
-first_delay = 6.0
+[node name="SpawnC" type="Marker2D" parent="WaveSpawner"]
+position = Vector2(4000, 340)
 
 [node name="Tracker" type="Node" parent="."]
-script = ExtResource("21_r")
+script = ExtResource("34_r")
 spawner_path = NodePath("../WaveSpawner")
 need_coins = 25
-label = "Clear 2 enemy waves"
+label = "Clear 3 enemy waves"
+
+[node name="Player" parent="." instance=ExtResource("19_r")]
+position = Vector2(200, 360)
 
 [node name="TouchControls" type="CanvasLayer" parent="."]
 layer = 20
 
 [node name="TouchPad" type="Control" parent="TouchControls"]
-script = ExtResource("22_r")
+script = ExtResource("20_r")
 mode = "platformer"
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
 
-[node name="HUD" parent="." instance=ExtResource("23_r")]
+[node name="HUD" parent="." instance=ExtResource("21_r")]
 
-[node name="PauseMenu" parent="." instance=ExtResource("24_r")]
+[node name="PauseMenu" parent="." instance=ExtResource("22_r")]
 
-[node name="LevelComplete" parent="." instance=ExtResource("25_r")]
+[node name="LevelComplete" parent="." instance=ExtResource("23_r")]
