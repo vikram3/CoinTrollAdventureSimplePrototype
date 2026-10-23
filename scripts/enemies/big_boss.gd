@@ -28,7 +28,7 @@ enum State { IDLE, WINDUP, SLASH, JUMP, FALL, RECOVER, STAGGER, STORY, DROP }
 ## Chance per attack that Big Boss leaves a fading illusion copy of himself behind.
 ## Cosmetic only for now: the copy never hits anything.
 @export var illusion_chance: float = 0.0
-## Teleport: when the target is this far away (px) in IDLE, Big Boss vanishes and drops onto the target.
+## Leap: when the target is this far away (px) in IDLE, Big Boss leaps in a jump arc and lands on the target.
 ## 0 disables it.
 @export var teleport_distance: float = 0.0
 @export var teleport_cooldown: float = 4.0
@@ -187,16 +187,32 @@ func _respawn() -> void:
 	_to_idle()
 
 
-## Vanishes and reappears above the target, then falls onto them (the fall lands as a slam).
+## Leaps from where he is in a jump arc and lands on the target, coming in from the side he was on.
+## The landing spot shows the slam marker, and the landing hits like a slam.
 func _teleport_onto(target: Node2D) -> void:
-	var x := clampf(target.global_position.x, arena_min_x, arena_max_x)
-	global_position = Vector2(x, _goal_y(target) - 200.0)
-	velocity = Vector2.ZERO
-	state = State.FALL
+	var from_x := global_position.x
+	var side := signf(from_x - target.global_position.x)
+	if side == 0.0:
+		side = 1.0
+	var land_x := clampf(target.global_position.x + side * 40.0, arena_min_x, arena_max_x)
+	var land_y := _goal_y(target)
+	var dy := land_y - global_position.y
+	var rise := clampf(maxf(120.0, 60.0 - dy), 120.0, 260.0)
+	var vy := -sqrt(2.0 * gravity * rise)
+	var disc := maxf(vy * vy + 2.0 * gravity * dy, 0.0)
+	var flight := (-vy + sqrt(disc)) / gravity
+	velocity.y = vy
+	velocity.x = clampf((land_x - from_x) / maxf(flight, 0.2), -1100.0, 1100.0)
+	state = State.JUMP
 	_teleport_cd = teleport_cooldown
+	_slam_target_x = land_x
+	_slam_target_y = target.global_position.y + 44.0
+	if slam_marker:
+		slam_marker.visible = true
+		slam_marker.global_position = Vector2(_slam_target_x, _slam_target_y)
 	if warning:
 		warning.visible = false
-	Sfx.play("warning")
+	Sfx.play("swing")
 
 
 func _begin_windup(target: Node2D) -> void:
