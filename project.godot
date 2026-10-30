@@ -11,10 +11,11 @@ config_version=5
 [application]
 
 config/name="Coin Troll Adventure"
-config/description="2D side-scrolling platformer prototype - 19 levels."
+config/description="2D prototype - 24 levels."
 run/main_scene="res://scenes/ui/main_menu.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://bt6g65jx3m2ob"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 

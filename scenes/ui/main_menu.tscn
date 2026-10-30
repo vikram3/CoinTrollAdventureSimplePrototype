@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dkvheob82plhg" path="res://scripts/ui/main_menu.gd" id="1_r"]
 [ext_resource type="Theme" uid="uid://cxp0n3gkuvjlp" path="res://scenes/ui/ui_theme.tres" id="2_r"]
-[ext_resource type="Texture2D" uid="uid://catjvoh18oien" path="res://assets/backgrounds/bg_castle_night.png" id="3_r"]
+[ext_resource type="Texture2D" uid="uid://c245blfeq74v1" path="res://bottom.jpg" id="3_x2yvf"]
 [ext_resource type="Texture2D" uid="uid://c7w1t6rwfnjs5" path="res://assets/characters/CT/ct_idle.png" id="4_r"]
 [ext_resource type="Texture2D" uid="uid://trr44gdw2163" path="res://assets/objects/coin_bag.png" id="5_r"]
 
@@ -23,9 +23,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_r")
+texture = ExtResource("3_x2yvf")
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="Shade" type="ColorRect" parent="." unique_id=795098480]
 layout_mode = 1
@@ -58,7 +58,7 @@ offset_top = 138.0
 offset_bottom = 172.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 22
-text = "Prototype - 18 levels"
+text = "Prototype - 24 levels"
 horizontal_alignment = 1
 
 [node name="CTArt" type="TextureRect" parent="." unique_id=1118674634]
