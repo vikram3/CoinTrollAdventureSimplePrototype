@@ -33,6 +33,9 @@ func _enemy_process(delta: float) -> void:
 	if absf(dx) > 1.0:
 		face(int(signf(dx)))
 	var dist := global_position.distance_to(p.global_position)
+	if not get_viewport_rect().grow(-24).has_point(get_global_transform_with_canvas().origin):
+		_cd = maxf(_cd, 0.8)
+		return
 	_cd -= delta
 	if dist < panic_range:
 		tint = Color(0.8, 0.8, 1.0)

@@ -29,7 +29,7 @@ signal goal_touched
 @export var time_limit: float = 0.0
 @export_group("Nodes")
 @export var player_path: NodePath = ^"Player"
-@export var tracker_path: NodePath
+@export var tracker_path: NodePath = ^"Tracker"
 
 var player: PlayerBase = null
 var hud: GameHUD = null
@@ -54,6 +54,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	get_tree().paused = false
 	GameState.current_level = level_number
+	GameState.prepare_abilities(level_number)
 	GameState.reset_coins()
 	if not GameState.coins_changed.is_connected(_on_coins_changed):
 		GameState.coins_changed.connect(_on_coins_changed)
@@ -68,7 +69,7 @@ func _ready() -> void:
 	if time_limit > 0.0:
 		time_limit *= GameState.timer_mult()
 	if survive_seconds > 0.0:
-		survive_seconds *= GameState.timer_mult()
+		survive_seconds /= GameState.timer_mult()
 	time_left = survive_seconds
 	limit_left = time_limit
 	if player:
@@ -81,6 +82,8 @@ func _ready() -> void:
 			hud.set_health(player.health, player.max_health)
 	if tracker:
 		tracker.setup(self)
+	if hud:
+		hud.announce("%02d: %s\n%s" % [level_number, level_name, get_objective_text()], 7.0)
 	_refresh_hud()
 	if trigger_line != "" and player:
 		_say_trigger_line.call_deferred()
@@ -206,6 +209,7 @@ func on_goal_reached() -> void:
 		reached_goal = true
 		goal_touched.emit()
 	if objective_type == ObjectiveType.COINS_AND_EXIT and GameState.coins < coin_target and player:
+		reached_goal = false
 		player.say("Need %d more coins!" % (coin_target - GameState.coins), 2.0)
 	_check_objective()
 
@@ -240,6 +244,7 @@ func handle_fall(message: String = "") -> void:
 func fail(message: String = "", allow_checkpoint: bool = true) -> void:
 	if finished:
 		return
+	GameState.log_test_event("failure: " + message)
 	if allow_checkpoint and _checkpoint != null and is_instance_valid(_checkpoint):
 		_respawn_at_checkpoint(message)
 		return
@@ -300,7 +305,8 @@ func _respawn_at_checkpoint(message: String) -> void:
 		hud.announce("Back to checkpoint")
 	Sfx.play("hurt")
 	await get_tree().create_timer(0.9).timeout
-	GameState.coins = _checkpoint_coins
+	# Pickups remain consumed in this scene: preserve the purse on respawn.
+	GameState.coins = maxi(GameState.coins, _checkpoint_coins)
 	GameState.coins_changed.emit(GameState.coins)
 	if player and is_instance_valid(player) and _checkpoint and is_instance_valid(_checkpoint):
 		player.respawn_at(_checkpoint.global_position)

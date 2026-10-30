@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3]
 
-[ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_r"]
+[ext_resource type="Script" path="res://scripts/levels/wind_level.gd" id="1_r"]
 [ext_resource type="PackedScene" path="res://scenes/environment/background.tscn" id="2_r"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/bg_desert.png" id="3_r"]
 [ext_resource type="PackedScene" path="res://scenes/environment/block.tscn" id="4_r"]

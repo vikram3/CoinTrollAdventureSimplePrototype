@@ -5,12 +5,14 @@ extends Node
 signal coins_changed(value: int)
 signal ability_unlocked(ability: String)
 
-const SAVE_PATH := "user://coin_troll_levels.cfg"
+const TESTER_BUILD := true
+const BUILD_LABEL := "Playtest 2026.10.30-r4"
+const SAVE_PATH := "user://coin_troll_test_levels.cfg" if TESTER_BUILD else "user://coin_troll_levels.cfg"
 const MAIN_MENU_SCENE := "res://scenes/ui/main_menu.tscn"
 const CINEMATIC_SCENE := "res://scenes/cinematics/cinematic.tscn"
 ## TEMPORARY dev buttons (touch/mobile testing): "DEV: Skip level" in the pause menu and
 ## "DEV: Unlock all levels" in the main menu. Set to false, or delete the buttons, before release.
-const DEV_TOOLS := true
+const DEV_TOOLS := false
 
 var current_level: int = 1
 var coins: int = 0
@@ -46,6 +48,18 @@ func unlock_ability(ability: String) -> void:
 		return
 	abilities[ability] = true
 	ability_unlocked.emit(ability)
+	save_progress()
+
+
+func prepare_abilities(number: int) -> void:
+	# Reconstruct the kit for replay, old saves and direct level tests.
+	abilities.clear()
+	if number >= 5:
+		for ability in ["double_jump", "dash", "block", "combo"]:
+			abilities[ability] = true
+	if number >= 6:
+		for ability in ["air_dive", "wall_jump", "counter", "triple_jump"]:
+			abilities[ability] = true
 
 
 # --- Coins -----------------------------------------------------------------
@@ -135,6 +149,8 @@ func enemy_contact_damage(base: int) -> int:
 # --- Flow ------------------------------------------------------------------
 
 func new_game() -> void:
+	abilities.clear()
+	show_end_card = false
 	unlocked_level = 1
 	best_coins.clear()
 	save_progress()
@@ -149,8 +165,36 @@ func continue_game() -> void:
 
 
 func start_level(number: int) -> void:
+	if Transition.busy:
+		return
 	current_level = clampi(number, 1, StoryData.count())
+	log_test_event("start")
 	Transition.change_scene(_level_scene(current_level), _level_title(current_level))
+
+
+func tester_jump(offset: int = 1) -> void:
+	if not TESTER_BUILD or Transition.busy:
+		return
+	var level := get_tree().get_first_node_in_group("level") as Level
+	if level == null:
+		return
+	log_test_event("skip" if offset > 0 else "previous")
+	level.finished = true
+	get_tree().paused = false
+	if current_level + offset > StoryData.count():
+		go_to_main_menu()
+	else:
+		start_level(maxi(1, current_level + offset))
+
+
+func log_test_event(event: String) -> void:
+	if not TESTER_BUILD:
+		return
+	var path := "user://playtest_events.jsonl"
+	var file := FileAccess.open(path, FileAccess.READ_WRITE if FileAccess.file_exists(path) else FileAccess.WRITE)
+	if file:
+		file.seek_end()
+		file.store_line(JSON.stringify({"build": BUILD_LABEL, "time": Time.get_datetime_string_from_system(), "event": event, "level": current_level, "difficulty": difficulty_name(), "coins": coins}))
 
 
 func restart_level() -> void:
@@ -158,6 +202,7 @@ func restart_level() -> void:
 
 
 func complete_level(collected: int) -> void:
+	log_test_event("completed")
 	var key := str(current_level)
 	best_coins[key] = maxi(int(best_coins.get(key, 0)), collected)
 	unlocked_level = clampi(maxi(unlocked_level, current_level + 1), 1, StoryData.count())
@@ -229,15 +274,21 @@ func get_best_coins(number: int) -> int:
 
 ## _input runs before any UI or gameplay node, so no other script can swallow these keys.
 func _input(event: InputEvent) -> void:
-	if not OS.is_debug_build():
+	if not OS.is_debug_build() and not TESTER_BUILD:
 		return
 	var key := event as InputEventKey
 	if key == null or not key.pressed or key.echo:
 		return
 	if key.keycode == KEY_F3:
-		debug_skip_level()
+		if TESTER_BUILD:
+			tester_jump()
+		else:
+			debug_skip_level()
 	elif key.keycode == KEY_F4:
-		debug_unlock_all()
+		if TESTER_BUILD:
+			tester_jump(-1)
+		else:
+			debug_unlock_all()
 	else:
 		return
 	get_viewport().set_input_as_handled()

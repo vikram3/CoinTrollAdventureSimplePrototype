@@ -42,7 +42,7 @@ level_name = "Big Bird Duel"
 trigger_line = "Big Bird went straight for projectiles, dodge and get close!"
 objective_type = 5
 defeat_target = 1
-objective_text_override = "Defeat Big Bird"
+objective_text_override = "Alex: defeat Big Bird | Down: shield, Up: bow, Space: jump"
 level_bounds = Rect2(1200, -600, 3000, 1220)
 kill_y = 1400
 

@@ -34,6 +34,19 @@ func _ready() -> void:
 	_blocker.add_child(bcs)
 	add_child(_blocker)
 	body_entered.connect(_on_body_entered)
+	z_index = 1
+	var label := Label.new()
+	label.text = "SHELTER"
+	label.position = Vector2(-size.x * 0.5, -size.y * 0.5 - 26)
+	label.add_theme_font_size_override("font_size", 16)
+	add_child(label)
+	queue_redraw()
+
+
+func _draw() -> void:
+	var area := Rect2(-size * 0.5, size)
+	draw_rect(area, Color(0.12, 0.55, 0.32, 0.25), true)
+	draw_rect(area, Color("78e8ac") if occupied else Color("77a88a"), false, 3.0)
 
 
 func rect() -> Rect2:
@@ -48,6 +61,7 @@ func contains_point(world_pos: Vector2) -> bool:
 func _physics_process(_delta: float) -> void:
 	var ct := get_tree().get_first_node_in_group("player") as PlayerBase
 	occupied = ct != null and not ct.is_dead and contains_point(ct.global_position)
+	queue_redraw()
 	_blocker.set_deferred("collision_layer", BUSH_BLOCK_LAYER if occupied else 0)
 
 

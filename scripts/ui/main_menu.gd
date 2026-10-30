@@ -31,14 +31,19 @@ func _ready() -> void:
 	quit_button.pressed.connect(_on_quit_pressed)
 	select_back_button.pressed.connect(_close_panels)
 	controls_back_button.pressed.connect(_close_panels)
-	var n := 0
+	# The scene's old grid only contained 18 buttons. Derive the menu from
+	# campaign data so future levels cannot silently disappear from selection.
 	for child in grid.get_children():
-		var b := child as Button
-		if b == null:
-			continue
-		n += 1
+		grid.remove_child(child)
+		child.queue_free()
+	for n in range(1, StoryData.count() + 1):
+		var b := Button.new()
+		b.name = "Level%02d" % n
+		b.text = "%02d" % n
+		b.custom_minimum_size = Vector2(110, 56)
+		grid.add_child(b)
 		var info := StoryData.get_level(n)
-		b.disabled = n > GameState.unlocked_level
+		b.disabled = not GameState.TESTER_BUILD and n > GameState.unlocked_level
 		b.tooltip_text = "%02d - %s" % [n, str(info["name"])]
 		b.pressed.connect(_on_level_pressed.bind(n))
 		b.focus_entered.connect(_show_info.bind(n))
@@ -49,6 +54,9 @@ func _ready() -> void:
 	main_buttons.add_child(_difficulty_button)
 	main_buttons.move_child(_difficulty_button, select_button.get_index())
 	_refresh_difficulty_button()
+	if GameState.TESTER_BUILD:
+		select_button.text = "Test any level (1–24)"
+		continue_button.tooltip_text = GameState.BUILD_LABEL + " | Separate tester save"
 	if GameState.DEV_TOOLS:
 		_add_dev_unlock_button()
 	continue_button.grab_focus()
@@ -116,7 +124,7 @@ func _close_panels() -> void:
 
 func _show_info(n: int) -> void:
 	var info := StoryData.get_level(n)
-	var locked := n > GameState.unlocked_level
+	var locked := not GameState.TESTER_BUILD and n > GameState.unlocked_level
 	var text := "%02d  %s" % [n, str(info["name"])]
 	if locked:
 		text += "\n(locked)"

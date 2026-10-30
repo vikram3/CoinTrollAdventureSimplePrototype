@@ -24,7 +24,7 @@
 script = ExtResource("1_r")
 level_number = 24
 level_name = "Ahrena's Gate"
-trigger_line = "Ahrena is at the palace... hold the gate and survive until he shows himself!"
+trigger_line = "Hold the gate while the crew escapes! Ahrena can wait."
 objective_type = 4
 survive_seconds = 40.0
 level_bounds = Rect2(0, -600, 6400, 1320)

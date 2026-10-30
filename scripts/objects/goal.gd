@@ -23,6 +23,14 @@ func _ready() -> void:
 	sprite.visible = show_sprite
 	if label:
 		label.text = label_text
+	z_index = 4
+	queue_redraw()
+
+
+func _draw() -> void:
+	# A consistent destination marker remains readable over the scenery.
+	draw_colored_polygon(PackedVector2Array([Vector2(-16, -92), Vector2(16, -92), Vector2(0, -68)]), Color("ffe273"))
+	draw_arc(Vector2.ZERO, 36.0, 0, TAU, 32, Color(1, 0.85, 0.3, 0.8), 3.0)
 
 
 func _process(delta: float) -> void:

@@ -28,19 +28,19 @@ const LEVELS := [
 	{"number": 11, "name": "Bull Gauntlet", "scene": "res://scenes/levels/chapter_04/level_11_bull_gauntlet.tscn",
 		"trigger": "The Queen stepped in, but those bulls aren't done yet!", "cinematic": "bull_gauntlet_done"},
 	{"number": 12, "name": "Warm-up Before the Duel", "scene": "res://scenes/levels/chapter_04/level_12_warmup_before_duel.tscn",
-		"trigger": "Alex accepted the duel... somebody's gotta warm up for him!", "cinematic": "crew_gathers"},
+		"trigger": "Alex accepted the duel... somebody's gotta warm up for him!", "cinematic": "crew_gathers+big_bird_challenge"},
 	{"number": 13, "name": "Big Bird Duel", "scene": "res://scenes/levels/chapter_04/level_13_big_bird_duel.tscn",
-		"trigger": "Big Bird went straight for projectiles, dodge and get close!", "cinematic": "big_bird_challenge"},
+		"trigger": "Big Bird went straight for projectiles, dodge and get close!", "cinematic": "chapter5_intro"},
 	{"number": 14, "name": "Cabin Gathering", "scene": "res://scenes/levels/chapter_05/level_14_coin_scramble.tscn",
-		"trigger": "Tex wants the cabins, Lala wants the coins... grab them before the crew settles in!", "cinematic": "chapter5_intro+coin_scramble_done"},
+		"trigger": "Tex wants the cabins, Lala wants the coins... grab them before the crew settles in!", "cinematic": "coin_scramble_done"},
 	{"number": 15, "name": "Sacavuelo on the Deck", "scene": "res://scenes/levels/chapter_05/level_15_coin_rain_deck.tscn",
 		"trigger": "That Sacavuelo fires from range... get in close, it's weak up close!", "cinematic": "deck_rain_done"},
 	{"number": 16, "name": "Battle Station Run", "scene": "res://scenes/levels/chapter_05/level_16_tilting_ship.tscn",
 		"trigger": "Battle station, let's go! Stay low and keep moving!", "cinematic": "ship_falls"},
 	{"number": 17, "name": "Reina's Airship", "scene": "res://scenes/levels/chapter_05/level_17_sand_land.tscn",
-		"trigger": "Reina de Viento is above us... keep up and dodge the winds!", "cinematic": "sand_land"},
+		"trigger": "Reina de Viento is above us... keep up and dodge the winds!", "cinematic": "sand_land+mayor_contract"},
 	{"number": 18, "name": "Mayor's Coin Bag", "scene": "res://scenes/levels/chapter_06/level_18_mayors_coin_bag.tscn",
-		"trigger": "I signed WHAT? Gotta do something, find those coins first!", "cinematic": "mayor_contract"},
+		"trigger": "I signed WHAT? Gotta do something, find those coins first!", "cinematic": "worm_warning"},
 	{"number": 19, "name": "Wormfish Chase", "scene": "res://scenes/levels/chapter_06/level_19_wormfish_chase.tscn",
 		"trigger": "A sand wormfish?! Everyone scatter!", "cinematic": "chapter6_intro"},
 	{"number": 20, "name": "Tex vs Sacavuelo", "scene": "res://scenes/levels/chapter_06/level_20_tex_sacavuelo.tscn",
@@ -52,7 +52,7 @@ const LEVELS := [
 	{"number": 23, "name": "Dune Road", "scene": "res://scenes/levels/chapter_08/level_23_dune_road.tscn",
 		"trigger": "Sand Land at last. Keep moving and dodge the falling stones!", "cinematic": ""},
 	{"number": 24, "name": "Ahrena's Gate", "scene": "res://scenes/levels/chapter_08/level_24_ahrenas_gate.tscn",
-		"trigger": "Ahrena is at the palace... hold the gate and survive until he shows himself!", "cinematic": "chapter8_outro+outro"},
+		"trigger": "Hold the gate while the crew escapes!", "cinematic": "gate_secured+chapter8_outro+outro"},
 ]
 
 ## Chapters group levels for the menus. Chapters 1 and 2 are set up; the rest are still one list.
@@ -72,6 +72,14 @@ const CHAPTERS := [
 ## Each cinematic is a list of still panels. Every panel has a background
 ## colour, optional art, a caption and speech lines shown one at a time.
 const CINEMATICS := {
+	"worm_warning": {
+		"title": "Something Beneath the Sand",
+		"panels": [{"bg": "#3a2a10", "caption": "The ground trembles beneath the crew.", "lines": [["Lala", "A wormfish! Keep moving until it loses our trail!"]]}],
+	},
+	"gate_secured": {
+		"title": "The Crew Is Safe — Episode 1 Complete",
+		"panels": [{"bg": "#3a2a10", "caption": "CT holds the gate long enough for the crew to reach shelter.", "lines": [["Lala", "Everyone is safe. You bought us time, CT."], ["CT", "Good. Now about my coins..."], ["Lala", "Ahrena is still inside. Our next journey starts here."]]}],
+	},
 	## Plays before level 01 when a New Game starts.
 	"intro": {
 		"title": "Chapter 1",

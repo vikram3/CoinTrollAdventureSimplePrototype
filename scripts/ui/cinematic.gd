@@ -65,8 +65,8 @@ func _add_button(node_name: String, text: String, left_top: Vector2, right_top: 
 	else:
 		b.anchor_left = 1.0
 		b.anchor_right = 1.0
-		b.offset_left = right_top.x
-		b.offset_right = right_top.x + 170.0
+		b.offset_left = -190.0
+		b.offset_right = -20.0
 	b.offset_top = left_top.y
 	b.offset_bottom = left_top.y + 64.0
 	b.pressed.connect(on_press)
@@ -169,7 +169,7 @@ func _run(data: Dictionary) -> void:
 func _show_panel(panel: Dictionary) -> void:
 	background.color = Color.html(str(panel.get("bg", "#101020")))
 	caption.text = str(panel.get("caption", ""))
-	var art_path := str(panel.get("art", ""))
+	var art_path: String = str(panel.get("art", ""))
 	art.texture = null
 	if art_path != "" and ResourceLoader.exists(art_path):
 		art.texture = load(art_path) as Texture2D

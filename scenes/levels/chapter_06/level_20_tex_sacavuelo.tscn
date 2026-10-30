@@ -29,7 +29,7 @@ objective_type = 5
 coin_target = 0
 survive_seconds = 0.0
 defeat_target = 1
-objective_text_override = "Defeat Big Bird"
+objective_text_override = "Tex: defeat Sacavuelo | Down: shield, Up: bow, Space: jump"
 level_bounds = Rect2(1200, -600, 2300, 1220)
 kill_y = 1400.0
 

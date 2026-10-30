@@ -27,6 +27,13 @@ var _bump_tween: Tween = null
 
 func _ready() -> void:
 	add_to_group("hud")
+	if GameState.TESTER_BUILD:
+		var badge := Label.new()
+		badge.text = "%s | Level %02d | F3 next / F4 previous | Esc: tester menu" % [GameState.BUILD_LABEL, GameState.current_level]
+		badge.position = Vector2(16, 142)
+		badge.add_theme_font_size_override("font_size", 16)
+		badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(badge)
 	pause_button.pressed.connect(_on_pause_button_pressed)
 	timer_label.visible = false
 	announce_label.modulate.a = 0.0

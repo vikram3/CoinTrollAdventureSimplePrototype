@@ -8,6 +8,8 @@ var _left: float = 0.0
 
 
 func _on_setup() -> void:
+	seconds *= GameState.timer_mult()
+	need_coins = maxi(1, roundi(need_coins * GameState.coin_target_mult()))
 	_left = seconds
 
 
@@ -16,7 +18,7 @@ func _physics_process(delta: float) -> void:
 		return
 	_left = maxf(_left - delta, 0.0)
 	if _left <= 0.0 and coins() < need_coins:
-		level.fail("Not enough coins!")
+		level.fail("Not enough coins!", false)
 
 
 func is_complete() -> bool:

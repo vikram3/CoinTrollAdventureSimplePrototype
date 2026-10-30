@@ -1,6 +1,6 @@
 [gd_scene load_steps=0 format=3]
 
-[ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_r"]
+[ext_resource type="Script" path="res://scripts/levels/lift_level.gd" id="1_r"]
 [ext_resource type="PackedScene" path="res://scenes/environment/background.tscn" id="2_r"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/bg_desert.png" id="3_r"]
 [ext_resource type="PackedScene" path="res://scenes/environment/block.tscn" id="4_r"]
@@ -26,7 +26,7 @@
 script = ExtResource("1_r")
 level_number = 22
 level_name = "Queen's Lift"
-trigger_line = "The Queen is holding the ship up... help her keep it steady!"
+trigger_line = "Reina needs ballast! Recover the scattered coins and deliver them to the rescue marker."
 objective_type = 3
 coin_target = 40
 survive_seconds = 0.0

@@ -37,6 +37,7 @@ level_number = 7
 level_name = "Cliff Ambush"
 trigger_line = "Horn is charging! Keep away from the edge!"
 objective_type = 1
+objective_text_override = "Survive Horn's ambush at the cliff edge"
 knockback_fall_completes = true
 knockback_fall_source = "horn"
 level_bounds = Rect2(0, -600, 7000, 1320)

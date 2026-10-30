@@ -5,13 +5,29 @@ extends CanvasLayer
 @onready var resume_button: Button = %ResumeButton
 @onready var restart_button: Button = %RestartButton
 @onready var quit_button: Button = %QuitButton
+var _mission: Label
 
 
 func _ready() -> void:
 	visible = false
+	_mission = Label.new()
+	_mission.custom_minimum_size = Vector2(480, 0)
+	_mission.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_mission.add_theme_font_size_override("font_size", 18)
+	resume_button.get_parent().add_child(_mission)
+	resume_button.get_parent().move_child(_mission, 1)
 	resume_button.pressed.connect(resume)
 	restart_button.pressed.connect(_on_restart_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
+	if GameState.TESTER_BUILD:
+		for offset in [1, -1]:
+			var button := Button.new()
+			button.text = "Next level / skip (F3)" if offset == 1 else "Previous level (F4)"
+			button.custom_minimum_size.y = 44
+			button.pressed.connect(GameState.tester_jump.bind(offset))
+			resume_button.get_parent().add_child(button)
+			resume_button.get_parent().move_child(button, restart_button.get_index() + 1)
+		quit_button.text = "Main menu / level selection"
 	if GameState.DEV_TOOLS:
 		_add_dev_skip_button()
 
@@ -54,6 +70,9 @@ func _can_pause() -> bool:
 func open() -> void:
 	if visible or not _can_pause():
 		return
+	var level := get_tree().get_first_node_in_group("level") as Level
+	if level:
+		_mission.text = "%02d — %s\n%s\n\n%s\nGreen outlines: shelter. Orange cannon lines: incoming fire." % [level.level_number, level.level_name, level.trigger_line, level.get_objective_text()]
 	visible = true
 	get_tree().paused = true
 	Sfx.play("select")

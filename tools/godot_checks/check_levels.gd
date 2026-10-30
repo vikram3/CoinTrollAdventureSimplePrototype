@@ -24,11 +24,14 @@ func _process(_delta: float) -> bool:
 			print("CANNOT INSTANCE level %d: %s" % [info["number"], path])
 			bad += 1
 			continue
+		if inst.objective_type == 6 and inst.get_node_or_null(inst.tracker_path) == null:
+			print("MISSING OBJECTIVE TRACKER level %d" % info["number"])
+			bad += 1
 		inst.free()
 		for key in str(info["cinematic"]).split("+", false):
 			if data.get_cinematic(key.strip_edges()).get("panels", []).is_empty():
 				print("MISSING CINEMATIC  level %d: '%s'" % [info["number"], key])
 				bad += 1
 	print("LEVELS CHECKED %d, problems %d" % [levels.size(), bad])
-	quit(0)
+	quit(1 if bad > 0 else 0)
 	return false

@@ -37,7 +37,7 @@ func _ready() -> void:
 	_start = body.position
 	var shape := RectangleShape2D.new()
 	shape.size = trigger_size
-	var cs := trigger.get_node("CollisionShape2D") as CollisionShape2D
+	var cs := $Trigger/CollisionShape2D as CollisionShape2D
 	cs.shape = shape
 	cs.position = Vector2(trigger_offset_x, trigger_size.y * 0.5)
 	body.body_entered.connect(_on_body_hit)

@@ -33,7 +33,7 @@
 [node name="Level06" type="Node2D"]
 script = ExtResource("1_r")
 level_number = 6
-level_name = "Pink Girl's Gauntlet"
+level_name = "Pink Girl vs Big Boss"
 trigger_line = "Push through the yard. Pink Girl is holding the arena, but Big Boss has one more trick!"
 objective_type = 6
 level_bounds = Rect2(0, -700, 6900, 1320)
